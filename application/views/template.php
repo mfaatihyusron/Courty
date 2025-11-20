@@ -79,7 +79,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <!-- Brand Info -->
                 <div>
-                    <h5 class="text-xl font-bold mb-4">Courty.</h5>
+                    <h5 class="text-xl font-bold italic mb-4">Courty.</h5>
                     <p class="text-sm text-gray-400">Pilihan terpercaya untuk reservasi lapangan olahraga Anda.</p>
                 </div>
                 <!-- Links 1 -->
