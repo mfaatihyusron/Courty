@@ -1,158 +1,150 @@
   <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html lang="en">
+?>
+<!DOCTYPE html>
+<html lang="id">
 <head>
-	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courty - Temukan Lapangan Olahraga Terbaik</title>
+    <!-- Load Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Konfigurasi Tailwind untuk menggunakan font Inter -->
     <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Arial, sans-serif; background: #f5f7fb; color: #222; }
-
-    /* Navbar */
-    header {
-      background: #fff;
-      border-bottom: 1px solid #ddd;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    }
-    .navbar {
-      max-width: 1000px;
-      margin: auto;
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .logo {
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: #0b2546;
-    }
-    nav a {
-      text-decoration: none;
-      color: #333;
-      margin-left: 20px;
-      font-size: 0.95rem;
-    }
-    nav a:hover {
-      color: #0057ff;
-    }
-
-    /* Konten utama */
-    main {
-      max-width: 1000px;
-      margin: 30px auto;
-      padding: 0 16px;
-    }
-    .content {
-      background: #fff;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    }
-
-    /* Responsif */
-    @media (max-width: 600px) {
-      nav a { margin-left: 10px; font-size: 0.9rem; }
-      .navbar { flex-direction: column; align-items: flex-start; }
-    }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fc; /* Light background */
+        }
+        /* CSS untuk menyembunyikan scrollbar horizontal di mobile (opsional, untuk estetika) */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+        }
     </style>
-
-	<style type="text/css">
-
-	::selection { background-color: #E13300; color: white; }
-	::-moz-selection { background-color: #E13300; color: white; }
-
-	body {
-		background-color: #cffff9ff;
-		margin: 40px;
-		font: 13px/20px normal Helvetica, Arial, sans-serif;
-		color: #4F5155;
-	}
-
-	a {
-		color: #003399;
-		background-color: transparent;
-		font-weight: normal;
-		text-decoration: none;
-	}
-
-	a:hover {
-		color: #97310e;
-	}
-
-	h1 {
-		color: #444;
-		background-color: transparent;
-		border-bottom: 1px solid #D0D0D0;
-		font-size: 19px;
-		font-weight: normal;
-		margin: 0 0 14px 0;
-		padding: 14px 15px 10px 15px;
-	}
-
-	code {
-		font-family: Consolas, Monaco, Courier New, Courier, monospace;
-		font-size: 12px;
-		background-color: #f9f9f9;
-		border: 1px solid #D0D0D0;
-		color: #002166;
-		display: block;
-		margin: 14px 0 14px 0;
-		padding: 12px 10px 12px 10px;
-	}
-
-	#body {
-		margin: 0 15px 0 15px;
-		min-height: 96px;
-	}
-
-	p {
-		margin: 0 0 10px;
-		padding:0;
-	}
-
-	p.footer {
-		text-align: right;
-		font-size: 11px;
-		border-top: 1px solid #D0D0D0;
-		line-height: 32px;
-		padding: 0 10px 0 10px;
-		margin: 20px 0 0 0;
-	}
-
-	#container {
-		margin: 10px;
-		border: 1px solid #D0D0D0;
-		box-shadow: 0 0 8px #D0D0D0;
-	}
-	</style>
 </head>
-<body>
+<body class="antialiased">
 
-    <header>
-        <div class="navbar">
-            <div class="Logo">Belajar pemrograman Web</div>
-            <nav>
-                <a href="<?php echo site_url('praktek/latihan1'); ?>">Login</a>
-                <a href="<?php echo site_url('praktek/formvalidasi'); ?>">Validasi</a>
+    <!-- Header (Navigation Bar) -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center">
+            <!-- Branding/Logo -->
+            <a href="#" class="text-2xl font-extrabold text-[#0070F3] tracking-tight">Courty.</a>
+            
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#" class="text-gray-600 hover:text-[#0070F3] transition duration-150">Home</a>
+                <a href="#" class="text-gray-600 hover:text-[#0070F3] transition duration-150">Browse Venues</a>
+                <a href="#" class="text-gray-600 hover:text-[#0070F3] transition duration-150">About Us</a>
             </nav>
-        </div>        
+            
+            <!-- User & Partner Actions -->
+            <div class="flex items-center space-x-4">
+                <a href="#" class="text-sm font-semibold text-gray-500 hover:text-gray-900 transition duration-150 hidden sm:block">Partner Login</a>
+                <a href="#" class="px-4 py-2 text-sm font-semibold text-white bg-[#0070F3] rounded-lg shadow-md hover:bg-[#005bb5] transition duration-150">Login / Register</a>
+                
+                <!-- Mobile Menu Button -->
+                <button id="menu-button" class="md:hidden text-gray-600 hover:text-[#0070F3] focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-1 bg-white border-t">
+            <a href="#" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Home</a>
+            <a href="#" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Browse Venues</a>
+            <a href="#" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">About Us</a>
+            <a href="#" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Partner Login</a>
+        </div>
     </header>
 
-    <main>
-        <div class="content">
-            <?php 
-            if (isset($content) && $content !== '') {
-                $this->load->view($content);
-            } else {
-                echo "<h2>Selamat Datang di Pemrograman Web</h2>
-                <p>Ini adalah area konten belajar pemrograman web.</p>";
-            }
-            ?>
-        </div>
-    </main>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <?php
+    if (isset($content)) {
+        // Memuat view yang namanya disimpan di dalam variabel $content
+        $this->load->view($content);
+    } else {
+        echo '<p class="text-gray-500 text-center">Konten tidak ditemukan atau belum didefinisikan.</p>';
+    }
+    ?>
+    </main> 
 
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- Brand Info -->
+                <div>
+                    <h5 class="text-xl font-bold mb-4">Courty.</h5>
+                    <p class="text-sm text-gray-400">Pilihan terpercaya untuk reservasi lapangan olahraga Anda.</p>
+                </div>
+                <!-- Links 1 -->
+                <div>
+                    <h5 class="text-lg font-semibold mb-4">Layanan</h5>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-[#0070F3]">Cari Lapangan</a></li>
+                        <li><a href="#" class="hover:text-[#0070F3]">Cara Kerja</a></li>
+                        <li><a href="#" class="hover:text-[#0070F3]">Bantuan</a></li>
+                    </ul>
+                </div>
+                <!-- Links 2 -->
+                <div>
+                    <h5 class="text-lg font-semibold mb-4">Perusahaan</h5>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-[#0070F3]">About Us</a></li>
+                        <li><a href="#" class="hover:text-[#0070F3]">Karir</a></li>
+                        <li><a href="#" class="hover:text-[#0070F3]">Hubungi Kami</a></li>
+                    </ul>
+                </div>
+                <!-- Partner -->
+                <div>
+                    <h5 class="text-lg font-semibold mb-4">Untuk Mitra</h5>
+                    <a href="#" class="text-sm text-gray-400 hover:text-[#0070F3]">Partner Login</a>
+                    <p class="mt-2 text-xs text-gray-500">Ingin bergabung? <a href="#" class="text-[#0070F3] hover:underline">Daftar Sekarang</a></p>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+                &copy; 2025 Courty. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript untuk Toggle Menu Mobile
+        document.getElementById('menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // JavaScript untuk simulasi Geolocation (Kunci fitur Haversine)
+        function getGeolocation() {
+            const statusElement = document.getElementById('geo-status');
+            const locationInput = document.getElementById('unified_search');
+            statusElement.textContent = 'Mencari lokasi Anda...';
+            
+            // Simulasi API Geolocation Browser
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+                        locationInput.value = `(${lat.toFixed(4)}, ${lon.toFixed(4)}) - Lokasi Terdeteksi`;
+                        statusElement.textContent = 'Lokasi GPS Anda berhasil ditemukan.';
+                        // Di sini data lat/lon akan dikirim ke backend CodeIgniter
+                    },
+                    function(error) {
+                        statusElement.textContent = 'Gagal menemukan lokasi GPS. Silakan masukkan secara manual.';
+                        console.error("Geolocation Error:", error.message);
+                    }
+                );
+            } else {
+                statusElement.textContent = 'Browser Anda tidak mendukung Geolocation.';
+            }
+        }
+    </script>
 </body>
 </html>
