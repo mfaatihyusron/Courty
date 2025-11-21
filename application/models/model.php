@@ -2,6 +2,15 @@
 
 class Model extends CI_Model {
 
+    // Fungsi untuk mengambil semua data user dari tabel 'users'
+    public function get_all_users()
+    {
+        // Pengecualian: jangan tampilkan kolom password
+        $this->db->select('id_user, name, role, email, telp'); 
+        $query = $this->db->get('users');
+        return $query->result_array();
+    }
+
     // Fungsi untuk mendaftarkan user baru
     public function register_user($data)
     {

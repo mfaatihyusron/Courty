@@ -36,6 +36,33 @@ class praktek extends CI_Controller {
 	}
     
     // ------------------------------------------------------------------
+    // FITUR ADMIN DASHBOARD (Akses hanya untuk role 1)
+    // ------------------------------------------------------------------
+
+    public function admin_dashboard()
+    {
+        // Pengecekan Hak Akses
+        // 1. Cek apakah sudah login
+        if (!$this->session->userdata('logged_in')) {
+            $this->session->set_flashdata('error', 'Anda harus login untuk mengakses halaman Admin.');
+            redirect('praktek/login');
+            return;
+        }
+
+        // 2. Cek apakah role adalah 1 (Admin)
+        if ($this->session->userdata('role') != 1) {
+            $this->session->set_flashdata('error', 'Anda tidak memiliki hak akses sebagai Admin.');
+            redirect('praktek/index');
+            return;
+        }
+
+        // Jika lolos pengecekan, ambil data user
+        $data['users'] = $this->Model->get_all_users();
+        $data['content'] = "admin_dashboard"; 
+        $this->load->view('template', $data);
+    }
+    
+    // ------------------------------------------------------------------
     // FITUR REGISTRASI
     // ------------------------------------------------------------------
 
