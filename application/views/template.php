@@ -29,19 +29,29 @@
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center">
             <!-- Branding/Logo -->
-            <a href="#" class="text-2xl font-extrabold text-[#926699] tracking-tight">Courty.</a>
+            <a href="<?php echo site_url('praktek/index'); ?>" class="text-2xl font-extrabold text-[#926699] tracking-tight">Courty.</a>
             
             <!-- Desktop Menu -->
             <nav class="hidden md:flex space-x-8 items-center">
-                <a href="#" class="text-gray-600 hover:text-[#926699] transition duration-150">Home</a>
+                <a href="<?php echo site_url('praktek/index'); ?>" class="text-gray-600 hover:text-[#926699] transition duration-150">Home</a>
                 <a href="#" class="text-gray-600 hover:text-[#926699] transition duration-150">Browse Venues</a>
                 <a href="#" class="text-gray-600 hover:text-[#926699] transition duration-150">About Us</a>
             </nav>
             
             <!-- User & Partner Actions -->
             <div class="flex items-center space-x-4">
-                <a href="#" class="text-sm font-semibold text-gray-500 hover:text-gray-900 transition duration-150 hidden sm:block">Partner Login</a>
-                <a href="#" class="px-4 py-2 text-sm font-semibold text-white bg-[#926699] rounded-lg shadow-md hover:bg-[#7d5583] transition duration-150">Login / Register</a>
+                
+                <?php if ($this->session->userdata('logged_in')): ?>
+                    <!-- Jika sudah login -->
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm text-gray-600 hidden sm:block">Halo, <?php echo $this->session->userdata('name'); ?>!</span>
+                        <a href="<?php echo site_url('praktek/logout'); ?>" class="px-4 py-2 text-sm font-semibold text-white bg-red-500 rounded-lg shadow-md hover:bg-red-600 transition duration-150">Logout</a>
+                    </div>
+                <?php else: ?>
+                    <!-- Jika belum login -->
+                    <a href="#" class="text-sm font-semibold text-gray-500 hover:text-gray-900 transition duration-150 hidden sm:block">Partner Login</a>
+                    <a href="<?php echo site_url('praktek/login'); ?>" class="px-4 py-2 text-sm font-semibold text-white bg-[#926699] rounded-lg shadow-md hover:bg-[#7d5583] transition duration-150">Login / Register</a>
+                <?php endif; ?>
                 
                 <!-- Mobile Menu Button -->
                 <button id="menu-button" class="md:hidden text-gray-600 hover:text-[#926699] focus:outline-none">
@@ -52,10 +62,15 @@
         
         <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-1 bg-white border-t">
-            <a href="#" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Home</a>
+            <a href="<?php echo site_url('praktek/index'); ?>" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Home</a>
             <a href="#" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Browse Venues</a>
             <a href="#" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">About Us</a>
-            <a href="#" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Partner Login</a>
+            <?php if ($this->session->userdata('logged_in')): ?>
+                <a href="<?php echo site_url('praktek/logout'); ?>" class="block px-3 py-2 rounded-lg text-base font-medium text-red-500 hover:bg-red-50">Logout</a>
+            <?php else: ?>
+                <a href="#" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Partner Login</a>
+                <a href="<?php echo site_url('praktek/login'); ?>" class="block px-3 py-2 rounded-lg text-base font-medium text-[#926699] hover:bg-gray-50">Login / Register</a>
+            <?php endif; ?>
         </div>
     </header>
 
@@ -63,6 +78,7 @@
     <?php
     if (isset($content)) {
         // Memuat view yang namanya disimpan di dalam variabel $content
+        // Pastikan Anda memiliki view 'index.php' di direktori 'application/views/'
         $this->load->view($content);
     } else {
         echo '<p class="text-gray-500 text-center">Konten tidak ditemukan atau belum didefinisikan.</p>';
