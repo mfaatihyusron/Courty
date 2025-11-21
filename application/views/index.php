@@ -68,26 +68,7 @@
                             <input type="text" id="search_query" name="search_query" placeholder="Venue, Olahraga, atau Lokasi..." class="w-full pl-12 pr-4 py-3 text-base border-none rounded-2xl focus:ring-1 focus:ring-[#926699] transition duration-150 focus:outline-none bg-gray-50">
                         </div>
                         
-                        <!-- 2. Date Selector -->
-                        <div class="relative w-full md:w-1/5">
-                            <label for="booking_date" class="sr-only">Tanggal</label>
-                            <input type="date" id="booking_date" name="booking_date" class="w-full pl-10 pr-4 py-3 text-base border-none rounded-2xl focus:ring-1 focus:ring-[#926699] transition duration-150 focus:outline-none bg-gray-50">
-                            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        </div>
-
-                        <!-- 3. Time Range Selector -->
-                        <div class="relative w-full md:w-1/5">
-                            <label for="time_range" class="sr-only">Jam</label>
-                            <select id="time_range" name="time_range" class="w-full pl-10 pr-4 py-3 text-base border-none rounded-2xl appearance-none focus:ring-1 focus:ring-[#926699] transition duration-150 focus:outline-none bg-gray-50">
-                                <option value="">Pilih Jam</option>
-                                <option value="morning">Pagi (06:00 - 12:00)</option>
-                                <option value="afternoon">Siang (12:00 - 17:00)</option>
-                                <option value="evening">Sore/Malam (17:00 - Selesai)</option>
-                            </select>
-                            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </div>
-                        
-                        <!-- 4. Search Button -->
+                        <!-- 2. Search Button -->
                         <button type="submit" class="w-full md:w-1/5 px-4 py-3 bg-[#B9CF32] text-white font-bold text-base rounded-2xl shadow-lg hover:bg-[#a1b62a] transition duration-150 flex-shrink-0">
                             Cari Lapangan
                         </button>
