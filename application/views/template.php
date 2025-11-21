@@ -1,6 +1,3 @@
-  <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -14,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f7f9fc; /* Light background */
+            background-color: #EBE1D8; /* Background Color: #EBE1D8 */
         }
         /* CSS untuk menyembunyikan scrollbar horizontal di mobile (opsional, untuk estetika) */
         .scrollbar-hide::-webkit-scrollbar {
@@ -32,22 +29,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center">
             <!-- Branding/Logo -->
-            <a href="#" class="text-2xl font-extrabold text-[#0070F3] tracking-tight">Courty.</a>
+            <a href="#" class="text-2xl font-extrabold text-[#926699] tracking-tight">Courty.</a>
             
             <!-- Desktop Menu -->
             <nav class="hidden md:flex space-x-8 items-center">
-                <a href="#" class="text-gray-600 hover:text-[#0070F3] transition duration-150">Home</a>
-                <a href="#" class="text-gray-600 hover:text-[#0070F3] transition duration-150">Browse Venues</a>
-                <a href="#" class="text-gray-600 hover:text-[#0070F3] transition duration-150">About Us</a>
+                <a href="#" class="text-gray-600 hover:text-[#926699] transition duration-150">Home</a>
+                <a href="#" class="text-gray-600 hover:text-[#926699] transition duration-150">Browse Venues</a>
+                <a href="#" class="text-gray-600 hover:text-[#926699] transition duration-150">About Us</a>
             </nav>
             
             <!-- User & Partner Actions -->
             <div class="flex items-center space-x-4">
                 <a href="#" class="text-sm font-semibold text-gray-500 hover:text-gray-900 transition duration-150 hidden sm:block">Partner Login</a>
-                <a href="#" class="px-4 py-2 text-sm font-semibold text-white bg-[#0070F3] rounded-lg shadow-md hover:bg-[#005bb5] transition duration-150">Login / Register</a>
+                <a href="#" class="px-4 py-2 text-sm font-semibold text-white bg-[#926699] rounded-lg shadow-md hover:bg-[#7d5583] transition duration-150">Login / Register</a>
                 
                 <!-- Mobile Menu Button -->
-                <button id="menu-button" class="md:hidden text-gray-600 hover:text-[#0070F3] focus:outline-none">
+                <button id="menu-button" class="md:hidden text-gray-600 hover:text-[#926699] focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
@@ -79,32 +76,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <!-- Brand Info -->
                 <div>
-                    <h5 class="text-xl font-bold italic mb-4">Courty.</h5>
+                    <h5 class="text-xl font-bold mb-4">Courty.</h5>
                     <p class="text-sm text-gray-400">Pilihan terpercaya untuk reservasi lapangan olahraga Anda.</p>
                 </div>
                 <!-- Links 1 -->
                 <div>
                     <h5 class="text-lg font-semibold mb-4">Layanan</h5>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-[#0070F3]">Cari Lapangan</a></li>
-                        <li><a href="#" class="hover:text-[#0070F3]">Cara Kerja</a></li>
-                        <li><a href="#" class="hover:text-[#0070F3]">Bantuan</a></li>
+                        <li><a href="#" class="hover:text-[#B9CF32]">Cari Lapangan</a></li>
+                        <li><a href="#" class="hover:text-[#B9CF32]">Cara Kerja</a></li>
+                        <li><a href="#" class="hover:text-[#B9CF32]">Bantuan</a></li>
                     </ul>
                 </div>
                 <!-- Links 2 -->
                 <div>
                     <h5 class="text-lg font-semibold mb-4">Perusahaan</h5>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-[#0070F3]">About Us</a></li>
-                        <li><a href="#" class="hover:text-[#0070F3]">Karir</a></li>
-                        <li><a href="#" class="hover:text-[#0070F3]">Hubungi Kami</a></li>
+                        <li><a href="#" class="hover:text-[#B9CF32]">About Us</a></li>
+                        <li><a href="#" class="hover:text-[#B9CF32]">Karir</a></li>
+                        <li><a href="#" class="hover:text-[#B9CF32]">Hubungi Kami</a></li>
                     </ul>
                 </div>
                 <!-- Partner -->
                 <div>
                     <h5 class="text-lg font-semibold mb-4">Untuk Mitra</h5>
-                    <a href="#" class="text-sm text-gray-400 hover:text-[#0070F3]">Partner Login</a>
-                    <p class="mt-2 text-xs text-gray-500">Ingin bergabung? <a href="#" class="text-[#0070F3] hover:underline">Daftar Sekarang</a></p>
+                    <a href="#" class="text-sm text-gray-400 hover:text-[#B9CF32]">Partner Login</a>
+                    <p class="mt-2 text-xs text-gray-500">Ingin bergabung? <a href="#" class="text-[#B9CF32] hover:underline">Daftar Sekarang</a></p>
                 </div>
             </div>
             <div class="mt-12 border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
@@ -123,7 +120,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         // JavaScript untuk simulasi Geolocation (Kunci fitur Haversine)
         function getGeolocation() {
             const statusElement = document.getElementById('geo-status');
-            const locationInput = document.getElementById('unified_search');
+            const locationInput = document.getElementById('search_query');
             statusElement.textContent = 'Mencari lokasi Anda...';
             
             // Simulasi API Geolocation Browser
@@ -132,6 +129,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     function(position) {
                         const lat = position.coords.latitude;
                         const lon = position.coords.longitude;
+                        // Mengisi input utama dengan koordinat yang ditemukan
                         locationInput.value = `(${lat.toFixed(4)}, ${lon.toFixed(4)}) - Lokasi Terdeteksi`;
                         statusElement.textContent = 'Lokasi GPS Anda berhasil ditemukan.';
                         // Di sini data lat/lon akan dikirim ke backend CodeIgniter
