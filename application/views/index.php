@@ -12,7 +12,7 @@
                 </p>
 
                 <!-- Category Bar Section -->
-                <div class="mt-8 mb-12 py-4 border-y border-gray-200 shadow-inner">
+                <div class="mt-8 mb-12 py-4">
                     <!-- Wrapper untuk horizontal scrolling di mobile dan centering di desktop -->
                     <div class="flex space-x-6 overflow-x-auto pb-2 scrollbar-hide justify-center">
                         
