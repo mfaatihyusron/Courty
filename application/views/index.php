@@ -66,7 +66,7 @@
                 <!-- Terpadu Search Bar (Mengadopsi Fungsionalitas Ayo.co.id) -->
                 <div class="mt-4 max-w-6xl mx-auto bg-white p-4 sm:p-5 rounded-3xl shadow-2xl border border-gray-100 transition duration-300 hover:shadow-xl">
                     <form class="flex flex-col md:flex-row items-center md:space-x-4 space-y-4 md:space-y-0">
-                        
+
                         
                         <!-- 1. Unified Search Input (Venue/Sport/Location) -->
                         <div class="relative flex-grow w-full md:w-2/5">
