@@ -34,7 +34,7 @@
             <!-- Desktop Menu -->
             <nav class="hidden md:flex space-x-8 items-center">
                 <a href="<?php echo site_url('praktek/index'); ?>" class="text-gray-600 hover:text-[#926699] transition duration-150">Home</a>
-                <a href="#" class="text-gray-600 hover:text-[#926699] transition duration-150">Browse Venues</a>
+                <a href="#" class="text-gray-600 hover:text-[#926699] transition duration-150">Venue</a>
                 <a href="#" class="text-gray-600 hover:text-[#926699] transition duration-150">About Us</a>
             </nav>
             
