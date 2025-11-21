@@ -55,10 +55,18 @@
                     </div>
                 </div>
 
-
+                <!-- Geolocation Button (Dipindah ke bawah search bar untuk kejelasan) -->
+                <div class="mt-4 flex justify-center items-center space-x-2">
+                    <button type="button" class="text-sm font-semibold text-gray-600 hover:text-[#926699] transition duration-150" onclick="getGeolocation()">
+                        <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        Gunakan Lokasi Saya Sekarang
+                    </button>
+                    <p id="geo-status" class="text-sm text-gray-500"></p>
+                </div>
                 <!-- Terpadu Search Bar (Mengadopsi Fungsionalitas Ayo.co.id) -->
-                <div class="mt-12 max-w-6xl mx-auto bg-white p-4 sm:p-5 rounded-3xl shadow-2xl border border-gray-100 transition duration-300 hover:shadow-xl">
+                <div class="mt-4 max-w-6xl mx-auto bg-white p-4 sm:p-5 rounded-3xl shadow-2xl border border-gray-100 transition duration-300 hover:shadow-xl">
                     <form class="flex flex-col md:flex-row items-center md:space-x-4 space-y-4 md:space-y-0">
+                        
                         
                         <!-- 1. Unified Search Input (Venue/Sport/Location) -->
                         <div class="relative flex-grow w-full md:w-2/5">
@@ -74,15 +82,7 @@
                         </button>
                     </form>
                 </div>
-                
-                <!-- Geolocation Button (Dipindah ke bawah search bar untuk kejelasan) -->
-                <div class="mt-4 flex justify-center items-center space-x-2">
-                    <button type="button" class="text-sm font-semibold text-gray-600 hover:text-[#926699] transition duration-150" onclick="getGeolocation()">
-                        <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                        Gunakan Lokasi Saya Sekarang
-                    </button>
-                    <p id="geo-status" class="text-sm text-gray-500"></p>
-                </div>
+            
 
             </div>
         </section>
