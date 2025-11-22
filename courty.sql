@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1 sdsd
--- Waktu pembuatan: 20 Nov 2025 pada 06.51
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.1.25
+-- Host: 127.0.0.1
+-- Generation Time: Nov 22, 2025 at 12:06 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `booking`
+-- Table structure for table `booking`
 --
 
 CREATE TABLE `booking` (
@@ -43,7 +43,7 @@ CREATE TABLE `booking` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `court`
+-- Table structure for table `court`
 --
 
 CREATE TABLE `court` (
@@ -58,7 +58,7 @@ CREATE TABLE `court` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `photo`
+-- Table structure for table `photo`
 --
 
 CREATE TABLE `photo` (
@@ -70,7 +70,7 @@ CREATE TABLE `photo` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sport`
+-- Table structure for table `sport`
 --
 
 CREATE TABLE `sport` (
@@ -81,22 +81,30 @@ CREATE TABLE `sport` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id_user` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `role` binary(1) DEFAULT NULL,
+  `role` int(1) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `telp` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id_user`, `name`, `role`, `email`, `telp`, `password`) VALUES
+(1, 'Admin', 1, 'admin@gmail.com', '0808832328', '$2y$10$f1T2UHjITtqG.FadqUfsL.Vvu5F6axHLSbJStaxMEJlvpJw6kTQVu'),
+(2, 'furina', 0, 'furinaaaaaa@gmail.com', '0808832328', '$2y$10$198XnI6srErTJ2wU6a4eaeZahzCYYJ.395by01fip3Kd4gMpLxboO');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `venue`
+-- Table structure for table `venue`
 --
 
 CREATE TABLE `venue` (
@@ -115,62 +123,102 @@ CREATE TABLE `venue` (
 --
 
 --
--- Indeks untuk tabel `booking`
+-- Indexes for table `booking`
 --
 ALTER TABLE `booking`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indeks untuk tabel `court`
+-- Indexes for table `court`
 --
 ALTER TABLE `court`
   ADD PRIMARY KEY (`id_court`),
   ADD KEY `id_venue` (`id_venue`);
 
 --
--- Indeks untuk tabel `photo`
+-- Indexes for table `photo`
 --
 ALTER TABLE `photo`
   ADD PRIMARY KEY (`id_photo`),
   ADD KEY `id_court` (`id_court`);
 
 --
--- Indeks untuk tabel `sport`
+-- Indexes for table `sport`
 --
 ALTER TABLE `sport`
   ADD PRIMARY KEY (`id_sport`);
 
 --
--- Indeks untuk tabel `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- Indeks untuk tabel `venue`
+-- Indexes for table `venue`
 --
 ALTER TABLE `venue`
   ADD PRIMARY KEY (`id_venue`);
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `booking`
+-- AUTO_INCREMENT for table `booking`
+--
+ALTER TABLE `booking`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `court`
+--
+ALTER TABLE `court`
+  MODIFY `id_court` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `photo`
+--
+ALTER TABLE `photo`
+  MODIFY `id_photo` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sport`
+--
+ALTER TABLE `sport`
+  MODIFY `id_sport` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `venue`
+--
+ALTER TABLE `venue`
+  MODIFY `id_venue` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `booking`
 --
 ALTER TABLE `booking`
   ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
 
 --
--- Ketidakleluasaan untuk tabel `court`
+-- Constraints for table `court`
 --
 ALTER TABLE `court`
   ADD CONSTRAINT `court_ibfk_1` FOREIGN KEY (`id_venue`) REFERENCES `venue` (`id_venue`);
 
 --
--- Ketidakleluasaan untuk tabel `photo`
+-- Constraints for table `photo`
 --
 ALTER TABLE `photo`
   ADD CONSTRAINT `photo_ibfk_1` FOREIGN KEY (`id_court`) REFERENCES `court` (`id_court`);
