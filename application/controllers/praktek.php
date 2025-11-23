@@ -8,33 +8,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property CI_Input $input
  * @property CI_Session $session
  * @property CI_Form_validation $form_validation
+ * @property CI_Upload $upload
  */
 class praktek extends CI_Controller {
 
-    // Constructor untuk memuat Model dan Library
     public function __construct()
     {
         parent::__construct();
-        
-        // Memuat Model
         $this->load->model('Model'); 
-        
-        // Memuat Helper form dan URL
         $this->load->helper(array('form', 'url'));
-        
-        // Memuat Library form_validation dan session (Ini adalah langkah krusial)
-        $this->load->library(array('form_validation', 'session'));
+        // Memuat library form_validation, session, dan upload
+        $this->load->library(array('form_validation', 'session', 'upload'));
     }
 
 	public function index()
 	{
-        // Menampilkan halaman utama
-        // Anda bisa menambahkan pesan sambutan di sini
         $data['user_name'] = $this->session->userdata('name');
 		$data['content'] = "index"; 
 		$this->load->view('template', $data);
 	}
     
+    // ------------------------------------------------------------------
+    // FITUR REGISTRASI MITRA (2 STEP)
+    // ------------------------------------------------------------------
+
     // STEP 1: Pendaftaran User (Role 3: Admin Venue)
     public function partner_register_step1()
     {
@@ -97,15 +94,20 @@ class praktek extends CI_Controller {
             return;
         }
 
+        // --- UPDATE VALIDASI SESUAI TABEL VENUE BARU ---
         $this->form_validation->set_rules('venue_name', 'Nama Venue', 'required|trim|max_length[255]');
         $this->form_validation->set_rules('address', 'Alamat Lengkap', 'required|trim');
-        $this->form_validation->set_rules('telp_venue', 'Nomor Telepon Venue', 'required|trim|numeric|max_length[255]');
-        $this->form_validation->set_rules('description', 'Deskripsi Venue', 'required');
         $this->form_validation->set_rules('lat', 'Latitude', 'required|trim|numeric');
         $this->form_validation->set_rules('lon', 'Longitude', 'required|trim|numeric');
-        
+        $this->form_validation->set_rules('maps_url', 'URL Google Maps', 'trim|valid_url');
+        $this->form_validation->set_rules('description', 'Deskripsi Venue', 'required');
+        $this->form_validation->set_rules('opening_time', 'Jam Buka', 'required|trim|max_length[5]'); 
+        $this->form_validation->set_rules('closing_time', 'Jam Tutup', 'required|trim|max_length[5]');
+        // Tidak ada set_rules untuk file upload, karena akan divalidasi manual
+
         $this->form_validation->set_message('required', '{field} wajib diisi.');
         $this->form_validation->set_message('numeric', '{field} harus berupa angka (koordinat).');
+        $this->form_validation->set_message('valid_url', '{field} harus berupa URL yang valid.');
 
         if ($this->form_validation->run() == FALSE)
         {
@@ -114,19 +116,53 @@ class praktek extends CI_Controller {
         }
         else
         {
+            // --- LOGIKA UPLOAD FOTO ---
+            $config['upload_path']   = './assets/uploads/venue_profiles/'; // Pastikan folder ini ada dan writable
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['max_size']      = 2048; // Maksimal 2MB
+            $config['file_name']     = 'venue-' . $partner_id . '-' . time();
+            $config['overwrite']     = TRUE;
+
+            $this->upload->initialize($config);
+            
+            $uploaded_file_path = 'placeholder.jpg'; // Default jika upload gagal atau tidak ada file
+            
+            // Cek apakah ada file yang diupload (input field 'link_profile_img')
+            if (!empty($_FILES['link_profile_img']['name'])) {
+                if ($this->upload->do_upload('link_profile_img')) {
+                    $upload_data = $this->upload->data();
+                    // Simpan path relatif file yang diupload
+                    $uploaded_file_path = 'assets/uploads/venue_profiles/' . $upload_data['file_name'];
+                } else {
+                    // Jika upload gagal, tampilkan error dan hentikan proses
+                    $upload_error = $this->upload->display_errors('', '');
+                    $this->session->set_flashdata('error', 'Upload foto gagal: ' . $upload_error);
+                    redirect('praktek/partner_register_step2');
+                    return; // Penting untuk menghentikan eksekusi
+                }
+            }
+            // --- AKHIR LOGIKA UPLOAD FOTO ---
+
+
+            // Gabungkan Latitude dan Longitude menjadi format Coordinate
+            $coordinate_string = $this->input->post('lat') . ',' . $this->input->post('lon');
+
+            // --- DATA INSERT KE TABEL VENUE ---
             $data_insert = array(
-                'id_user'     => $partner_id, // Ambil ID dari sesi sementara
-                'venue_name'  => $this->input->post('venue_name'),
-                'address'     => $this->input->post('address'),
-                'telp'        => $this->input->post('telp_venue'),
-                'description' => $this->input->post('description'),
-                'lat'         => $this->input->post('lat'),
-                'lon'         => $this->input->post('lon')
+                'id_user'            => $partner_id, 
+                'venue_name'         => $this->input->post('venue_name'),
+                'address'            => $this->input->post('address'),
+                'coordinate'         => $coordinate_string, 
+                'maps_url'           => $this->input->post('maps_url') ? $this->input->post('maps_url') : '#',
+                'description'        => $this->input->post('description'),
+                'opening_time'       => $this->input->post('opening_time'),
+                'closing_time'       => $this->input->post('closing_time'),
+                'link_profile_img'   => $uploaded_file_path // Simpan path/nama file
             );
 
             if ($this->Model->add_venue($data_insert)) {
                 // Pendaftaran venue berhasil
-                $this->session->unset_userdata('temp_partner_id'); // Hapus ID sementara
+                $this->session->unset_userdata('temp_partner_id'); 
                 $this->session->set_flashdata('success', 'Pendaftaran Mitra berhasil! Venue Anda sudah terdaftar. Silakan Login.');
                 redirect('praktek/login');
             } else {
@@ -137,34 +173,26 @@ class praktek extends CI_Controller {
     }
 
     // ------------------------------------------------------------------
-    // FITUR ADMIN DASHBOARD (Akses hanya untuk role 1)
+    // FITUR ADMIN DASHBOARD
     // ------------------------------------------------------------------
 
     public function admin_dashboard()
     {
         // Pengecekan Hak Akses
-        // 1. Cek apakah sudah login
-        if (!$this->session->userdata('logged_in')) {
-            $this->session->set_flashdata('error', 'Anda harus login untuk mengakses halaman Admin.');
-            redirect('praktek/login');
-            return;
-        }
-
-        // 2. Cek apakah role adalah 1 (Admin)
-        if ($this->session->userdata('role') != 1) {
-            $this->session->set_flashdata('error', 'Anda tidak memiliki hak akses sebagai Admin.');
+        // Akses hanya untuk Role 1 (Super Admin)
+        if (!$this->session->userdata('logged_in') || $this->session->userdata('role') != 1) {
+            $this->session->set_flashdata('error', 'Anda tidak memiliki hak akses untuk halaman Admin.');
             redirect('praktek/index');
             return;
         }
 
-        // Jika lolos pengecekan, ambil data user
         $data['users'] = $this->Model->get_all_users();
         $data['content'] = "admin_dashboard"; 
         $this->load->view('template', $data);
     }
     
     // ------------------------------------------------------------------
-    // FITUR REGISTRASI
+    // FITUR REGISTRASI USER BIASA
     // ------------------------------------------------------------------
 
     public function register()
@@ -206,7 +234,7 @@ class praktek extends CI_Controller {
                 'password'  => $this->input->post('password')
             );
 
-            // Panggil fungsi register di model
+            // Panggil fungsi register di model (role 0)
             if ($this->Model->register_user($data_insert)) {
                 $this->session->set_flashdata('success', 'Pendaftaran berhasil! Silakan login.');
                 redirect('praktek/login');
@@ -218,40 +246,36 @@ class praktek extends CI_Controller {
     }
 
     // ------------------------------------------------------------------
-    // FITUR LOGIN
+    // FITUR LOGIN & LOGOUT
     // ------------------------------------------------------------------
     
     public function login()
     {
-        // Cek jika user sudah login, arahkan ke halaman utama
+        // Logika login sama dengan sebelumnya...
+        // ... (kode login yang sudah ada)
         if ($this->session->userdata('logged_in')) {
             redirect('praktek/index');
         }
 
-        // Set rules untuk form validation
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'required');
         
-        // Mengubah pesan error ke Bahasa Indonesia
         $this->form_validation->set_message('required', '{field} wajib diisi.');
         $this->form_validation->set_message('valid_email', 'Format {field} tidak valid.');
 
         if ($this->form_validation->run() == FALSE)
         {
-            // Jika validasi gagal atau ini adalah tampilan form pertama
             $data['content'] = "login"; 
             $this->load->view('template', $data);
         }
         else
         {
-            // Jika validasi sukses, proses login
             $email = $this->input->post('email');
             $password = $this->input->post('password');
 
             $user = $this->Model->check_login($email, $password);
 
             if ($user) {
-                // Login berhasil, buat session
                 $session_data = array(
                     'user_id'   => $user['id_user'],
                     'name'      => $user['name'],
@@ -262,28 +286,26 @@ class praktek extends CI_Controller {
                 
                 $this->session->set_userdata($session_data);
                 $this->session->set_flashdata('success', 'Selamat datang kembali, ' . $user['name'] . '!');
-                redirect('praktek/index'); // Arahkan ke halaman utama
+                // Arahkan admin venue (role 3) ke dashboard mitra (jika ada) atau index
+                if ($user['role'] == 3) {
+                     redirect('praktek/index'); // Atau ke dashboard mitra yang akan dibuat
+                } else {
+                    redirect('praktek/index'); 
+                }
             } else {
-                // Login gagal
                 $this->session->set_flashdata('error', 'Email atau Password salah.');
                 redirect('praktek/login');
             }
         }
     }
     
-    // ------------------------------------------------------------------
-    // FITUR LOGOUT
-    // ------------------------------------------------------------------
-    
     public function logout()
     {
-        // Hapus semua data session
         $this->session->sess_destroy();
         $this->session->set_flashdata('success', 'Anda telah berhasil logout.');
         redirect('praktek/index');
     }
     
-    // Fungsi formvalidasi (dari file asli Anda, saya biarkan)
     public function formvalidasi()
 	{
 		$data['content'] = "formvalidasi"; 
