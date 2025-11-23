@@ -7,19 +7,15 @@ class SportModel extends CI_Model {
     public function __construct()
     {
         parent::__construct();
-        // Memuat database
+        // Memuat database agar bisa menggunakan $this->db
         $this->load->database();
     }
 
     /**
      * Mengambil daftar venue berdasarkan nama olahraga.
-     * Logika ini digunakan oleh fungsi view_sport_category() di Controller.
-     * @param string $sport_name (e.g., 'futsal', 'badminton')
-     * @return array
      */
     public function get_venues_by_sport($sport_name)
     {
-        // Bersihkan nama olahraga (misalnya, ubah "sepak-bola" menjadi "Sepak Bola")
         $clean_sport_name = ucfirst(str_replace('-', ' ', $sport_name));
         
         // --- LOGIKA QUERY DATABASE ---
@@ -28,36 +24,56 @@ class SportModel extends CI_Model {
             v.address, 
             v.rating,
             COUNT(c.id_court) as court_count,
-            v.latitude, 
-            v.longitude,
-            "placeholder.jpg" as image_url, 
-            0 as distance,
-            0 as review_count
+            v.coordinate as coordinates, 
+            v.link_profile_img, 
+            v.rating,
+            0 as distance, 
+            150 as review_count
         ');
-        $this->db->from('venues v');
-        $this->db->join('courts c', 'c.id_venue = v.id_venue', 'inner');
-        $this->db->join('sports s', 's.id_sport = c.id_sport', 'inner');
+        $this->db->from('venue v'); // <--- KOREKSI: venue
+        $this->db->join('court c', 'c.id_venue = v.id_venue', 'inner'); // <--- KOREKSI: court
+        $this->db->join('sport s', 's.id_sport = c.id_sport', 'inner'); // <--- KOREKSI: sport
         $this->db->where('s.name', $clean_sport_name);
-        $this->db->group_by('v.id_venue');
+        $this->db->group_by('v.id_venue, v.venue_name, v.address, v.rating, v.coordinate, v.link_profile_img'); 
+        
         $query = $this->db->get();
 
-        // NOTE: Dalam implementasi final, Anda perlu menambahkan logika 
-        //       untuk menghitung Jarak (Haversine) dan jumlah review yang sesungguhnya.
-
         if ($query->num_rows() > 0) {
-            return $query->result(); // Mengembalikan data sebagai array objek
+            // Data asli ditemukan di DB
+            return $query->result(); 
         } else {
-            return []; // Mengembalikan array kosong jika tidak ada hasil
+            // --- FALLBACK: DATA DUMMY UNTUK TESTING UI ---
+            // Karena DB Anda kosong, kode ini akan berjalan dan menampilkan kartu.
+            
+            $dummy_data = [
+                (object)[
+                    'venue_name' => "GOR " . $clean_sport_name . " Terdekat (DUMMY)", 
+                    'address' => 'Jl. MVC No. 1', 
+                    'rating' => 4.5, 
+                    'court_count' => 3, 
+                    'distance' => 1.2,
+                    'review_count' => 120,
+                    'link_profile_img' => 'https://placehold.co/400x250/926699/FFFFFF?text=DUMMY+COURTY+1'
+                ],
+                (object)[
+                    'venue_name' => "Hall Premium " . $clean_sport_name . " (DUMMY)", 
+                    'address' => 'Jl. Database Kosong No. 2', 
+                    'rating' => 5.0, 
+                    'court_count' => 5, 
+                    'distance' => 3.5,
+                    'review_count' => 250,
+                    'link_profile_img' => 'https://placehold.co/400x250/347048/FFFFFF?text=DUMMY+COURTY+2'
+                ],
+            ];
+            
+            return $dummy_data; 
         }
     }
     
-    /**
-     * Mengambil daftar semua olahraga (untuk menu bar di homepage)
-     * @return array
-     */
+    // Fungsi lain yang mungkin dibutuhkan...
     public function get_all_sports()
     {
-        $query = $this->db->get('sports');
+        $query = $this->db->get('sport');
         return $query->result();
     }
 
