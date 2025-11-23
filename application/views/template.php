@@ -34,7 +34,7 @@
             <!-- Desktop Menu -->
             <nav class="hidden md:flex space-x-8 items-center">
                 <a href="<?php echo site_url('praktek/index'); ?>" class="text-gray-600 hover:text-[#926699] transition duration-150">Home</a>
-                <a href="<?php echo site_url('praktek/vanue'); ?>" class="text-gray-600 hover:text-[#926699] transition duration-150">Browse Venues</a>
+                <a href="<?php echo site_url('praktek/vanue'); ?>" class="text-gray-600 hover:text-[#926699] transition duration-150">Venue</a>
                 <a href="<?php echo site_url('praktek/about'); ?>" class="text-gray-600 hover:text-[#926699] transition duration-150">About Us</a>
                 <?php if ($this->session->userdata('role') == 1): ?>
                     <!-- Tambahkan link Admin Dashboard jika role = 1 (Super Admin) -->
@@ -72,7 +72,7 @@
         <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-1 bg-white border-t">
             <a href="<?php echo site_url('praktek/index'); ?>" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Home</a>
-            <a href="#" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Browse Venues</a>
+            <a href="#" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Venue</a>
             <a href="#" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">About Us</a>
             <?php if ($this->session->userdata('logged_in')): ?>
                 <?php if ($this->session->userdata('role') == 1): ?>
