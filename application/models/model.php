@@ -2,6 +2,27 @@
 
 class Model extends CI_Model {
 
+    
+    // FUNGSI BARU: Mengupdate data Venue
+    public function update_venue($id_venue, $data)
+    {
+        $this->db->where('id_venue', $id_venue);
+        return $this->db->update('venue', $data);
+    }
+
+    // FUNGSI BARU: Menambahkan data Court
+    public function add_court($data)
+    {
+        return $this->db->insert('court', $data);
+    }
+    
+    // FUNGSI BARU: Mengambil data sport (diperlukan untuk form tambah court)
+    public function get_all_sports()
+    {
+        $query = $this->db->get('sport');
+        return $query->result_array();
+    }
+    
     // FUNGSI BARU: Mengambil data venue berdasarkan ID User (Admin Venue)
     public function get_venue_by_user_id($user_id)
     {
@@ -11,7 +32,7 @@ class Model extends CI_Model {
         // Gunakan row_array() karena satu user (admin venue) hanya punya satu venue
         return $query->row_array();
     }
-    
+
     // Fungsi untuk mengambil semua data user dari tabel 'users'
     public function get_all_users()
     {
