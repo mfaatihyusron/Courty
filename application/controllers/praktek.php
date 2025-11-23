@@ -41,6 +41,13 @@ class praktek extends CI_Controller {
 		$data['content'] = "about"; 
 		$this->load->view('template', $data);
 	}
+
+    public function sport_category()
+	{
+        $data['user_name'] = $this->session->userdata('name');
+		$data['content'] = "sport_category"; 
+		$this->load->view('template', $data);
+	}
     // ------------------------------------------------------------------
     // FITUR REGISTRASI MITRA (2 STEP)
     // ------------------------------------------------------------------
