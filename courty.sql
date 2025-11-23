@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2025 at 12:06 PM
+-- Generation Time: Nov 23, 2025 at 08:43 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -99,7 +99,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id_user`, `name`, `role`, `email`, `telp`, `password`) VALUES
 (1, 'Admin', 1, 'admin@gmail.com', '0808832328', '$2y$10$f1T2UHjITtqG.FadqUfsL.Vvu5F6axHLSbJStaxMEJlvpJw6kTQVu'),
-(2, 'furina', 0, 'furinaaaaaa@gmail.com', '0808832328', '$2y$10$198XnI6srErTJ2wU6a4eaeZahzCYYJ.395by01fip3Kd4gMpLxboO');
+(2, 'furina', 0, 'furinaaaaaa@gmail.com', '0808832328', '$2y$10$198XnI6srErTJ2wU6a4eaeZahzCYYJ.395by01fip3Kd4gMpLxboO'),
+(3, 'alif', 3, 'alif@gmail.com', '0808832328', '$2y$10$N2VIT2JqzETfQPSnDLhiw.Jx4ABHkOiTds8Fr6g.R3xwprMOfK5HS');
 
 -- --------------------------------------------------------
 
@@ -109,13 +110,15 @@ INSERT INTO `users` (`id_user`, `name`, `role`, `email`, `telp`, `password`) VAL
 
 CREATE TABLE `venue` (
   `id_venue` int(11) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
+  `link_profile_img` varchar(255) NOT NULL,
+  `venue_name` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `coordinate` varchar(255) DEFAULT NULL,
   `maps_url` varchar(255) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `opening_time` varchar(50) DEFAULT NULL,
-  `closing_time` varchar(50) DEFAULT NULL
+  `closing_time` varchar(50) DEFAULT NULL,
+  `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -159,7 +162,8 @@ ALTER TABLE `users`
 -- Indexes for table `venue`
 --
 ALTER TABLE `venue`
-  ADD PRIMARY KEY (`id_venue`);
+  ADD PRIMARY KEY (`id_venue`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -193,7 +197,7 @@ ALTER TABLE `sport`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `venue`
@@ -222,6 +226,12 @@ ALTER TABLE `court`
 --
 ALTER TABLE `photo`
   ADD CONSTRAINT `photo_ibfk_1` FOREIGN KEY (`id_court`) REFERENCES `court` (`id_court`);
+
+--
+-- Constraints for table `venue`
+--
+ALTER TABLE `venue`
+  ADD CONSTRAINT `venue_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
