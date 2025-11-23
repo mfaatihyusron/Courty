@@ -35,7 +35,7 @@
             <nav class="hidden md:flex space-x-8 items-center">
                 <a href="<?php echo site_url('praktek/index'); ?>" class="text-gray-600 hover:text-[#926699] transition duration-150">Home</a>
                 <a href="<?php echo site_url('praktek/vanue'); ?>" class="text-gray-600 hover:text-[#926699] transition duration-150">Browse Venues</a>
-                <a href="#" class="text-gray-600 hover:text-[#926699] transition duration-150">About Us</a>
+                <a href="<?php echo site_url('praktek/about'); ?>" class="text-gray-600 hover:text-[#926699] transition duration-150">About Us</a>
                 <?php if ($this->session->userdata('role') == 1): ?>
                     <!-- Tambahkan link Admin Dashboard jika role = 1 (Super Admin) -->
                     <a href="<?php echo site_url('praktek/admin_dashboard'); ?>" class="text-sm font-semibold text-white bg-indigo-500 px-3 py-1 rounded-lg hover:bg-indigo-600 transition duration-150">Admin Panel</a>

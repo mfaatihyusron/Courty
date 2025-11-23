@@ -34,6 +34,13 @@ class praktek extends CI_Controller {
 		$data['content'] = "vanue"; 
 		$this->load->view('template', $data);
 	}
+
+    public function about()
+	{
+        $data['user_name'] = $this->session->userdata('name');
+		$data['content'] = "about"; 
+		$this->load->view('template', $data);
+	}
     // ------------------------------------------------------------------
     // FITUR REGISTRASI MITRA (2 STEP)
     // ------------------------------------------------------------------
