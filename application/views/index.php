@@ -23,7 +23,7 @@
                         </a>
                         
                         <!-- Category Item 2: Badminton -->
-                        <a href="#" class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 bg-gray-50 rounded-xl shadow-md border-2 border-transparent hover:border-[#926699] transition duration-200 group w-28 sm:w-32">
+                        <a href="<?php echo site_url('praktek/sport_category'); ?>" class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 bg-gray-50 rounded-xl shadow-md border-2 border-transparent hover:border-[#926699] transition duration-200 group w-28 sm:w-32">
                             <span class="text-3xl sm:text-4xl">🏸</span>
                             <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Badminton</span>
                         </a>
