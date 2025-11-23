@@ -4,11 +4,17 @@
 
     <div class="bg-white shadow-2xl rounded-xl border border-gray-100 p-8">
         
+        <!-- HEADER DAN TOMBOL AKSI -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-4 mb-4">
             <h2 class="text-3xl font-bold text-[#926699]"><?php echo html_escape($venue['venue_name']); ?></h2>
-            <a href="#" class="mt-3 md:mt-0 px-4 py-2 text-sm font-semibold text-white bg-indigo-500 rounded-lg shadow-md hover:bg-indigo-600 transition duration-150">
-                <i class="fas fa-edit"></i> Edit Venue
-            </a>
+            <div class="mt-3 md:mt-0 space-x-3 flex">
+                <a href="<?php echo site_url('praktek/edit_venue'); ?>" class="px-4 py-2 text-sm font-semibold text-white bg-indigo-500 rounded-lg shadow-md hover:bg-indigo-600 transition duration-150">
+                    <i class="fas fa-edit"></i> Edit Venue
+                </a>
+                <a href="<?php echo site_url('praktek/add_court'); ?>" class="px-4 py-2 text-sm font-semibold text-white bg-[#B9CF32] rounded-lg shadow-md hover:bg-[#a6bd2e] transition duration-150">
+                    <i class="fas fa-plus"></i> Tambah Lapangan
+                </a>
+            </div>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
