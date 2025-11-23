@@ -191,6 +191,177 @@ class praktek extends CI_Controller {
         }
     }
 
+
+    // ------------------------------------------------------------------
+    // FITUR EDIT VENUE (ROLE 3)
+    // ------------------------------------------------------------------
+
+    public function edit_venue()
+    {
+        // 1. Pengecekan Hak Akses (Wajib Role 3)
+        if (!$this->session->userdata('logged_in') || $this->session->userdata('role') != 3) {
+            $this->session->set_flashdata('error', 'Anda tidak memiliki hak akses.');
+            redirect('praktek/index');
+            return;
+        }
+
+        $user_id = $this->session->userdata('user_id');
+        $venue = $this->Model->get_venue_by_user_id($user_id);
+        
+        if (empty($venue)) {
+            $this->session->set_flashdata('error', 'Venue Anda belum terdaftar.');
+            redirect('praktek/partner_dashboard');
+            return;
+        }
+
+        // 2. Set Rules Validasi
+        $this->form_validation->set_rules('venue_name', 'Nama Venue', 'required|trim|max_length[255]');
+        $this->form_validation->set_rules('address', 'Alamat Lengkap', 'required|trim');
+        $this->form_validation->set_rules('maps_url', 'URL Google Maps', 'trim|valid_url'); 
+        $this->form_validation->set_rules('description', 'Deskripsi Venue', 'required');
+        $this->form_validation->set_rules('opening_time', 'Jam Buka', 'required|trim|max_length[5]'); 
+        $this->form_validation->set_rules('closing_time', 'Jam Tutup', 'required|trim|max_length[5]');
+
+        $this->form_validation->set_message('required', '{field} wajib diisi.');
+        $this->form_validation->set_message('valid_url', '{field} harus berupa URL yang valid.');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            // Tampilkan form dengan data lama
+            $data['venue'] = $venue;
+            $data['content'] = "edit_venue"; 
+            $this->load->view('template', $data);
+        }
+        else
+        {
+            // 3. Proses Upload Foto (Opsional)
+            $uploaded_file_path = $venue['link_profile_img']; // Default: pakai foto lama
+
+            if (!empty($_FILES['link_profile_img']['name'])) {
+                $config['upload_path']   = './assets/uploads/venue_profiles/'; 
+                $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                $config['max_size']      = 2048; // Maksimal 2MB
+                $config['file_name']     = 'venue-' . $venue['id_venue'] . '-' . time();
+                $config['overwrite']     = TRUE;
+
+                $this->upload->initialize($config);
+                
+                if ($this->upload->do_upload('link_profile_img')) {
+                    $upload_data = $this->upload->data();
+                    $uploaded_file_path = 'assets/uploads/venue_profiles/' . $upload_data['file_name'];
+                    
+                    // Hapus file lama (jika bukan placeholder)
+                    if ($venue['link_profile_img'] != 'placeholder.jpg' && file_exists($venue['link_profile_img'])) {
+                         unlink($venue['link_profile_img']);
+                    }
+                } else {
+                    $upload_error = $this->upload->display_errors('', '');
+                    $this->session->set_flashdata('error', 'Update gagal: Upload foto gagal: ' . $upload_error);
+                    redirect('praktek/edit_venue');
+                    return;
+                }
+            }
+
+            // 4. Data Update
+            $data_update = array(
+                'venue_name'         => $this->input->post('venue_name'),
+                'address'            => $this->input->post('address'),
+                'maps_url'           => $this->input->post('maps_url'),
+                'description'        => $this->input->post('description'),
+                'opening_time'       => $this->input->post('opening_time'),
+                'closing_time'       => $this->input->post('closing_time'),
+                'link_profile_img'   => $uploaded_file_path
+            );
+
+            if ($this->Model->update_venue($venue['id_venue'], $data_update)) {
+                $this->session->set_flashdata('success', 'Detail Venue berhasil diperbarui!');
+            } else {
+                $this->session->set_flashdata('error', 'Update gagal. Tidak ada perubahan data atau terjadi kesalahan.');
+            }
+            redirect('praktek/partner_dashboard');
+        }
+    }
+
+    // ------------------------------------------------------------------
+    // FITUR TAMBAH COURT (ROLE 3)
+    // ------------------------------------------------------------------
+
+    public function add_court()
+    {
+        // 1. Pengecekan Hak Akses (Wajib Role 3)
+        if (!$this->session->userdata('logged_in') || $this->session->userdata('role') != 3) {
+            $this->session->set_flashdata('error', 'Anda tidak memiliki hak akses.');
+            redirect('praktek/index');
+            return;
+        }
+
+        $user_id = $this->session->userdata('user_id');
+        $venue = $this->Model->get_venue_by_user_id($user_id);
+        
+        if (empty($venue)) {
+            $this->session->set_flashdata('error', 'Venue Anda belum terdaftar.');
+            redirect('praktek/partner_dashboard');
+            return;
+        }
+
+        // 2. Set Rules Validasi
+        $this->form_validation->set_rules('id_sport', 'Jenis Olahraga', 'required|numeric');
+        $this->form_validation->set_rules('price_per_hour', 'Harga per Jam', 'required|numeric');
+        $this->form_validation->set_rules('description', 'Deskripsi Lapangan', 'required');
+
+        $this->form_validation->set_message('required', '{field} wajib diisi.');
+        $this->form_validation->set_message('numeric', '{field} harus berupa angka.');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            // Tampilkan form dengan data Sport
+            $data['sports'] = $this->Model->get_all_sports(); 
+            $data['venue'] = $venue;
+            $data['content'] = "add_court"; 
+            $this->load->view('template', $data);
+        }
+        else
+        {
+            $id_venue = $venue['id_venue']; // ID Venue milik mitra
+            
+            // 3. Proses Upload Foto Court (Wajib ada)
+            $config['upload_path']   = './assets/uploads/court_profiles/'; 
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['max_size']      = 2048; // Maksimal 2MB
+            $config['file_name']     = 'court-' . $id_venue . '-' . time();
+            $config['overwrite']     = TRUE;
+
+            $this->upload->initialize($config);
+            
+            if (!$this->upload->do_upload('profile_photo')) {
+                $upload_error = $this->upload->display_errors('', '');
+                $this->session->set_flashdata('error', 'Tambah Lapangan gagal: Upload foto gagal: ' . $upload_error);
+                redirect('praktek/add_court');
+                return;
+            }
+
+            $upload_data = $this->upload->data();
+            $uploaded_file_path = 'assets/uploads/court_profiles/' . $upload_data['file_name'];
+
+            // 4. Data Insert Court
+            $data_insert = array(
+                'id_venue'          => $id_venue, 
+                'id_sport'          => $this->input->post('id_sport'),
+                'price_per_hour'    => $this->input->post('price_per_hour'),
+                'description'       => $this->input->post('description'),
+                'profile_photo'     => $uploaded_file_path
+            );
+
+            if ($this->Model->add_court($data_insert)) {
+                $this->session->set_flashdata('success', 'Lapangan baru berhasil ditambahkan!');
+                redirect('praktek/partner_dashboard');
+            } else {
+                $this->session->set_flashdata('error', 'Gagal menambahkan lapangan baru. Silakan coba lagi.');
+                redirect('praktek/add_court');
+            }
+        }
+    }
+
     // ------------------------------------------------------------------
     // FITUR ADMIN DASHBOARD
     // ------------------------------------------------------------------
