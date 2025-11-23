@@ -37,7 +37,7 @@
                 <a href="#" class="text-gray-600 hover:text-[#926699] transition duration-150">Browse Venues</a>
                 <a href="#" class="text-gray-600 hover:text-[#926699] transition duration-150">About Us</a>
                 <?php if ($this->session->userdata('role') == 1): ?>
-                    <!-- Tambahkan link Admin Dashboard jika role = 1 -->
+                    <!-- Tambahkan link Admin Dashboard jika role = 1 (Super Admin) -->
                     <a href="<?php echo site_url('praktek/admin_dashboard'); ?>" class="text-sm font-semibold text-white bg-indigo-500 px-3 py-1 rounded-lg hover:bg-indigo-600 transition duration-150">Admin Panel</a>
                 <?php endif; ?>
             </nav>
@@ -53,7 +53,8 @@
                     </div>
                 <?php else: ?>
                     <!-- Jika belum login -->
-                    <a href="#" class="text-sm font-semibold text-gray-500 hover:text-gray-900 transition duration-150 hidden sm:block">Partner Login</a>
+                    <!-- LINK DAFTAR MITRA BARU -->
+                    <a href="<?php echo site_url('praktek/partner_register_step1'); ?>" class="text-sm font-semibold text-gray-500 hover:text-gray-900 transition duration-150 hidden sm:block">Daftar Mitra</a>
                     <a href="<?php echo site_url('praktek/login'); ?>" class="px-4 py-2 text-sm font-semibold text-white bg-[#926699] rounded-lg shadow-md hover:bg-[#7d5583] transition duration-150">Login / Register</a>
                 <?php endif; ?>
                 
@@ -75,7 +76,7 @@
                 <?php endif; ?>
                 <a href="<?php echo site_url('praktek/logout'); ?>" class="block px-3 py-2 rounded-lg text-base font-medium text-red-500 hover:bg-red-50">Logout</a>
             <?php else: ?>
-                <a href="#" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Partner Login</a>
+                <a href="<?php echo site_url('praktek/partner_register_step1'); ?>" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Daftar Mitra</a>
                 <a href="<?php echo site_url('praktek/login'); ?>" class="block px-3 py-2 rounded-lg text-base font-medium text-[#926699] hover:bg-gray-50">Login / Register</a>
             <?php endif; ?>
         </div>
@@ -83,9 +84,13 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
     <?php
+    // Menampilkan pesan Flash Data di area konten utama (sebelum dimuatnya view spesifik)
+    if ($this->session->flashdata('error_access')) {
+        echo '<div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">' . $this->session->flashdata('error_access') . '</div>';
+    }
+    
     if (isset($content)) {
         // Memuat view yang namanya disimpan di dalam variabel $content
-        // Pastikan Anda memiliki view 'index.php' di direktori 'application/views/'
         $this->load->view($content);
     } else {
         echo '<p class="text-gray-500 text-center">Konten tidak ditemukan atau belum didefinisikan.</p>';
@@ -123,8 +128,8 @@
                 <!-- Partner -->
                 <div>
                     <h5 class="text-lg font-semibold mb-4">Untuk Mitra</h5>
-                    <a href="#" class="text-sm text-gray-400 hover:text-[#B9CF32]">Partner Login</a>
-                    <p class="mt-2 text-xs text-gray-500">Ingin bergabung? <a href="#" class="text-[#B9CF32] hover:underline">Daftar Sekarang</a></p>
+                    <a href="<?php echo site_url('praktek/partner_register_step1'); ?>" class="text-sm text-gray-400 hover:text-[#B9CF32]">Daftar Mitra</a>
+                    <p class="mt-2 text-xs text-gray-500">Ingin bergabung? <a href="<?php echo site_url('praktek/partner_register_step1'); ?>" class="text-[#B9CF32] hover:underline">Daftar Sekarang</a></p>
                 </div>
             </div>
             <div class="mt-12 border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
