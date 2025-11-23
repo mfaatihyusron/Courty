@@ -96,6 +96,7 @@ class praktek extends CI_Controller {
         }
     }
     
+    
     // STEP 2: Pendaftaran Venue (Membutuhkan ID User dari Step 1)
     public function partner_register_step2()
     {
@@ -107,19 +108,18 @@ class praktek extends CI_Controller {
             return;
         }
 
-        // --- UPDATE VALIDASI SESUAI TABEL VENUE BARU ---
+        // --- UPDATE VALIDASI SESUAI TABEL VENUE BARU (COORDINATE DIHAPUS) ---
         $this->form_validation->set_rules('venue_name', 'Nama Venue', 'required|trim|max_length[255]');
         $this->form_validation->set_rules('address', 'Alamat Lengkap', 'required|trim');
-        $this->form_validation->set_rules('lat', 'Latitude', 'required|trim|numeric');
-        $this->form_validation->set_rules('lon', 'Longitude', 'required|trim|numeric');
-        $this->form_validation->set_rules('maps_url', 'URL Google Maps', 'trim|valid_url');
+        // VALIDASI LAT & LON DIHAPUS
+        $this->form_validation->set_rules('maps_url', 'URL Google Maps', 'trim|valid_url'); 
         $this->form_validation->set_rules('description', 'Deskripsi Venue', 'required');
         $this->form_validation->set_rules('opening_time', 'Jam Buka', 'required|trim|max_length[5]'); 
         $this->form_validation->set_rules('closing_time', 'Jam Tutup', 'required|trim|max_length[5]');
-        // Tidak ada set_rules untuk file upload, karena akan divalidasi manual
+        // Tidak ada set_rules untuk file upload
 
         $this->form_validation->set_message('required', '{field} wajib diisi.');
-        $this->form_validation->set_message('numeric', '{field} harus berupa angka (koordinat).');
+        // PESAN ERROR NUMERIC DIHAPUS KARENA LAT/LON TIDAK ADA
         $this->form_validation->set_message('valid_url', '{field} harus berupa URL yang valid.');
 
         if ($this->form_validation->run() == FALSE)
@@ -129,8 +129,13 @@ class praktek extends CI_Controller {
         }
         else
         {
+            $maps_url = $this->input->post('maps_url');
+            
+            // --- KOORDINAT MANUAL DARI FORM DIHAPUS ---
+            // $coordinate_string = $this->input->post('lat') . ',' . $this->input->post('lon');
+
             // --- LOGIKA UPLOAD FOTO ---
-            $config['upload_path']   = './assets/uploads/venue_profiles/'; // Pastikan folder ini ada dan writable
+            $config['upload_path']   = './assets/uploads/venue_profiles/'; 
             $config['allowed_types'] = 'gif|jpg|png|jpeg';
             $config['max_size']      = 2048; // Maksimal 2MB
             $config['file_name']     = 'venue-' . $partner_id . '-' . time();
@@ -138,39 +143,33 @@ class praktek extends CI_Controller {
 
             $this->upload->initialize($config);
             
-            $uploaded_file_path = 'placeholder.jpg'; // Default jika upload gagal atau tidak ada file
+            $uploaded_file_path = 'placeholder.jpg';
             
-            // Cek apakah ada file yang diupload (input field 'link_profile_img')
             if (!empty($_FILES['link_profile_img']['name'])) {
                 if ($this->upload->do_upload('link_profile_img')) {
                     $upload_data = $this->upload->data();
-                    // Simpan path relatif file yang diupload
                     $uploaded_file_path = 'assets/uploads/venue_profiles/' . $upload_data['file_name'];
                 } else {
-                    // Jika upload gagal, tampilkan error dan hentikan proses
                     $upload_error = $this->upload->display_errors('', '');
                     $this->session->set_flashdata('error', 'Upload foto gagal: ' . $upload_error);
                     redirect('praktek/partner_register_step2');
-                    return; // Penting untuk menghentikan eksekusi
+                    return;
                 }
             }
             // --- AKHIR LOGIKA UPLOAD FOTO ---
 
 
-            // Gabungkan Latitude dan Longitude menjadi format Coordinate
-            $coordinate_string = $this->input->post('lat') . ',' . $this->input->post('lon');
-
-            // --- DATA INSERT KE TABEL VENUE ---
+            // --- DATA INSERT KE TABEL VENUE (FIELD COORDINATE DIBERI NULL ATAU STRING KOSONG) ---
             $data_insert = array(
                 'id_user'            => $partner_id, 
                 'venue_name'         => $this->input->post('venue_name'),
                 'address'            => $this->input->post('address'),
-                'coordinate'         => $coordinate_string, 
-                'maps_url'           => $this->input->post('maps_url') ? $this->input->post('maps_url') : '#',
+                'coordinate'         => NULL, // Dihapus dari input, diset NULL di sini
+                'maps_url'           => $maps_url,
                 'description'        => $this->input->post('description'),
                 'opening_time'       => $this->input->post('opening_time'),
                 'closing_time'       => $this->input->post('closing_time'),
-                'link_profile_img'   => $uploaded_file_path // Simpan path/nama file
+                'link_profile_img'   => $uploaded_file_path
             );
 
             if ($this->Model->add_venue($data_insert)) {
