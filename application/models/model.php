@@ -28,6 +28,30 @@ class Model extends CI_Model {
         return $this->db->insert('users', $data_user);
     }
 
+    // FUNGSI BARU: Mendaftarkan Mitra/Partner (Role 3: Admin Venue)
+    public function register_partner($data)
+    {
+        $data_user = array(
+            'name'      => $data['name'],
+            'email'     => $data['email'],
+            'telp'      => $data['telp'],
+            'password'  => password_hash($data['password'], PASSWORD_DEFAULT),
+            'role'      => 3 // Role khusus untuk Admin Venue
+        );
+        
+        // Masukkan data ke tabel 'users'
+        $this->db->insert('users', $data_user);
+        
+        // Mengembalikan ID User yang baru dibuat untuk digunakan pada langkah selanjutnya (venue)
+        return $this->db->insert_id();
+    }
+    
+    // FUNGSI BARU: Menambahkan Data Venue
+    public function add_venue($data)
+    {
+        return $this->db->insert('venue', $data);
+    }
+
     // Fungsi untuk mengecek email apakah sudah terdaftar
     public function check_email($email)
     {
