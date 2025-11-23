@@ -28,10 +28,10 @@ class praktek extends CI_Controller {
 		$this->load->view('template', $data);
 	}
     
-    public function vanue()
+    public function venue()
 	{
         $data['user_name'] = $this->session->userdata('name');
-		$data['content'] = "vanue"; 
+		$data['content'] = "venue"; 
 		$this->load->view('template', $data);
 	}
 
