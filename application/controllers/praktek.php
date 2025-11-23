@@ -16,6 +16,7 @@ class praktek extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('Model'); 
+        $this->load->model('sportModel');
         $this->load->helper(array('form', 'url'));
         // Memuat library form_validation, session, dan upload
         $this->load->library(array('form_validation', 'session', 'upload'));
@@ -42,12 +43,29 @@ class praktek extends CI_Controller {
 		$this->load->view('template', $data);
 	}
 
-    public function sport_category()
-	{
+    public function view_sport_category($sport_name = 'futsal') // Beri nilai default
+    {
+        // 1. Ambil data venue berdasarkan nama olahraga (melalui Model)
+        // NOTE: Anda perlu membuat Model bernama 'SportModel' dan method 'get_venues_by_sport'
+        // Untuk latihan, $venue_data adalah data dummy jika model belum dibuat:
+        $venue_data = [
+            (object)['venue_name' => 'GOR Futsal A', 'distance' => '1.2', 'court_count' => 3, 'review_count' => 120, 'image_url' => 'https://placehold.co/400x250/926699/FFFFFF?text=COURTY'],
+            (object)['venue_name' => 'Hall Premium B', 'distance' => '5.5', 'court_count' => 5, 'review_count' => 90, 'image_url' => 'https://placehold.co/400x250/347048/FFFFFF?text=COURTY'],
+            (object)['venue_name' => 'Lapangan Cepat', 'distance' => '2.1', 'court_count' => 2, 'review_count' => 45, 'image_url' => 'https://placehold.co/400x250/B9CF32/FFFFFF?text=COURTY'],
+        ]; 
+        
+        // 2. Siapkan data untuk dikirim ke View
         $data['user_name'] = $this->session->userdata('name');
-		$data['content'] = "sport_category"; 
-		$this->load->view('template', $data);
-	}
+        // Mengubah 'sepak-bola' menjadi 'Sepak Bola'
+        $data['nama_olahraga'] = ucfirst(str_replace('-', ' ', $sport_name)); 
+        $data['venue_list'] = $venue_data;
+        $data['title'] = 'Reservasi Lapangan ' . $data['nama_olahraga'];
+        
+        // 3. Muat View dinamis ke dalam template
+        $data['content'] = "sport_category"; // Mengacu pada file sport_category.php
+        $this->load->view('template', $data);
+    }
+
     // ------------------------------------------------------------------
     // FITUR REGISTRASI MITRA (2 STEP)
     // ------------------------------------------------------------------
