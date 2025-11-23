@@ -2,6 +2,16 @@
 
 class Model extends CI_Model {
 
+    // FUNGSI BARU: Mengambil data venue berdasarkan ID User (Admin Venue)
+    public function get_venue_by_user_id($user_id)
+    {
+        $this->db->where('id_user', $user_id);
+        // Ambil semua kolom dari tabel 'venue'
+        $query = $this->db->get('venue');
+        // Gunakan row_array() karena satu user (admin venue) hanya punya satu venue
+        return $query->row_array();
+    }
+    
     // Fungsi untuk mengambil semua data user dari tabel 'users'
     public function get_all_users()
     {
