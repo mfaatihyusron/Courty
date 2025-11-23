@@ -204,6 +204,35 @@ class praktek extends CI_Controller {
         $this->load->view('template', $data);
     }
     
+    
+    // ------------------------------------------------------------------
+    // FITUR PARTNER DASHBOARD (Role 3)
+    // ------------------------------------------------------------------
+
+    public function partner_dashboard()
+    {
+        // Pengecekan Hak Akses
+        // Akses hanya untuk Role 3 (Admin Venue)
+        if (!$this->session->userdata('logged_in') || $this->session->userdata('role') != 3) {
+            $this->session->set_flashdata('error', 'Anda tidak memiliki hak akses untuk halaman Mitra.');
+            redirect('praktek/index');
+            return;
+        }
+
+        $user_id = $this->session->userdata('user_id');
+        $data['venue'] = $this->Model->get_venue_by_user_id($user_id);
+
+        if (empty($data['venue'])) {
+            $this->session->set_flashdata('error', 'Venue Anda belum terdaftar. Silakan hubungi admin.');
+            redirect('praktek/index');
+            return;
+        }
+
+        $data['content'] = "partner_dashboard"; 
+        $this->load->view('template', $data);
+    }
+
+
     // ------------------------------------------------------------------
     // FITUR REGISTRASI USER BIASA
     // ------------------------------------------------------------------
