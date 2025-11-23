@@ -394,6 +394,7 @@ class praktek extends CI_Controller {
         }
 
         $data['users'] = $this->Model->get_all_users();
+        $data['sports'] = $this->Model->get_all_sports(); // TAMBAH: Ambil data Sport
         $data['content'] = "admin_dashboard"; 
         $this->load->view('template', $data);
     }
