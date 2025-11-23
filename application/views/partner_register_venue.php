@@ -51,7 +51,7 @@
 
 
             <div class="mb-5">
-                <label for="maps_url" class="block text-sm font-medium text-gray-700 mb-1">URL Google Maps (Opsional)</label>
+                <label for="maps_url" class="block text-sm font-medium text-gray-700 mb-1">URL Google Maps</label>
                 <input type="url" name="maps_url" id="maps_url" value="<?php echo set_value('maps_url'); ?>" 
                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-[#926699] focus:border-[#926699]" 
                        placeholder="Link Google Maps Venue Anda">
@@ -60,7 +60,7 @@
 
 
             <!-- Jam Operasional -->
-            <div class="grid grid-cols-2 gap-4 mb-5">
+            <div class="grid grid-cols-2 gap-4 mb-6">
                 <div>
                     <label for="opening_time" class="block text-sm font-medium text-gray-700 mb-1">Jam Buka</label>
                     <input type="time" name="opening_time" id="opening_time" value="<?php echo set_value('opening_time', '08:00'); ?>" 
@@ -75,23 +75,7 @@
                 </div>
             </div>
 
-            <!-- Koordinat Lokasi (Digabung menjadi satu field 'coordinate' di Controller) -->
-            <div class="grid grid-cols-2 gap-4 mb-6">
-                <div>
-                    <label for="lat" class="block text-sm font-medium text-gray-700 mb-1">Latitude (Lintang)</label>
-                    <input type="text" name="lat" id="lat" value="<?php echo set_value('lat'); ?>" 
-                           class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-[#926699] focus:border-[#926699]" 
-                           placeholder="Contoh: -6.2088">
-                    <?php echo form_error('lat', '<p class="text-red-500 text-xs mt-1">', '</p>'); ?>
-                </div>
-                <div>
-                    <label for="lon" class="block text-sm font-medium text-gray-700 mb-1">Longitude (Bujur)</label>
-                    <input type="text" name="lon" id="lon" value="<?php echo set_value('lon'); ?>" 
-                           class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-[#926699] focus:border-[#926699]" 
-                           placeholder="Contoh: 106.8456">
-                    <?php echo form_error('lon', '<p class="text-red-500 text-xs mt-1">', '</p>'); ?>
-                </div>
-            </div>
+            <!-- Koordinat Lokasi DIHAPUS -->
 
             <button type="submit" 
                     class="w-full py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-[#B9CF32] hover:bg-[#a6bd2e] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#B9CF32] transition duration-150">
