@@ -3,6 +3,40 @@
 class Model extends CI_Model {
 
     
+    // FUNGSI BARU: Mengambil semua data Sport
+    public function get_all_sports()
+    {
+        $query = $this->db->get('sport');
+        return $query->result_array();
+    }
+    
+    // FUNGSI BARU: Menambahkan data Sport
+    public function add_sport($data)
+    {
+        return $this->db->insert('sport', $data);
+    }
+    
+    // FUNGSI BARU: Menghapus data Sport
+    public function delete_sport($id_sport)
+    {
+        $this->db->where('id_sport', $id_sport);
+        return $this->db->delete('sport');
+    }
+    
+    // FUNGSI BARU: Mengambil data Sport berdasarkan ID
+    public function get_sport_by_id($id_sport)
+    {
+        $this->db->where('id_sport', $id_sport);
+        return $this->db->get('sport')->row_array();
+    }
+    
+    // FUNGSI BARU: Mengupdate data Sport
+    public function update_sport($id_sport, $data)
+    {
+        $this->db->where('id_sport', $id_sport);
+        return $this->db->update('sport', $data);
+    }
+
     // FUNGSI BARU: Mengupdate data Venue
     public function update_venue($id_venue, $data)
     {
@@ -16,13 +50,7 @@ class Model extends CI_Model {
         return $this->db->insert('court', $data);
     }
     
-    // FUNGSI BARU: Mengambil data sport (diperlukan untuk form tambah court)
-    public function get_all_sports()
-    {
-        $query = $this->db->get('sport');
-        return $query->result_array();
-    }
-    
+
     // FUNGSI BARU: Mengambil data venue berdasarkan ID User (Admin Venue)
     public function get_venue_by_user_id($user_id)
     {
