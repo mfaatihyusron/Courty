@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2025 at 08:43 AM
+-- Generation Time: Nov 23, 2025 at 03:07 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -100,7 +100,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id_user`, `name`, `role`, `email`, `telp`, `password`) VALUES
 (1, 'Admin', 1, 'admin@gmail.com', '0808832328', '$2y$10$f1T2UHjITtqG.FadqUfsL.Vvu5F6axHLSbJStaxMEJlvpJw6kTQVu'),
 (2, 'furina', 0, 'furinaaaaaa@gmail.com', '0808832328', '$2y$10$198XnI6srErTJ2wU6a4eaeZahzCYYJ.395by01fip3Kd4gMpLxboO'),
-(3, 'alif', 3, 'alif@gmail.com', '0808832328', '$2y$10$N2VIT2JqzETfQPSnDLhiw.Jx4ABHkOiTds8Fr6g.R3xwprMOfK5HS');
+(3, 'alif', 3, 'alif@gmail.com', '0808832328', '$2y$10$N2VIT2JqzETfQPSnDLhiw.Jx4ABHkOiTds8Fr6g.R3xwprMOfK5HS'),
+(4, 'mahdi', 3, 'mahdi@gmail.com', '232342354', '$2y$10$hp2io6mYXD.RrPY1Vklfw.LD0gMRdX/DW4uMqTOtZfmxkyuR3kElC');
 
 -- --------------------------------------------------------
 
@@ -120,6 +121,14 @@ CREATE TABLE `venue` (
   `closing_time` varchar(50) DEFAULT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `venue`
+--
+
+INSERT INTO `venue` (`id_venue`, `link_profile_img`, `venue_name`, `address`, `coordinate`, `maps_url`, `description`, `opening_time`, `closing_time`, `id_user`) VALUES
+(1, 'assets/uploads/venue_profiles/venue-3-1763887402.jpeg', 'GOR Bulan Sabit', 'jl. masa depan dia', '3.3232,103.242', 'https://maps.app.goo.gl/7HtDacazyS2B1hxGA', '5 lapangan badminton', '08:00', '20:00', 3),
+(2, 'assets/uploads/venue_profiles/venue-4-1763888300.jpeg', 'GOR YU AI', 'Jl. Imantaka', '3.3232,103.242', 'https://maps.app.goo.gl/7HtDacazyS2B1hxGA', 'buat renang gas kan', '08:00', '22:00', 4);
 
 --
 -- Indexes for dumped tables
@@ -197,13 +206,13 @@ ALTER TABLE `sport`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `venue`
 --
 ALTER TABLE `venue`
-  MODIFY `id_venue` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_venue` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
