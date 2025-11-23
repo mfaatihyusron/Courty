@@ -40,6 +40,10 @@
                     <!-- Tambahkan link Admin Dashboard jika role = 1 (Super Admin) -->
                     <a href="<?php echo site_url('praktek/admin_dashboard'); ?>" class="text-sm font-semibold text-white bg-indigo-500 px-3 py-1 rounded-lg hover:bg-indigo-600 transition duration-150">Admin Panel</a>
                 <?php endif; ?>
+                <?php if ($this->session->userdata('role') == 3): ?>
+                    <!-- Link Partner Dashboard untuk Role 3 -->
+                    <a href="<?php echo site_url('praktek/partner_dashboard'); ?>" class="text-sm font-semibold text-white bg-[#B9CF32] px-3 py-1 rounded-lg hover:bg-[#a6bd2e] transition duration-150">Dashboard Mitra</a>
+                <?php endif; ?>
             </nav>
             
             <!-- User & Partner Actions -->
