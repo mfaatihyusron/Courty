@@ -2,6 +2,13 @@
 
 class Model extends CI_Model {
 
+    // FUNGSI BARU: Menghapus data Court
+    public function delete_court($id_court)
+    {
+        $this->db->where('id_court', $id_court);
+        return $this->db->delete('court');
+    }
+    
     // FUNGSI BARU: Mengambil semua Court berdasarkan ID Venue
     public function get_courts_by_venue_id($id_venue)
     {
