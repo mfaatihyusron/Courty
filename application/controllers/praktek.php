@@ -298,6 +298,45 @@ class praktek extends CI_Controller {
             redirect('praktek/partner_dashboard');
         }
     }
+
+    
+    // ------------------------------------------------------------------
+    // FITUR DELETE COURT (ROLE 3)
+    // ------------------------------------------------------------------
+
+    public function delete_court($id_court)
+    {
+        // 1. Pengecekan Hak Akses (Wajib Role 3)
+        if (!$this->session->userdata('logged_in') || $this->session->userdata('role') != 3) {
+            $this->session->set_flashdata('error', 'Anda tidak memiliki hak akses.');
+            redirect('praktek/index');
+            return;
+        }
+
+        $user_id = $this->session->userdata('user_id');
+        $venue = $this->Model->get_venue_by_user_id($user_id);
+        $court = $this->Model->get_court_by_id($id_court);
+        
+        // Pengecekan: Court ada dan Court milik Venue Admin yang sedang login
+        if (empty($court) || $court['id_venue'] != $venue['id_venue']) {
+            $this->session->set_flashdata('error', 'Lapangan tidak ditemukan atau bukan milik Anda.');
+            redirect('praktek/partner_dashboard');
+            return;
+        }
+
+        // 2. Hapus Court
+        if ($this->Model->delete_court($id_court)) {
+            // Hapus file foto terkait
+            if (file_exists($court['profile_photo'])) {
+                unlink($court['profile_photo']);
+            }
+            $this->session->set_flashdata('success', 'Lapangan berhasil dihapus.');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal menghapus lapangan. Mungkin terdapat data terkait lainnya.');
+        }
+
+        redirect('praktek/partner_dashboard');
+    }
     
     // ------------------------------------------------------------------
     // FITUR EDIT COURT (ROLE 3)
