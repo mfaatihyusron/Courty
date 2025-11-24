@@ -149,7 +149,7 @@ class Mitra extends CI_Controller {
     // DASHBOARD & MANAJEMEN VENUE (Wajib Role 3)
     // ------------------------------------------------------------------
     
-    public function dashboard()
+    public function partner_dashboard()
     {
         // Pengecekan Hak Akses
         if (!$this->session->userdata('logged_in') || $this->session->userdata('role') != 3) {
@@ -183,7 +183,7 @@ class Mitra extends CI_Controller {
         
         if (empty($venue)) {
             $this->session->set_flashdata('error', 'Venue Anda belum terdaftar.');
-            redirect('mitra/dashboard');
+            redirect('mitra/partner_dashboard');
             return;
         }
 
@@ -245,7 +245,7 @@ class Mitra extends CI_Controller {
             } else {
                 $this->session->set_flashdata('error', 'Update gagal. Tidak ada perubahan data atau terjadi kesalahan.');
             }
-            redirect('mitra/dashboard');
+            redirect('mitra/partner_dashboard');
         }
     }
     
@@ -262,7 +262,7 @@ class Mitra extends CI_Controller {
         
         if (empty($venue)) {
             $this->session->set_flashdata('error', 'Venue Anda belum terdaftar.');
-            redirect('mitra/dashboard');
+            redirect('mitra/partner_dashboard');
             return;
         }
 
@@ -310,7 +310,7 @@ class Mitra extends CI_Controller {
 
             if ($this->Model->add_court($data_insert)) {
                 $this->session->set_flashdata('success', 'Lapangan baru berhasil ditambahkan!');
-                redirect('mitra/dashboard');
+                redirect('mitra/partner_dashboard');
             } else {
                 $this->session->set_flashdata('error', 'Gagal menambahkan lapangan baru. Silakan coba lagi.');
                 redirect('mitra/add_court');
@@ -328,7 +328,7 @@ class Mitra extends CI_Controller {
         
         if (empty($court) || $court['id_venue'] != $venue['id_venue']) {
             $this->session->set_flashdata('error', 'Lapangan tidak ditemukan atau bukan milik Anda.');
-            redirect('mitra/dashboard');
+            redirect('mitra/partner_dashboard');
             return;
         }
 
@@ -385,7 +385,7 @@ class Mitra extends CI_Controller {
             } else {
                 $this->session->set_flashdata('error', 'Update gagal. Tidak ada perubahan data atau terjadi kesalahan.');
             }
-            redirect('mitra/dashboard');
+            redirect('mitra/partner_dashboard');
         }
     }
 
@@ -399,7 +399,7 @@ class Mitra extends CI_Controller {
         
         if (empty($court) || $court['id_venue'] != $venue['id_venue']) {
             $this->session->set_flashdata('error', 'Lapangan tidak ditemukan atau bukan milik Anda.');
-            redirect('mitra/dashboard');
+            redirect('mitra/partner_dashboard');
             return;
         }
 
@@ -412,7 +412,7 @@ class Mitra extends CI_Controller {
             $this->session->set_flashdata('error', 'Gagal menghapus lapangan. Mungkin terdapat data terkait lainnya.');
         }
 
-        redirect('mitra/dashboard');
+        redirect('mitra/partner_dashboard');
     }
     
     // --- PRIVATE FUNCTION UNTUK PENCEGAHAN REDUNDANSI ---
