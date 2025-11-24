@@ -2,7 +2,37 @@
 
 class Model extends CI_Model {
 
+    // FUNGSI BARU: Mengambil semua Court berdasarkan ID Venue
+    public function get_courts_by_venue_id($id_venue)
+    {
+        // Join dengan tabel sport agar nama olahraga bisa ditampilkan
+        $this->db->select('c.*, s.name as sport_name');
+        $this->db->from('court c');
+        $this->db->join('sport s', 's.id_sport = c.id_sport', 'left');
+        $this->db->where('c.id_venue', $id_venue);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
     
+    // FUNGSI BARU: Mengambil detail Court berdasarkan ID Court
+    public function get_court_by_id($id_court)
+    {
+        // Join dengan tabel sport agar nama olahraga bisa ditampilkan
+        $this->db->select('c.*, s.name as sport_name');
+        $this->db->from('court c');
+        $this->db->join('sport s', 's.id_sport = c.id_sport', 'left');
+        $this->db->where('c.id_court', $id_court);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+    
+    // FUNGSI BARU: Mengupdate data Court
+    public function update_court($id_court, $data)
+    {
+        $this->db->where('id_court', $id_court);
+        return $this->db->update('court', $data);
+    }
+
     // FUNGSI BARU: Mengambil semua data Sport
     public function get_all_sports()
     {
