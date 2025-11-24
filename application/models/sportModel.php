@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class SportModel extends CI_Model {
 
     // Konstruktor
-    public function __construct()
+    public function __construct() // Belajar
     {
         parent::__construct();
         // Memuat database agar bisa menggunakan $this->db
