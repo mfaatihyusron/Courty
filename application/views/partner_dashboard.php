@@ -118,16 +118,19 @@
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">
                             ID
                         </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">
+                            Gambar
+                        </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-2/12">
                             Olahraga
                         </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-3/12">
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-2/12">
                             Harga/Jam
                         </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-4/12">
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-3/12">
                             Deskripsi Singkat
                         </th>
-                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-2/12">
+                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-3/12">
                             Aksi
                         </th>
                     </tr>
@@ -140,6 +143,16 @@
                                     #<?php echo $court['id_court']; ?>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <?php 
+                                    $court_img_src = base_url($court['profile_photo']);
+                                    // Placeholder jika foto kosong atau tidak valid
+                                    if (empty($court['profile_photo']) || !file_exists($court['profile_photo'])) {
+                                        $court_img_src = "https://placehold.co/50x50/B9CF32/ffffff?text=FOTO";
+                                    }
+                                    ?>
+                                    <img src="<?php echo $court_img_src; ?>" alt="Court Photo" class="w-12 h-12 object-cover rounded-md border">
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                     <?php echo html_escape($court['sport_name']); ?>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-semibold">
@@ -150,13 +163,16 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-center space-x-2">
                                     <a href="<?php echo site_url('praktek/edit_court/' . $court['id_court']); ?>" class="text-indigo-600 hover:text-indigo-900 font-medium">Edit</a>
-                                    <!-- Anda bisa menambahkan tombol Hapus di sini juga -->
+                                    
+                                    <a href="#" 
+                                       onclick="confirmDeleteCourt('<?php echo site_url('praktek/delete_court/' . $court['id_court']); ?>', '<?php echo html_escape($court['sport_name']); ?> #<?php echo $court['id_court']; ?>')" 
+                                       class="text-red-600 hover:text-red-900 font-medium ml-3">Hapus</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="5" class="px-6 py-4 text-center text-sm text-gray-500">
+                            <td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500">
                                 Belum ada lapangan yang ditambahkan. Silakan klik "Tambah Lapangan" di atas.
                             </td>
                         </tr>
@@ -167,3 +183,24 @@
         <!-- Akhir Tabel Court -->
     </div>
 </div>
+
+<!-- Modal Konfirmasi Hapus Court (Custom UI) -->
+<div id="delete-court-modal" class="fixed inset-0 bg-gray-600 bg-opacity-75 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-xl max-w-sm w-full p-6">
+        <h3 class="text-lg font-semibold text-gray-900 border-b pb-3 mb-4">Konfirmasi Penghapusan Lapangan</h3>
+        <p class="text-sm text-gray-600 mb-4">Apakah Anda yakin ingin menghapus lapangan <strong id="court-name-display"></strong>? Tindakan ini tidak dapat dibatalkan.</p>
+        <div class="flex justify-end space-x-3">
+            <button onclick="document.getElementById('delete-court-modal').classList.add('hidden');" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 text-sm">Batal</button>
+            <a id="delete-court-confirm-link" href="#" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm">Hapus</a>
+        </div>
+    </div>
+</div>
+
+<script>
+function confirmDeleteCourt(deleteUrl, courtName) {
+    document.getElementById('court-name-display').textContent = '"' + courtName + '"';
+    document.getElementById('delete-court-confirm-link').href = deleteUrl;
+    document.getElementById('delete-court-modal').classList.remove('hidden');
+    document.getElementById('delete-court-modal').classList.add('flex');
+}
+</script>
