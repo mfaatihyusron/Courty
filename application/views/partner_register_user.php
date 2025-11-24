@@ -62,7 +62,7 @@
         <?php echo form_close(); ?>
         
         <p class="mt-4 text-center text-sm text-gray-600">
-            Sudah punya akun mitra? <a href="<?php echo site_url('praktek/login'); ?>" class="font-medium text-[#926699] hover:text-[#7d5583]">Login di sini</a>
+            Sudah punya akun mitra? <a href="<?php echo site_url('Auth/login'); ?>" class="font-medium text-[#926699] hover:text-[#7d5583]">Login di sini</a>
         </p>
     </div>
 </div>

@@ -79,7 +79,7 @@
         <?php echo form_close(); ?>
 
         <div class="mt-6 text-center text-sm">
-            <p class="text-gray-600">Sudah punya akun? <a href="<?php echo site_url('praktek/login'); ?>" class="font-medium text-[#926699] hover:text-[#7d5583]">Login di sini</a></p>
+            <p class="text-gray-600">Sudah punya akun? <a href="<?php echo site_url('Auth/login'); ?>" class="font-medium text-[#926699] hover:text-[#7d5583]">Login di sini</a></p>
         </div>
     </div>
 </div>

@@ -299,6 +299,132 @@ class praktek extends CI_Controller {
         }
     }
 
+    
+    // ------------------------------------------------------------------
+    // FITUR DELETE COURT (ROLE 3)
+    // ------------------------------------------------------------------
+
+    public function delete_court($id_court)
+    {
+        // 1. Pengecekan Hak Akses (Wajib Role 3)
+        if (!$this->session->userdata('logged_in') || $this->session->userdata('role') != 3) {
+            $this->session->set_flashdata('error', 'Anda tidak memiliki hak akses.');
+            redirect('praktek/index');
+            return;
+        }
+
+        $user_id = $this->session->userdata('user_id');
+        $venue = $this->Model->get_venue_by_user_id($user_id);
+        $court = $this->Model->get_court_by_id($id_court);
+        
+        // Pengecekan: Court ada dan Court milik Venue Admin yang sedang login
+        if (empty($court) || $court['id_venue'] != $venue['id_venue']) {
+            $this->session->set_flashdata('error', 'Lapangan tidak ditemukan atau bukan milik Anda.');
+            redirect('praktek/partner_dashboard');
+            return;
+        }
+
+        // 2. Hapus Court
+        if ($this->Model->delete_court($id_court)) {
+            // Hapus file foto terkait
+            if (file_exists($court['profile_photo'])) {
+                unlink($court['profile_photo']);
+            }
+            $this->session->set_flashdata('success', 'Lapangan berhasil dihapus.');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal menghapus lapangan. Mungkin terdapat data terkait lainnya.');
+        }
+
+        redirect('praktek/partner_dashboard');
+    }
+    
+    // ------------------------------------------------------------------
+    // FITUR EDIT COURT (ROLE 3)
+    // ------------------------------------------------------------------
+
+    public function edit_court($id_court)
+    {
+        // 1. Pengecekan Hak Akses (Wajib Role 3)
+        if (!$this->session->userdata('logged_in') || $this->session->userdata('role') != 3) {
+            $this->session->set_flashdata('error', 'Anda tidak memiliki hak akses.');
+            redirect('praktek/index');
+            return;
+        }
+
+        $user_id = $this->session->userdata('user_id');
+        $venue = $this->Model->get_venue_by_user_id($user_id);
+        $court = $this->Model->get_court_by_id($id_court);
+        
+        // Pengecekan: Court ada dan Court milik Venue Admin yang sedang login
+        if (empty($court) || $court['id_venue'] != $venue['id_venue']) {
+            $this->session->set_flashdata('error', 'Lapangan tidak ditemukan atau bukan milik Anda.');
+            redirect('praktek/partner_dashboard');
+            return;
+        }
+
+        // 2. Set Rules Validasi
+        $this->form_validation->set_rules('id_sport', 'Jenis Olahraga', 'required|numeric');
+        $this->form_validation->set_rules('price_per_hour', 'Harga per Jam', 'required|numeric');
+        $this->form_validation->set_rules('description', 'Deskripsi Lapangan', 'required');
+
+        $this->form_validation->set_message('required', '{field} wajib diisi.');
+        $this->form_validation->set_message('numeric', '{field} harus berisi angka.');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            // Tampilkan form dengan data Court
+            $data['sports'] = $this->Model->get_all_sports();
+            $data['court'] = $court;
+            $data['content'] = "edit_court"; 
+            $this->load->view('template', $data);
+        }
+        else
+        {
+            // 3. Proses Upload Foto Court (Opsional)
+            $uploaded_file_path = $court['profile_photo']; // Default: pakai foto lama
+
+            if (!empty($_FILES['profile_photo']['name'])) {
+                $config['upload_path']   = './assets/uploads/court_profiles/'; 
+                $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                $config['max_size']      = 2048; // Maksimal 2MB
+                $config['file_name']     = 'court-' . $court['id_court'] . '-' . time();
+                $config['overwrite']     = TRUE;
+
+                $this->upload->initialize($config);
+                
+                if ($this->upload->do_upload('profile_photo')) {
+                    $upload_data = $this->upload->data();
+                    $uploaded_file_path = 'assets/uploads/court_profiles/' . $upload_data['file_name'];
+                    
+                    // Hapus file lama jika ada dan bukan placeholder
+                    if (file_exists($court['profile_photo'])) {
+                         unlink($court['profile_photo']);
+                    }
+                } else {
+                    $upload_error = $this->upload->display_errors('', '');
+                    $this->session->set_flashdata('error', 'Update gagal: Upload foto gagal: ' . $upload_error);
+                    redirect('praktek/edit_court/' . $id_court);
+                    return;
+                }
+            }
+
+            // 4. Data Update
+            $data_update = array(
+                'id_sport'          => $this->input->post('id_sport'),
+                'price_per_hour'    => $this->input->post('price_per_hour'),
+                'description'       => $this->input->post('description'),
+                'profile_photo'     => $uploaded_file_path
+            );
+
+            if ($this->Model->update_court($id_court, $data_update)) {
+                $this->session->set_flashdata('success', 'Detail Lapangan berhasil diperbarui!');
+            } else {
+                $this->session->set_flashdata('error', 'Update gagal. Tidak ada perubahan data atau terjadi kesalahan.');
+            }
+            redirect('praktek/partner_dashboard');
+        }
+    }
+
     // ------------------------------------------------------------------
     // FITUR TAMBAH COURT (ROLE 3)
     // ------------------------------------------------------------------
@@ -519,14 +645,18 @@ class praktek extends CI_Controller {
         }
 
         $user_id = $this->session->userdata('user_id');
-        $data['venue'] = $this->Model->get_venue_by_user_id($user_id);
+        $venue = $this->Model->get_venue_by_user_id($user_id);
 
-        if (empty($data['venue'])) {
+        if (empty($venue)) {
             $this->session->set_flashdata('error', 'Venue Anda belum terdaftar. Silakan hubungi admin.');
             redirect('praktek/index');
             return;
         }
+        
+        // TAMBAH: Ambil data court yang dimiliki venue ini
+        $data['courts'] = $this->Model->get_courts_by_venue_id($venue['id_venue']);
 
+        $data['venue'] = $venue;
         $data['content'] = "partner_dashboard"; 
         $this->load->view('template', $data);
     }
