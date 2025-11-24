@@ -103,7 +103,7 @@
     <div class="bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-100">
         <div class="p-5 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
             <h3 class="text-xl font-semibold text-gray-800">2. Manajemen Jenis Olahraga (Tabel Sport)</h3>
-            <a href="<?php echo site_url('praktek/add_sport'); ?>" class="px-4 py-2 text-sm font-semibold text-white bg-[#B9CF32] rounded-lg shadow-md hover:bg-[#a6bd2e] transition duration-150">
+            <a href="<?php echo site_url('Admin/add_sport'); ?>" class="px-4 py-2 text-sm font-semibold text-white bg-[#B9CF32] rounded-lg shadow-md hover:bg-[#a6bd2e] transition duration-150">
                 + Tambah Olahraga Baru
             </a>
         </div>

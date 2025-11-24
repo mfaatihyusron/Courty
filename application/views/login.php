@@ -49,7 +49,7 @@
         <?php echo form_close(); ?>
 
         <div class="mt-6 text-center text-sm">
-            <p class="text-gray-600">Belum punya akun? <a href="<?php echo site_url('praktek/register'); ?>" class="font-medium text-[#926699] hover:text-[#7d5583]">Daftar Sekarang</a></p>
+            <p class="text-gray-600">Belum punya akun? <a href="<?php echo site_url('Auth/register'); ?>" class="font-medium text-[#926699] hover:text-[#7d5583]">Daftar Sekarang</a></p>
         </div>
     </div>
 </div>
