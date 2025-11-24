@@ -29,20 +29,20 @@
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center">
             <!-- Branding/Logo -->
-            <a href="<?php echo site_url('praktek/index'); ?>" class="text-2xl font-extrabold text-[#926699] tracking-tight">Courty.</a>
+            <a href="<?php echo site_url('App/index'); ?>" class="text-2xl font-extrabold text-[#926699] tracking-tight">Courty.</a>
             
             <!-- Desktop Menu -->
             <nav class="hidden md:flex space-x-8 items-center">
-                <a href="<?php echo site_url('praktek/index'); ?>" class="text-gray-600 hover:text-[#926699] transition duration-150">Home</a>
-                <a href="<?php echo site_url('praktek/venue'); ?>" class="text-gray-600 hover:text-[#926699] transition duration-150">Venue</a>
-                <a href="<?php echo site_url('praktek/about'); ?>" class="text-gray-600 hover:text-[#926699] transition duration-150">About Us</a>
+                <a href="<?php echo site_url('App/index'); ?>" class="text-gray-600 hover:text-[#926699] transition duration-150">Home</a>
+                <a href="<?php echo site_url('App/venue'); ?>" class="text-gray-600 hover:text-[#926699] transition duration-150">Venue</a>
+                <a href="<?php echo site_url('App/about'); ?>" class="text-gray-600 hover:text-[#926699] transition duration-150">About Us</a>
                 <?php if ($this->session->userdata('role') == 1): ?>
                     <!-- Tambahkan link Admin Dashboard jika role = 1 (Super Admin) -->
-                    <a href="<?php echo site_url('praktek/admin_dashboard'); ?>" class="text-sm font-semibold text-white bg-indigo-500 px-3 py-1 rounded-lg hover:bg-indigo-600 transition duration-150">Admin Panel</a>
+                    <a href="<?php echo site_url('Admin/admin_dashboard'); ?>" class="text-sm font-semibold text-white bg-indigo-500 px-3 py-1 rounded-lg hover:bg-indigo-600 transition duration-150">Admin Panel</a>
                 <?php endif; ?>
                 <?php if ($this->session->userdata('role') == 3): ?>
                     <!-- Link Partner Dashboard untuk Role 3 -->
-                    <a href="<?php echo site_url('praktek/partner_dashboard'); ?>" class="text-sm font-semibold text-white bg-[#B9CF32] px-3 py-1 rounded-lg hover:bg-[#a6bd2e] transition duration-150">Dashboard Mitra</a>
+                    <a href="<?php echo site_url('Mitra/partner_dashboard'); ?>" class="text-sm font-semibold text-white bg-[#B9CF32] px-3 py-1 rounded-lg hover:bg-[#a6bd2e] transition duration-150">Dashboard Mitra</a>
                 <?php endif; ?>
             </nav>
             
@@ -53,13 +53,13 @@
                     <!-- Jika sudah login -->
                     <div class="flex items-center space-x-4">
                         <span class="text-sm text-gray-600 hidden sm:block">Halo, <?php echo $this->session->userdata('name'); ?>!</span>
-                        <a href="<?php echo site_url('praktek/logout'); ?>" class="px-4 py-2 text-sm font-semibold text-white bg-red-500 rounded-lg shadow-md hover:bg-red-600 transition duration-150">Logout</a>
+                        <a href="<?php echo site_url('Auth/logout'); ?>" class="px-4 py-2 text-sm font-semibold text-white bg-red-500 rounded-lg shadow-md hover:bg-red-600 transition duration-150">Logout</a>
                     </div>
                 <?php else: ?>
                     <!-- Jika belum login -->
                     <!-- LINK DAFTAR MITRA BARU -->
-                    <a href="<?php echo site_url('praktek/partner_register_step1'); ?>" class="text-sm font-semibold text-gray-500 hover:text-gray-900 transition duration-150 hidden sm:block">Daftar Mitra</a>
-                    <a href="<?php echo site_url('praktek/login'); ?>" class="px-4 py-2 text-sm font-semibold text-white bg-[#926699] rounded-lg shadow-md hover:bg-[#7d5583] transition duration-150">Login / Register</a>
+                    <a href="<?php echo site_url('Mitra/partner_register_step1'); ?>" class="text-sm font-semibold text-gray-500 hover:text-gray-900 transition duration-150 hidden sm:block">Daftar Mitra</a>
+                    <a href="<?php echo site_url('Auth/login'); ?>" class="px-4 py-2 text-sm font-semibold text-white bg-[#926699] rounded-lg shadow-md hover:bg-[#7d5583] transition duration-150">Login / Register</a>
                 <?php endif; ?>
                 
                 <!-- Mobile Menu Button -->
@@ -71,17 +71,17 @@
         
         <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-1 bg-white border-t">
-            <a href="<?php echo site_url('praktek/index'); ?>" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Home</a>
+            <a href="<?php echo site_url('App/index'); ?>" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Home</a>
             <a href="#" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Venue</a>
             <a href="#" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">About Us</a>
             <?php if ($this->session->userdata('logged_in')): ?>
                 <?php if ($this->session->userdata('role') == 1): ?>
-                    <a href="<?php echo site_url('praktek/admin_dashboard'); ?>" class="block px-3 py-2 rounded-lg text-base font-medium text-indigo-500 hover:bg-indigo-50">Admin Panel</a>
+                    <a href="<?php echo site_url('Admin/admin_dashboard'); ?>" class="block px-3 py-2 rounded-lg text-base font-medium text-indigo-500 hover:bg-indigo-50">Admin Panel</a>
                 <?php endif; ?>
-                <a href="<?php echo site_url('praktek/logout'); ?>" class="block px-3 py-2 rounded-lg text-base font-medium text-red-500 hover:bg-red-50">Logout</a>
+                <a href="<?php echo site_url('Auth/logout'); ?>" class="block px-3 py-2 rounded-lg text-base font-medium text-red-500 hover:bg-red-50">Logout</a>
             <?php else: ?>
-                <a href="<?php echo site_url('praktek/partner_register_step1'); ?>" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Daftar Mitra</a>
-                <a href="<?php echo site_url('praktek/login'); ?>" class="block px-3 py-2 rounded-lg text-base font-medium text-[#926699] hover:bg-gray-50">Login / Register</a>
+                <a href="<?php echo site_url('Mitra/partner_register_step1'); ?>" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Daftar Mitra</a>
+                <a href="<?php echo site_url('Auth/login'); ?>" class="block px-3 py-2 rounded-lg text-base font-medium text-[#926699] hover:bg-gray-50">Login / Register</a>
             <?php endif; ?>
         </div>
     </header>
@@ -132,8 +132,8 @@
                 <!-- Partner -->
                 <div>
                     <h5 class="text-lg font-semibold mb-4">Untuk Mitra</h5>
-                    <a href="<?php echo site_url('praktek/partner_register_step1'); ?>" class="text-sm text-gray-400 hover:text-[#B9CF32]">Daftar Mitra</a>
-                    <p class="mt-2 text-xs text-gray-500">Ingin bergabung? <a href="<?php echo site_url('praktek/partner_register_step1'); ?>" class="text-[#B9CF32] hover:underline">Daftar Sekarang</a></p>
+                    <a href="<?php echo site_url('Mitra/partner_register_step1'); ?>" class="text-sm text-gray-400 hover:text-[#B9CF32]">Daftar Mitra</a>
+                    <p class="mt-2 text-xs text-gray-500">Ingin bergabung? <a href="<?php echo site_url('Mitra/partner_register_step1'); ?>" class="text-[#B9CF32] hover:underline">Daftar Sekarang</a></p>
                 </div>
             </div>
             <div class="mt-12 border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
