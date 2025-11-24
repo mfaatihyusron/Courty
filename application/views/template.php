@@ -38,7 +38,7 @@
                 <a href="<?php echo site_url('App/about'); ?>" class="text-gray-600 hover:text-[#926699] transition duration-150">About Us</a>
                 <?php if ($this->session->userdata('role') == 1): ?>
                     <!-- Tambahkan link Admin Dashboard jika role = 1 (Super Admin) -->
-                    <a href="<?php echo site_url('Admin/admin_dashboard'); ?>" class="text-sm font-semibold text-white bg-indigo-500 px-3 py-1 rounded-lg hover:bg-indigo-600 transition duration-150">Admin Panel</a>
+                    <a href="<?php echo site_url('Admin/dashboard'); ?>" class="text-sm font-semibold text-white bg-indigo-500 px-3 py-1 rounded-lg hover:bg-indigo-600 transition duration-150">Admin Panel</a>
                 <?php endif; ?>
                 <?php if ($this->session->userdata('role') == 3): ?>
                     <!-- Link Partner Dashboard untuk Role 3 -->
@@ -76,7 +76,7 @@
             <a href="#" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">About Us</a>
             <?php if ($this->session->userdata('logged_in')): ?>
                 <?php if ($this->session->userdata('role') == 1): ?>
-                    <a href="<?php echo site_url('Admin/admin_dashboard'); ?>" class="block px-3 py-2 rounded-lg text-base font-medium text-indigo-500 hover:bg-indigo-50">Admin Panel</a>
+                    <a href="<?php echo site_url('Admin/dashboard'); ?>" class="block px-3 py-2 rounded-lg text-base font-medium text-indigo-500 hover:bg-indigo-50">Admin Panel</a>
                 <?php endif; ?>
                 <a href="<?php echo site_url('Auth/logout'); ?>" class="block px-3 py-2 rounded-lg text-base font-medium text-red-500 hover:bg-red-50">Logout</a>
             <?php else: ?>
