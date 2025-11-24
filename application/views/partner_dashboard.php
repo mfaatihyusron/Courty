@@ -1,10 +1,26 @@
 <div class="py-6">
     <h1 class="text-4xl font-bold text-[#B9CF32] mb-2">Dashboard Mitra</h1>
     <p class="text-gray-600 mb-8">Kelola informasi GOR/Venue Anda di sini.</p>
+    
+    <?php 
+    if ($this->session->flashdata('success')): ?>
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <span class="block sm:inline"><?php echo $this->session->flashdata('success'); ?></span>
+        </div>
+    <?php endif; 
+    if ($this->session->flashdata('error')): ?>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <span class="block sm:inline"><?php echo $this->session->flashdata('error'); ?></span>
+        </div>
+    <?php endif; 
+    ?>
 
-    <div class="bg-white shadow-2xl rounded-xl border border-gray-100 p-8">
+    <!-- ============================================== -->
+    <!-- BAGIAN 1: DETAIL VENUE UTAMA -->
+    <!-- ============================================== -->
+    <div class="bg-white shadow-2xl rounded-xl border border-gray-100 p-8 mb-12">
         
-        <!-- HEADER DAN TOMBOL AKSI -->
+        <!-- HEADER DAN TOMBOL AKSI VENUE -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-4 mb-4">
             <h2 class="text-3xl font-bold text-[#926699]"><?php echo html_escape($venue['venue_name']); ?></h2>
             <div class="mt-3 md:mt-0 space-x-3 flex">
@@ -27,7 +43,7 @@
                     <?php 
                     $img_src = base_url($venue['link_profile_img']);
                     // Cek jika link_profile_img adalah placeholder
-                    if ($venue['link_profile_img'] == 'placeholder.jpg') {
+                    if ($venue['link_profile_img'] == 'placeholder.jpg' || empty($venue['link_profile_img'])) {
                         $img_src = "https://placehold.co/800x400/926699/ffffff?text=FOTO+VENUE+BELUM+DIUPLOAD";
                     }
                     ?>
@@ -45,7 +61,7 @@
 
             <!-- Kolom Kanan: Detail Kontak & Waktu -->
             <div class="md:col-span-1 space-y-6 bg-gray-50 p-6 rounded-lg border border-gray-200">
-                <h3 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">Detail Kontak & Lokasi</h3>
+                <h3 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">Detail Kontak & Waktu</h3>
                 
                 <!-- ID Mitra -->
                 <div>
@@ -68,7 +84,7 @@
                 <!-- Koordinat -->
                 <div>
                     <p class="text-sm font-medium text-gray-500">Koordinat (Lat, Lon)</p>
-                    <p class="text-lg text-gray-700"><?php echo html_escape($venue['coordinate']); ?></p>
+                    <p class="text-lg text-gray-700"><?php echo empty($venue['coordinate']) ? '-' : html_escape($venue['coordinate']); ?></p>
                 </div>
 
                 <!-- Maps URL -->
@@ -84,5 +100,70 @@
             </div>
         </div>
         
+    </div>
+
+    <!-- ============================================== -->
+    <!-- BAGIAN 2: LIST COURT/LAPANGAN -->
+    <!-- ============================================== -->
+    <div class="bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-100">
+        <div class="p-5 border-b border-gray-100 bg-gray-50">
+            <h3 class="text-xl font-semibold text-gray-800">Daftar Lapangan yang Dimiliki (Courts)</h3>
+            <p class="text-sm text-gray-500">Total Lapangan: <?php echo count($courts); ?></p>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-white">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">
+                            ID
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-2/12">
+                            Olahraga
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-3/12">
+                            Harga/Jam
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-4/12">
+                            Deskripsi Singkat
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-2/12">
+                            Aksi
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <?php if (!empty($courts)): ?>
+                        <?php foreach ($courts as $court): ?>
+                            <tr class="hover:bg-gray-50 transition duration-100">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    #<?php echo $court['id_court']; ?>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <?php echo html_escape($court['sport_name']); ?>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-semibold">
+                                    Rp. <?php echo number_format($court['price_per_hour'], 0, ',', '.'); ?>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-500 truncate max-w-xs">
+                                    <?php echo html_escape($court['description']); ?>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center space-x-2">
+                                    <a href="<?php echo site_url('praktek/edit_court/' . $court['id_court']); ?>" class="text-indigo-600 hover:text-indigo-900 font-medium">Edit</a>
+                                    <!-- Anda bisa menambahkan tombol Hapus di sini juga -->
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="5" class="px-6 py-4 text-center text-sm text-gray-500">
+                                Belum ada lapangan yang ditambahkan. Silakan klik "Tambah Lapangan" di atas.
+                            </td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+        <!-- Akhir Tabel Court -->
     </div>
 </div>
