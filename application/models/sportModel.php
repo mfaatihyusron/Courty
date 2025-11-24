@@ -16,21 +16,20 @@ class SportModel extends CI_Model {
     {
         // 1. Bersihkan nama olahraga untuk query (case-insensitive)
         $lower_sport_name = strtolower($sport_name); 
+        $clean_name_display = ucfirst(str_replace('-', ' ', $sport_name)); // Untuk fallback
         
-        // --- 2. LOGIKA QUERY DATABASE (KOREKSI) ---
+        // --- 2. LOGIKA QUERY DATABASE (KOREKSI FINAL) ---
         $this->db->select('
             v.id_venue, 
             v.venue_name, 
             v.address, 
-            
-            /* FIX: Menghitung jumlah court yang dimiliki venue ini */
-            COUNT(c.id_court) as court_count,
-            
-            /* Kolom koordinat yang sudah ada di DB */
             v.coordinate, 
             v.link_profile_img, 
             
-            /* DUMMY/Subquery: Kolom Rating & Review */
+            /* FIX A: Menghitung jumlah court yang dimiliki venue ini */
+            COUNT(c.id_court) as court_count,
+            
+            /* DUMMY: Kolom Rating & Review (HARUS ADA di SELECT walaupun datanya statis) */
             4.5 as rating, 
             (SELECT COUNT(id) FROM booking WHERE id_user = v.id_user) as review_count, 
             0 as distance 
@@ -39,7 +38,7 @@ class SportModel extends CI_Model {
         $this->db->join('court c', 'c.id_venue = v.id_venue', 'inner'); 
         $this->db->join('sport s', 's.id_sport = c.id_sport', 'inner'); 
         
-        // KRITIS: Menggunakan LOWER() untuk Case-Insensitive Matching dengan data sport
+        // KRITIS: Menggunakan LOWER() untuk Case-Insensitive Matching
         $this->db->where('LOWER(s.name)', $lower_sport_name); 
         
         // Penting: GROUP BY harus mencakup semua kolom non-agregasi
@@ -48,11 +47,10 @@ class SportModel extends CI_Model {
         $query = $this->db->get();
 
         if ($query->num_rows() > 0) {
-            // Data asli ditemukan di DB (INI SEKARANG HARUS BERHASIL)
+            // Data asli ditemukan di DB
             return $query->result(); 
         } else {
-            // --- FALLBACK: DATA DUMMY (Hanya berjalan jika tidak ada JOIN yang cocok) ---
-            $clean_name_display = ucfirst(str_replace('-', ' ', $sport_name));
+            // --- FALLBACK: DATA DUMMY ---
             $dummy_data = [
                 (object)[
                     'venue_name' => "GOR " . $clean_name_display . " Terdekat (DUMMY)", 
@@ -63,16 +61,23 @@ class SportModel extends CI_Model {
                     'review_count' => 120,
                     'link_profile_img' => 'https://placehold.co/400x250/926699/FFFFFF?text=DUMMY+COURTY+1'
                 ],
+                (object)[
+                    'venue_name' => "Hall Premium " . $clean_name_display . " (DUMMY)", 
+                    'address' => 'Jl. Database Kosong No. 2', 
+                    'rating' => 5.0, 
+                    'court_count' => 5, 
+                    'distance' => 3.5,
+                    'review_count' => 250,
+                    'link_profile_img' => 'https://placehold.co/400x250/347048/FFFFFF?text=DUMMY+COURTY+2'
+                ],
             ];
             return $dummy_data; 
         }
     }
     
-    // Fungsi lain yang mungkin dibutuhkan...
     public function get_all_sports()
     {
         $query = $this->db->get('sport');
         return $query->result();
     }
-
 }
