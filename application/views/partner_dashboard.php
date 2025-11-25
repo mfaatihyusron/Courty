@@ -27,7 +27,6 @@
                 <a href="<?php echo site_url('mitra/edit_venue'); ?>" class="px-4 py-2 text-sm font-semibold text-white bg-indigo-500 rounded-lg shadow-md hover:bg-indigo-600 transition duration-150">
                     <i class="fas fa-edit"></i> Edit Venue Detail
                 </a>
-                <!-- Tombol Tambah Lapangan DIPINDAH ke BAGIAN 2 -->
             </div>
         </div>
         
@@ -79,11 +78,11 @@
                     <p class="text-lg text-gray-700"><?php echo html_escape($venue['address']); ?></p>
                 </div>
 
-                <!-- Koordinat -->
-                <div>
+                <!-- Koordinat (DIHAPUS SESUAI PERMINTAAN) -->
+                <!-- <div>
                     <p class="text-sm font-medium text-gray-500">Koordinat (Lat, Lon)</p>
                     <p class="text-lg text-gray-700"><?php echo empty($venue['coordinate']) ? '-' : html_escape($venue['coordinate']); ?></p>
-                </div>
+                </div> -->
 
                 <!-- Maps URL -->
                 <div>
@@ -120,7 +119,7 @@
                 <thead class="bg-white">
                     <tr>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">
-                            ID
+                            No.
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">
                             Gambar
@@ -141,10 +140,10 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     <?php if (!empty($courts)): ?>
-                        <?php foreach ($courts as $court): ?>
+                        <?php $no = 1; foreach ($courts as $court): ?>
                             <tr class="hover:bg-gray-50 transition duration-100">
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                    #<?php echo $court['id_court']; ?>
+                                    <?php echo $no++; // Menampilkan dan menaikkan nomor urut ?>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                     <?php 
