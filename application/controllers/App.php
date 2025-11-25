@@ -25,7 +25,11 @@ class App extends CI_Controller {
 
 	public function index()
 	{
+        // Ambil data venue unggulan dari Model
+        $featured_venues = $this->Model->get_featured_venues();
+        
         $data['user_name'] = $this->session->userdata('name');
+        $data['featured_venues'] = $featured_venues; // Kirim data venue ke view
 		$data['content'] = "index"; 
 		$this->load->view('template', $data);
 	}

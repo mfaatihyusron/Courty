@@ -120,42 +120,56 @@
             </div>
         </section>
 
-        <!-- Featured Venues (Placeholder) -->
+        <!-- Featured Venues (Dynamic Content) -->
         <section class="py-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-3xl font-extrabold text-gray-900 text-center">Rekomendasi Lapangan Terbaik</h2>
-                <p class="mt-2 text-lg text-gray-500 text-center">Venue dengan rating dan pelayanan tertinggi.</p>
+                <p class="mt-2 text-lg text-gray-500 text-center">Venue dengan pilihan lapangan dan harga terjangkau.</p>
 
                 <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Venue Card 1 -->
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                        <img src="https://placehold.co/600x400/1e293b/FFFFFF?text=Futsal+Arena" alt="Futsal Arena" class="w-full h-48 object-cover">
-                        <div class="p-5">
-                            <h4 class="text-xl font-semibold text-gray-900">Gedung Futsal Juara</h4>
-                            <p class="text-sm text-gray-500 mt-1">Futsal, Basket | 3.5 km dari Anda</p>
-                            <button class="mt-4 w-full py-2 text-sm text-white bg-[#926699] rounded-lg hover:bg-[#7d5583] transition duration-150">Lihat Detail & Slot</button>
-                        </div>
-                    </div>
                     
-                    <!-- Venue Card 2 -->
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                        <img src="https://placehold.co/600x400/374151/FFFFFF?text=Badminton+Court" alt="Badminton Court" class="w-full h-48 object-cover">
-                        <div class="p-5">
-                            <h4 class="text-xl font-semibold text-gray-900">GOR Jaya Badminton</h4>
-                            <p class="text-sm text-gray-500 mt-1">Badminton | 5.8 km dari Anda</p>
-                            <button class="mt-4 w-full py-2 text-sm text-white bg-[#926699] rounded-lg hover:bg-[#7d5583] transition duration-150">Lihat Detail & Slot</button>
+                    <?php if (!empty($featured_venues)): ?>
+                        <?php foreach ($featured_venues as $venue): ?>
+                            <!-- Venue Card Dynamic -->
+                            <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition duration-300">
+                                <?php 
+                                    $img_src = base_url($venue['link_profile_img']);
+                                    if (empty($venue['link_profile_img']) || $venue['link_profile_img'] == 'placeholder.jpg' || !file_exists($venue['link_profile_img'])) {
+                                        $img_src = "https://placehold.co/600x400/926699/FFFFFF?text=" . urlencode($venue['venue_name']);
+                                    }
+                                ?>
+                                <img src="<?php echo $img_src; ?>" alt="<?php echo html_escape($venue['venue_name']); ?>" class="w-full h-48 object-cover">
+                                <div class="p-5">
+                                    <h4 class="text-xl font-semibold text-gray-900 truncate"><?php echo html_escape($venue['venue_name']); ?></h4>
+                                    
+                                    <!-- Detail Jumlah Lapangan & Harga -->
+                                    <div class="mt-2 text-sm text-gray-600 flex justify-between items-center">
+                                        <p>
+                                            <span class="font-bold text-[#926699]"><?php echo $venue['court_count']; ?></span> Lapangan Tersedia
+                                        </p>
+                                        <p class="font-bold text-[#B9CF32] text-lg">
+                                            Rp. <?php echo number_format($venue['min_price'], 0, ',', '.'); ?>,-
+                                        </p>
+                                    </div>
+                                    
+                                    <!-- Detail Olahraga & Lokasi (Dummy Location) -->
+                                    <p class="text-sm text-gray-500 mt-1">
+                                        <?php echo $venue['sports_offered']; ?> | 
+                                        <span class="text-xs text-gray-400">~ 5 km dari Anda</span>
+                                    </p>
+                                    
+                                    <button class="mt-4 w-full py-2 text-sm text-white bg-[#926699] rounded-lg hover:bg-[#7d5583] transition duration-150">Lihat Detail & Slot</button>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <!-- Jika tidak ada venue yang terdaftar -->
+                        <div class="md:col-span-3 text-center p-10 bg-white rounded-xl shadow-lg">
+                             <p class="text-xl text-gray-500">Belum ada Lapangan/GOR yang terdaftar sebagai Mitra.</p>
+                             <p class="text-sm text-gray-400 mt-2">Daftar sekarang untuk menjadi yang pertama!</p>
                         </div>
-                    </div>
-                    
-                    <!-- Venue Card 3 -->
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                        <img src="https://placehold.co/600x400/10b981/FFFFFF?text=Basket+Hall" alt="Basket Hall" class="w-full h-48 object-cover">
-                        <div class="p-5">
-                            <h4 class="text-xl font-semibold text-gray-900">Gelanggang Basket Emas</h4>
-                            <p class="text-sm text-gray-500 mt-1">Basket | 12.1 km dari Anda</p>
-                            <button class="mt-4 w-full py-2 text-sm text-white bg-[#926699] rounded-lg hover:bg-[#7d5583] transition duration-150">Lihat Detail & Slot</button>
-                        </div>
-                    </div>
+                    <?php endif; ?>
+
                 </div>
             </div>
         </section>

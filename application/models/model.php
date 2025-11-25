@@ -2,6 +2,30 @@
 
 class Model extends CI_Model {
 
+    // FUNGSI BARU: Mengambil daftar Venue yang direkomendasikan dengan agregasi data Court
+    public function get_featured_venues()
+    {
+        $this->db->select('
+            v.*, 
+            COUNT(c.id_court) as court_count, 
+            MIN(c.price_per_hour) as min_price,
+            GROUP_CONCAT(DISTINCT s.name SEPARATOR ", ") as sports_offered
+        ');
+        $this->db->from('venue v');
+        $this->db->join('court c', 'c.id_venue = v.id_venue', 'left');
+        $this->db->join('sport s', 's.id_sport = c.id_sport', 'left');
+        $this->db->group_by('v.id_venue');
+        // Filter: Hanya tampilkan venue yang sudah punya court
+        $this->db->having('court_count > 0'); 
+        // Order: Anda bisa menambahkan logika ordering di sini (misal: order by rating)
+        $this->db->order_by('v.id_venue', 'DESC'); 
+        // BATASAN TELAH DIUBAH MENJADI 3 UNTUK REKOMENDASI TERBARU
+        $this->db->limit(3); 
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     // FUNGSI BARU: Menghapus data Court
     public function delete_court($id_court)
     {
