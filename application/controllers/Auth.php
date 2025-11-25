@@ -112,7 +112,7 @@ class Auth extends CI_Controller {
                 if ($user['role'] == 1) {
                     redirect('admin/dashboard'); // Mengarahkan ke Admin/dashboard
                 } elseif ($user['role'] == 3) {
-                     redirect('mitra/dashboard'); // Mengarahkan ke Mitra/dashboard
+                     redirect('mitra/partner_dashboard'); // Mengarahkan ke Mitra/dashboard
                 } else {
                     redirect('app/index'); // Mengarahkan ke App/index
                 }
