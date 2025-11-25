@@ -134,7 +134,8 @@
                             $img_src = "https://placehold.co/600x400/926699/FFFFFF?text=" . urlencode($venue['venue_name']);
                         }
                     ?>
-                        <a href="<?= site_url('App/view_venue_detail/' . $venue['id_venue']) ?>" class="flex-shrink-0 w-80 bg-white rounded-xl shadow-lg overflow-hidden transition transform hover:scale-[1.02] hover:shadow-1xl duration-300 group">
+                        <!-- PERBAIKAN KRITIS DI BARIS INI: Mengubah view_venue_detail menjadi detail_venue -->
+                        <a href="<?= site_url('App/detail_venue/' . $venue['id_venue']) ?>" class="flex-shrink-0 w-80 bg-white rounded-xl shadow-lg overflow-hidden transition transform hover:scale-[1.02] hover:shadow-1xl duration-300 group">
                             <img src="<?php echo $img_src; ?>" alt="<?php echo html_escape($venue['venue_name']); ?>" class="w-full h-48 object-cover group-hover:opacity-90 transition duration-300">
                             <div class="p-5">
                                 <h4 class="text-xl font-semibold text-gray-900 truncate"><?php echo html_escape($venue['venue_name']); ?></h4>

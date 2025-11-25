@@ -75,74 +75,54 @@
                 <!-- Horizontal Scroll Container -->
                 <div class="flex space-x-6 overflow-x-auto pb-4 scrollbar-hide">
                     
-                    <!-- Venue Card (Template) -->
-                    <div class="flex-shrink-0 w-72 bg-white rounded-xl shadow-xl overflow-hidden border-t-4 border-t-main cursor-pointer hover:shadow-2xl transition duration-300">
-                        <img src="https://placehold.co/400x250/347048/FFFFFF?text=Venue+Futsal" alt="Venue Trending 1" class="w-full h-40 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-gray-900 truncate">SBR Pickleball Arena</h3>
-                            <p class="text-sm text-gray-500 mt-1 truncate">Jl. Sudirman No. 12, Jakarta</p>
-                            <div class="flex items-center mt-2">
-                                <span class="rating-star">&#9733;</span>
-                                <span class="rating-star">&#9733;</span>
-                                <span class="rating-star">&#9733;</span>
-                                <span class="rating-star">&#9733;</span>
-                                <span class="rating-star text-gray-300">&#9733;</span>
-                                <span class="text-xs text-gray-600 ml-2">(150 reviews)</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Venue Card 2 -->
-                    <div class="flex-shrink-0 w-72 bg-white rounded-xl shadow-xl overflow-hidden border-t-4 border-t-main cursor-pointer hover:shadow-2xl transition duration-300">
-                        <img src="https://placehold.co/400x250/926699/FFFFFF?text=GOR+Badminton" alt="Venue Trending 2" class="w-full h-40 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-gray-900 truncate">GOR Jaya Mandiri</h3>
-                            <p class="text-sm text-gray-500 mt-1 truncate">Badminton Hall A, Depok</p>
-                            <div class="flex items-center mt-2">
-                                <span class="rating-star">&#9733;</span>
-                                <span class="rating-star">&#9733;</span>
-                                <span class="rating-star">&#9733;</span>
-                                <span class="rating-star">&#9733;</span>
-                                <span class="rating-star">&#9733;</span>
-                                <span class="text-xs text-gray-600 ml-2">(210 reviews)</span>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- MEMULAI LOOPING DATA DARI CONTROLLER -->
+                    <?php if (isset($trending_venues) && is_array($trending_venues) && count($trending_venues) > 0): ?>
+                    <?php foreach ($trending_venues as $venue): 
+                        // Perhatikan bahwa data dari Model.php adalah array, bukan object, jadi aksesnya $venue['key']
+                    ?>
                     
-                    <!-- Venue Card 3 -->
-                    <div class="flex-shrink-0 w-72 bg-white rounded-xl shadow-xl overflow-hidden border-t-4 border-t-main cursor-pointer hover:shadow-2xl transition duration-300">
-                        <img src="https://placehold.co/400x250/B9CF32/FFFFFF?text=Stadion+Mini" alt="Venue Trending 3" class="w-full h-40 object-cover">
+                    <!-- Venue Card DINAMIS -->
+                    <!-- PENAMBAHAN KELAS HOVERING di sini -->
+                    <a href="<?= site_url('App/detail_venue/' . $venue['id_venue']) ?>" 
+                       class="flex-shrink-0 w-72 bg-white rounded-xl shadow-lg overflow-hidden border-t-4 border-t-main 
+                              cursor-pointer transition transform hover:scale-[1.02] hover:shadow-2xl duration-300 group">
+                        <!-- Menggunakan link_profile_img dari DB. Jika kosong, gunakan placeholder. -->
+                        <img src="<?= base_url($venue['link_profile_img']) ?>" 
+                             alt="Venue <?= $venue['venue_name'] ?>" 
+                             class="w-full h-40 object-cover group-hover:opacity-90 transition duration-300"
+                             onerror="this.onerror=null;this.src='https://placehold.co/400x250/347048/FFFFFF?text=<?= urlencode($venue['venue_name']) ?>';">
+                        
                         <div class="p-4">
-                            <h3 class="text-lg font-semibold text-gray-900 truncate">Mini Soccer Field X</h3>
-                            <p class="text-sm text-gray-500 mt-1 truncate">Lapangan Bola, Bekasi Timur</p>
+                            <h3 class="text-lg font-semibold text-gray-900 truncate" title="<?= $venue['venue_name'] ?>">
+                                <?= $venue['venue_name'] ?>
+                            </h3>
+                            <!-- Menampilkan Olahraga yang Ditawarkan dan Harga Termurah -->
+                            <p class="text-sm text-gray-500 mt-1 truncate">
+                                Olahraga: <span class="font-medium text-gray-700"><?= $venue['sports_offered'] ?: 'N/A' ?></span>
+                            </p>
+                            <p class="text-sm text-gray-500 mt-1 truncate">
+                                Mulai dari: <span class="font-bold text-main">Rp <?= number_format($venue['min_price'], 0, ',', '.') ?></span>
+                            </p>
+                            <!-- Rating/Lokasi bisa ditambahkan nanti, sementara kita gunakan data yang ada -->
                             <div class="flex items-center mt-2">
-                                <span class="rating-star">&#9733;</span>
-                                <span class="rating-star">&#9733;</span>
-                                <span class="rating-star">&#9733;</span>
-                                <span class="rating-star text-gray-300">&#9733;</span>
-                                <span class="rating-star text-gray-300">&#9733;</span>
-                                <span class="text-xs text-gray-600 ml-2">(55 reviews)</span>
+                                <span class="text-xs text-gray-600">Total Lapangan: <?= $venue['court_count'] ?></span>
                             </div>
                         </div>
-                    </div>
+                    </a>
 
-                    <!-- Add more cards as needed -->
-                    <div class="flex-shrink-0 w-72 bg-white rounded-xl shadow-xl overflow-hidden border-t-4 border-t-main cursor-pointer hover:shadow-2xl transition duration-300">
-                        <img src="https://placehold.co/400x250/4CAF50/FFFFFF?text=Basketball+Court" alt="Venue Trending 4" class="w-full h-40 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-gray-900 truncate">Indoor Basket Hall</h3>
-                            <p class="text-sm text-gray-500 mt-1 truncate">Jl. Veteran, Bogor</p>
-                            <div class="flex items-center mt-2">
-                                <span class="rating-star">&#9733;</span>
-                                <span class="rating-star">&#9733;</span>
-                                <span class="rating-star">&#9733;</span>
-                                <span class="rating-star">&#9733;</span>
-                                <span class="rating-star text-gray-300">&#9733;</span>
-                                <span class="text-xs text-gray-600 ml-2">(90 reviews)</span>
-                            </div>
-                        </div>
+                    <?php endforeach; ?>
+                    
+                    <?php else: ?>
+                    <!-- Pesan jika tidak ada data -->
+                    <div class="w-full text-center p-8 bg-gray-50 rounded-xl">
+                        <p class="text-gray-500">Mohon maaf, data trending venue belum tersedia.</p>
                     </div>
+                    <?php endif; ?>
+                    <!-- AKHIR DARI LOOPING DATA -->
 
+                    <!-- Hapus atau ubah cards dummy statis di bawah ini -->
+                    <!-- Venue Card (Template) -->
+                    <!-- Card dummy 1, 2, 3, 4, 5, 6, 7, 8 sudah dihapus dan diganti dengan looping di atas -->
                 </div>
             </section>
 
