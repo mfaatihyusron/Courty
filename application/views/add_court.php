@@ -14,7 +14,7 @@
         ?>
 
         <!-- PENTING: Menggunakan form_open_multipart untuk upload file -->
-        <?php echo form_open_multipart('praktek/add_court'); ?>
+        <?php echo form_open_multipart('Mitra/add_court'); ?>
             
             <!-- Jenis Olahraga -->
             <div class="mb-5">

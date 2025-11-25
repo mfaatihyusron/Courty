@@ -10,7 +10,7 @@
             </div>
         <?php endif; 
         
-        echo form_open('praktek/edit_sport/' . $sport['id_sport'], ['class' => 'space-y-5']); 
+        echo form_open('Admin/edit_sport/' . $sport['id_sport'], ['class' => 'space-y-5']); 
         ?>
 
             <div>

@@ -135,10 +135,10 @@
                                     <?php echo html_escape($sport['name']); ?>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center space-x-2">
-                                    <a href="<?php echo site_url('praktek/edit_sport/' . $sport['id_sport']); ?>" class="text-indigo-600 hover:text-indigo-900 font-medium">Edit</a>
+                                    <a href="<?php echo site_url('Admin/edit_sport/' . $sport['id_sport']); ?>" class="text-indigo-600 hover:text-indigo-900 font-medium">Edit</a>
                                     
                                     <a href="#" 
-                                       onclick="confirmDelete('<?php echo site_url('praktek/delete_sport/' . $sport['id_sport']); ?>', '<?php echo html_escape($sport['name']); ?>')" 
+                                       onclick="confirmDelete('<?php echo site_url('Admin/delete_sport/' . $sport['id_sport']); ?>', '<?php echo html_escape($sport['name']); ?>')" 
                                        class="text-red-600 hover:text-red-900 font-medium ml-3">Hapus</a>
                                 </td>
                             </tr>

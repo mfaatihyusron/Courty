@@ -14,7 +14,7 @@
         ?>
 
         <!-- PENTING: Menggunakan form_open_multipart untuk upload file -->
-        <?php echo form_open_multipart('praktek/partner_register_step2'); ?>
+        <?php echo form_open_multipart('Mitra/partner_register_step2'); ?>
             
             <div class="mb-5">
                 <label for="venue_name" class="block text-sm font-medium text-gray-700 mb-1">Nama Venue/Lapangan</label>

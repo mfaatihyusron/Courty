@@ -16,8 +16,8 @@
             </div>
         <?php endif; 
         
-        // Membuka form yang akan di-submit ke controller praktek/login
-        echo form_open('praktek/login', ['class' => 'space-y-5']); 
+        // Membuka form yang akan di-submit ke controller Auth/login
+        echo form_open('Auth/login', ['class' => 'space-y-5']); 
         ?>
 
             <!-- Email -->

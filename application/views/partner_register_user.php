@@ -13,7 +13,7 @@
         }
         ?>
 
-        <?php echo form_open('praktek/partner_register_step1'); ?>
+        <?php echo form_open('Mitra/partner_register_step1'); ?>
             
             <div class="mb-5">
                 <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
