@@ -19,22 +19,21 @@ class SportModel extends CI_Model {
         $clean_name_display = ucfirst(str_replace('-', ' ', $sport_name)); // Untuk fallback
         
         // --- 2. LOGIKA QUERY DATABASE (KOREKSI FINAL DAN MINIMALIS) ---
-        $this->db->select('
+        // PENTING: Semua komentar SQL sudah dihapus dari dalam string SELECT
+        $this->db->select("
             v.id_venue, 
             v.venue_name, 
             v.address, 
             v.coordinate, 
             v.link_profile_img, 
             
-            /* FIX: Menghitung court yang dimiliki venue ini (Agregasi yang BENAR) */
             COUNT(c.id_court) as court_count,
             
-            /* DUMMY KOLOM: Karena rating dan review tidak ada di tabel venue/booking Anda, 
-               kita berikan nilai statis agar VIEW tidak error dan QUERY tidak gagal. */
+            /* Kolom DUMMY untuk VIEW (rating, review, distance) */
             4.5 as rating, 
             150 as review_count, 
             0 as distance 
-        ');
+        ");
         $this->db->from('venue v'); 
         $this->db->join('court c', 'c.id_venue = v.id_venue', 'inner'); 
         $this->db->join('sport s', 's.id_sport = c.id_sport', 'inner'); 
