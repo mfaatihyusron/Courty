@@ -18,7 +18,7 @@ class App extends CI_Controller {
         parent::__construct();
         // Hanya memuat model dan helper yang diperlukan untuk halaman publik
         $this->load->model('Model'); 
-        $this->load->model('SportModel'); // <--- PERBAIKAN 1: Model Wajib Dimuat!
+        $this->load->model('SportModel'); 
         $this->load->helper(array('url'));
         $this->load->library(array('session'));
     }
@@ -51,7 +51,7 @@ class App extends CI_Controller {
     public function view_sport_category($sport_name = 'futsal') // Beri nilai default
     {
         // 1. Ambil data venue berdasarkan nama olahraga (melalui Model)
-        // PERBAIKAN 2: Menghapus data dummy yang hardcoded
+        // PERBAIKAN 2: Panggil Model yang benar dan HAPUS SEMUA DUMMY DATA HARDCODED DI SINI
         $venue_data = $this->SportModel->get_venues_by_sport($sport_name); 
         
         // 2. Siapkan data untuk dikirim ke View
@@ -94,4 +94,10 @@ class App extends CI_Controller {
         $data['content'] = 'venue_detail'; // Nama file View baru
         $this->load->view('template', $data);
     }
+    
+    public function formvalidasi()
+	{
+		$data['content'] = "formvalidasi"; 
+		$this->load->view('template', $data);
+	}
 }

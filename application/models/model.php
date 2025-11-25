@@ -10,7 +10,6 @@ class Model extends CI_Model {
         return $query->row_array();
     }
 
-    
     // FUNGSI BARU: Mengambil daftar Venue yang direkomendasikan dengan agregasi data Court
     public function get_featured_venues()
     {
