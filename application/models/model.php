@@ -2,6 +2,15 @@
 
 class Model extends CI_Model {
 
+    // FUNGSI BARU: Mengambil detail Venue berdasarkan ID Venue
+    public function get_venue_detail_by_id($id_venue)
+    {
+        $this->db->where('id_venue', $id_venue);
+        $query = $this->db->get('venue');
+        return $query->row_array();
+    }
+
+    
     // FUNGSI BARU: Mengambil daftar Venue yang direkomendasikan dengan agregasi data Court
     public function get_featured_venues()
     {
@@ -20,7 +29,7 @@ class Model extends CI_Model {
         // Order: Anda bisa menambahkan logika ordering di sini (misal: order by rating)
         $this->db->order_by('v.id_venue', 'DESC'); 
         // BATASAN TELAH DIUBAH MENJADI 3 UNTUK REKOMENDASI TERBARU
-        $this->db->limit(3); 
+        $this->db->limit(6); 
 
         $query = $this->db->get();
         return $query->result_array();

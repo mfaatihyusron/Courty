@@ -64,10 +64,34 @@ class App extends CI_Controller {
         $data['content'] = "sport_category"; 
         $this->load->view('template', $data);
     }
-    
-    public function formvalidasi()
-	{
-		$data['content'] = "formvalidasi"; 
-		$this->load->view('template', $data);
-	}
+
+    public function view_venue_detail($id_venue)
+    {
+        // 1. Ambil data Venue
+        $venue_data = $this->Model->get_venue_detail_by_id($id_venue);
+
+        if (empty($venue_data)) {
+            // Handle jika venue tidak ditemukan
+            show_404();
+            return;
+        }
+
+        // 2. Ambil daftar Lapangan (Courts) yang dimiliki venue tersebut
+        $court_list = $this->Model->get_courts_by_venue_id($id_venue);
+
+        // 3. Siapkan data untuk View
+        $data['user_name'] = $this->session->userdata('name');
+        $data['venue'] = $venue_data;
+        $data['courts'] = $court_list;
+
+        // Data dummy untuk Gallery Photo (Untuk simulasi, asumsikan ada 3 foto tambahan selain foto profil)
+        $data['gallery_photos'] = [
+            ['url' => 'https://placehold.co/800x600/926699/FFFFFF?text=GALERI+FOTO+1'],
+            ['url' => 'https://placehold.co/800x600/B9CF32/FFFFFF?text=GALERI+FOTO+2'],
+            ['url' => 'https://placehold.co/800x600/808080/FFFFFF?text=GALERI+FOTO+3'],
+        ];
+
+        $data['content'] = 'venue_detail'; // Nama file View baru
+        $this->load->view('template', $data);
+    }
 }
