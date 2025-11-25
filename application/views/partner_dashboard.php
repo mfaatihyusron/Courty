@@ -24,12 +24,10 @@
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-4 mb-4">
             <h2 class="text-3xl font-bold text-[#926699]"><?php echo html_escape($venue['venue_name']); ?></h2>
             <div class="mt-3 md:mt-0 space-x-3 flex">
-                <a href="<?php echo site_url('Mitra/edit_venue'); ?>" class="px-4 py-2 text-sm font-semibold text-white bg-indigo-500 rounded-lg shadow-md hover:bg-indigo-600 transition duration-150">
-                    <i class="fas fa-edit"></i> Edit Venue
+                <a href="<?php echo site_url('mitra/edit_venue'); ?>" class="px-4 py-2 text-sm font-semibold text-white bg-indigo-500 rounded-lg shadow-md hover:bg-indigo-600 transition duration-150">
+                    <i class="fas fa-edit"></i> Edit Venue Detail
                 </a>
-                <a href="<?php echo site_url('Mitra/add_court'); ?>" class="px-4 py-2 text-sm font-semibold text-white bg-[#B9CF32] rounded-lg shadow-md hover:bg-[#a6bd2e] transition duration-150">
-                    <i class="fas fa-plus"></i> Tambah Lapangan
-                </a>
+                <!-- Tombol Tambah Lapangan DIPINDAH ke BAGIAN 2 -->
             </div>
         </div>
         
@@ -106,9 +104,15 @@
     <!-- BAGIAN 2: LIST COURT/LAPANGAN -->
     <!-- ============================================== -->
     <div class="bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-100">
-        <div class="p-5 border-b border-gray-100 bg-gray-50">
-            <h3 class="text-xl font-semibold text-gray-800">Daftar Lapangan yang Dimiliki (Courts)</h3>
-            <p class="text-sm text-gray-500">Total Lapangan: <?php echo count($courts); ?></p>
+        <div class="p-5 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+            <div>
+                <h3 class="text-xl font-semibold text-gray-800">Daftar Lapangan yang Dimiliki (Courts)</h3>
+                <p class="text-sm text-gray-500">Total Lapangan: <?php echo count($courts); ?></p>
+            </div>
+            <!-- Tombol Tambah Lapangan DIPINDAH ke sini -->
+            <a href="<?php echo site_url('mitra/add_court'); ?>" class="px-4 py-2 text-sm font-semibold text-white bg-[#B9CF32] rounded-lg shadow-md hover:bg-[#a6bd2e] transition duration-150">
+                <i class="fas fa-plus"></i> Tambah Lapangan
+            </a>
         </div>
 
         <div class="overflow-x-auto">
@@ -162,10 +166,10 @@
                                     <?php echo html_escape($court['description']); ?>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-center space-x-2">
-                                    <a href="<?php echo site_url('Mitra/edit_court/' . $court['id_court']); ?>" class="text-indigo-600 hover:text-indigo-900 font-medium">Edit</a>
+                                    <a href="<?php echo site_url('mitra/edit_court/' . $court['id_court']); ?>" class="text-indigo-600 hover:text-indigo-900 font-medium">Edit</a>
                                     
                                     <a href="#" 
-                                       onclick="confirmDeleteCourt('<?php echo site_url('App/delete_court/' . $court['id_court']); ?>', '<?php echo html_escape($court['sport_name']); ?> #<?php echo $court['id_court']; ?>')" 
+                                       onclick="confirmDeleteCourt('<?php echo site_url('mitra/delete_court/' . $court['id_court']); ?>', '<?php echo html_escape($court['sport_name']); ?> #<?php echo $court['id_court']; ?>')" 
                                        class="text-red-600 hover:text-red-900 font-medium ml-3">Hapus</a>
                                 </td>
                             </tr>
