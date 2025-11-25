@@ -39,9 +39,12 @@
                     <?php foreach ($venue_list as $venue): ?>
                         
                         <!-- Venue Card Dihasilkan dari data database -->
-                        <div class="bg-white rounded-xl shadow-xl overflow-hidden border-t-4 border-t-main cursor-pointer hover:shadow-2xl transition duration-300">
-                            <!-- Data Binding untuk Gambar -->
-                            <img src="<?= isset($venue->link_profile_img) ? site_url($venue->link_profile_img) : 'https://placehold.co/400x250/926699/FFFFFF?text=COURTY' ?>" alt="<?= $venue->venue_name ?>" class="w-full h-48 object-cover">
+                        <div class="bg-white rounded-xl shadow-xl overflow-hidden border-t-4 border-t-main cursor-pointer 
+                            transition transform hover:scale-[1.02] hover:shadow-2xl duration-300 group"> <!-- PERBAIKAN: Menambahkan efek hover -->
+                            <!-- PERBAIKAN 3: Menggunakan base_url() untuk path gambar -->
+                            <img src="<?= base_url($venue->link_profile_img) ?>" alt="<?= $venue->venue_name ?>" class="w-full h-48 object-cover group-hover:opacity-90 transition duration-300" 
+                                onerror="this.onerror=null;this.src='https://placehold.co/400x250/926699/FFFFFF?text=COURTY';"
+                            >
                             <div class="p-5">
                                 <!-- Data Binding untuk Nama Venue -->
                                 <h3 class="text-xl font-semibold text-gray-900 truncate"><?= $venue->venue_name ?></h3>
