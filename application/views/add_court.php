@@ -16,11 +16,21 @@
         <!-- PENTING: Menggunakan form_open_multipart untuk upload file -->
         <?php echo form_open_multipart('Mitra/add_court'); ?>
             
+            <!-- INPUT BARU: Nama Lapangan -->
+            <div class="mb-5">
+                <label for="court_name" class="block text-sm font-medium text-gray-700 mb-1">Nama Lapangan <span class="text-red-500">*</span></label>
+                <input type="text" name="court_name" id="court_name" 
+                       value="<?php echo set_value('court_name'); ?>" 
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-[#B9CF32] focus:border-[#B9CF32]" 
+                       placeholder="Contoh: Lapangan 1, Court A, atau VIP Court" required>
+                <?php echo form_error('court_name', '<p class="text-red-500 text-xs mt-1">', '</p>'); ?>
+            </div>
+
             <!-- Jenis Olahraga -->
             <div class="mb-5">
-                <label for="id_sport" class="block text-sm font-medium text-gray-700 mb-1">Jenis Olahraga</label>
+                <label for="id_sport" class="block text-sm font-medium text-gray-700 mb-1">Jenis Olahraga <span class="text-red-500">*</span></label>
                 <select name="id_sport" id="id_sport" 
-                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-[#B9CF32] focus:border-[#B9CF32]">
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-[#B9CF32] focus:border-[#B9CF32]" required>
                     <option value="">-- Pilih Jenis Olahraga --</option>
                     <?php 
                     if (!empty($sports)) {
@@ -38,25 +48,25 @@
 
             <!-- Harga per Jam -->
             <div class="mb-5">
-                <label for="price_per_hour" class="block text-sm font-medium text-gray-700 mb-1">Harga per Jam (Rp)</label>
+                <label for="price_per_hour" class="block text-sm font-medium text-gray-700 mb-1">Harga per Jam (Rp) <span class="text-red-500">*</span></label>
                 <input type="number" name="price_per_hour" id="price_per_hour" 
                        value="<?php echo set_value('price_per_hour'); ?>" 
                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-[#B9CF32] focus:border-[#B9CF32]" 
-                       placeholder="Contoh: 50000">
+                       placeholder="Contoh: 50000" required>
                 <?php echo form_error('price_per_hour', '<p class="text-red-500 text-xs mt-1">', '</p>'); ?>
             </div>
             
             <div class="mb-5">
-                <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Lapangan</label>
+                <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Lapangan <span class="text-red-500">*</span></label>
                 <textarea name="description" id="description" rows="3" 
                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-[#B9CF32] focus:border-[#B9CF32]" 
-                       placeholder="Detail tentang lapangan ini (misalnya, indoor/outdoor, jenis permukaan)."><?php echo set_value('description'); ?></textarea>
+                       placeholder="Detail tentang lapangan ini (misalnya, indoor/outdoor, jenis permukaan)." required><?php echo set_value('description'); ?></textarea>
                 <?php echo form_error('description', '<p class="text-red-500 text-xs mt-1">', '</p>'); ?>
             </div>
             
             <!-- INPUT UNTUK UPLOAD FOTO COURT -->
             <div class="mb-6">
-                <label for="profile_photo" class="block text-sm font-medium text-gray-700 mb-1">Foto Lapangan (Max 2MB, Wajib)</label>
+                <label for="profile_photo" class="block text-sm font-medium text-gray-700 mb-1">Foto Lapangan (Max 2MB, Wajib) <span class="text-red-500">*</span></label>
                 <input type="file" name="profile_photo" id="profile_photo" required
                        class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none p-2" 
                        accept="image/jpeg, image/png, image/jpg">
