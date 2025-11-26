@@ -266,6 +266,8 @@ class Mitra extends CI_Controller {
             return;
         }
 
+        // PERUBAHAN KRITIS: Menambahkan validasi untuk 'court_name'
+        $this->form_validation->set_rules('court_name', 'Nama Lapangan', 'required|trim|max_length[255]');
         $this->form_validation->set_rules('id_sport', 'Jenis Olahraga', 'required|numeric');
         $this->form_validation->set_rules('price_per_hour', 'Harga per Jam', 'required|numeric');
         $this->form_validation->set_rules('description', 'Deskripsi Lapangan', 'required');
@@ -302,6 +304,8 @@ class Mitra extends CI_Controller {
 
             $data_insert = array(
                 'id_venue'          => $id_venue, 
+                // PERUBAHAN KRITIS: Menambahkan 'name'
+                'name'              => $this->input->post('court_name'), 
                 'id_sport'          => $this->input->post('id_sport'),
                 'price_per_hour'    => $this->input->post('price_per_hour'),
                 'description'       => $this->input->post('description'),
@@ -332,6 +336,8 @@ class Mitra extends CI_Controller {
             return;
         }
 
+        // PERUBAHAN KRITIS: Menambahkan validasi untuk 'court_name'
+        $this->form_validation->set_rules('court_name', 'Nama Lapangan', 'required|trim|max_length[255]');
         $this->form_validation->set_rules('id_sport', 'Jenis Olahraga', 'required|numeric');
         $this->form_validation->set_rules('price_per_hour', 'Harga per Jam', 'required|numeric');
         $this->form_validation->set_rules('description', 'Deskripsi Lapangan', 'required');
@@ -374,6 +380,8 @@ class Mitra extends CI_Controller {
             }
 
             $data_update = array(
+                // PERUBAHAN KRITIS: Menambahkan 'name'
+                'name'              => $this->input->post('court_name'), 
                 'id_sport'          => $this->input->post('id_sport'),
                 'price_per_hour'    => $this->input->post('price_per_hour'),
                 'description'       => $this->input->post('description'),
