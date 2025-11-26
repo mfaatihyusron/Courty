@@ -1,169 +1,154 @@
 <main>
-        <!-- Hero Section (Fokus Pencarian) -->
-        <section class="relative bg-white pt-16 pb-24 sm:pt-24 sm:pb-32 lg:pb-40">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <!-- Hero Section (Full-width Background Image dengan Overlap Search Bar) --><section class="relative h-[65vh] sm:h-[80vh] flex items-center justify-center overflow-hidden bg-soft -mt-16">
+        <!-- Background Image Full Width --><div class="absolute inset-0 z-0">
+            <img src="<?= base_url('upload/Tennis_court.jpg') ?>" 
+                 alt="Lapangan Tenis Background" 
+                 class="w-full h-full object-cover brightness-50 contrast-100">
+            <!-- Overlay warna hijau gelap transparan --><div class="absolute inset-0 bg-action opacity-25"></div> 
+        </div>
+
+        <!-- Konten Hero Section (Text & Search Bar) --><div class="relative z-10 text-center px-4">
+            <h1 class="text-4xl sm:text-7xl font-extrabold text-white leading-tight mt-10">
+                PLAY SPORTS
+            </h1>
+            <p class="mt-4 text-lg text-white/80 max-w-3xl mx-auto font-medium">
+                World's Biggest Sports Community
+            </p>
+
+            <!-- Search Bar (Lama, tapi dengan Styling Baru dan Penempatan Sesuai Referensi) --><div class="mt-12 max-w-4xl mx-auto bg-white p-2 rounded-full shadow-2xl relative z-20 flex items-center">
+                <div class="relative flex-grow">
+                    <i class="fas fa-search absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" id="search_query" name="search_query" placeholder="Cari nama venue, olahraga, atau lokasi..." 
+                           class="w-full pl-12 pr-4 py-3 text-base border-none rounded-full focus:ring-0 focus:outline-none bg-transparent">
+                </div>
+                <button type="submit" class="flex-shrink-0 px-6 py-3 bg-action text-white font-bold text-base rounded-full shadow-md hover:bg-[#2e5d3c] transition duration-150">
+                    Search
+                </button>
+            </div>
+            <!-- Geolocation Button Dipindahkan di bawah search bar agar lebih rapi --><button type="button" class="text-sm font-semibold text-white/80 hover:text-white transition duration-150 mt-3" onclick="getGeolocation()">
+                <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                Gunakan Lokasi Saya Sekarang
+            </button>
+        </div>
+        
+        <!-- Curve di bawah Hero Section (sesuai referensi, warna #EBE1D8) --><div class="absolute bottom-0 left-0 right-0 h-40 bg-soft transform translate-y-2/3 rounded-t-[100px] sm:rounded-t-[150px] lg:rounded-t-[200px] z-0"></div>
+    </section>
+        
+    <!-- Category Bar Section (Tepat di bawah Hero, di dalam container) --><section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Pilih Kategori Olahraga</h2>
+        <div class="mt-4 mb-12 py-4">
+            <div class="flex space-x-6 overflow-x-auto pb-2 scrollbar-hide">
                 
-                <!-- Tagline -->
-                <h1 class="text-4xl sm:text-6xl font-extrabold text-gray-900 leading-tight">
-                    Temukan Lapangan Terbaik <span class="text-[#926699]">di Sekitarmu</span>
-                </h1>
-                <p class="mt-4 text-lg text-gray-500 max-w-3xl mx-auto">
-                    Reservasi semi-otomatis yang pasti. Cek ketersediaan lapangan, konfirmasi cepat oleh Mitra GOR.
-                </p>
+                <!-- Category Item 1: Futsal/Sepakbola --><a href="<?= site_url('App/view_sport_category/futsal/sepakbola') ?>" class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 bg-white rounded-xl shadow-md border-2 border-transparent hover:border-main transition duration-200 group w-28 sm:w-32">
+                    <span class="text-3xl sm:text-4xl">⚽</span>
+                    <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-main text-center">Futsal/Sepakbola</span>
+                </a>
+                
+                <!-- Category Item 2: Badminton --><a href="<?= site_url('App/view_sport_category/badminton') ?>" class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 bg-white rounded-xl shadow-md border-2 border-transparent hover:border-main transition duration-200 group w-28 sm:w-32">
+                    <span class="text-3xl sm:text-4xl">🏸</span>
+                    <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-main text-center">Badminton</span>
+                </a>
+                
+                <!-- Category Item 3: Basket --><a href="<?= site_url('App/view_sport_category/basket') ?>" class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 bg-white rounded-xl shadow-md border-2 border-transparent hover:border-main transition duration-200 group w-28 sm:w-32">
+                    <span class="text-3xl sm:text-4xl">🏀</span>
+                    <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-main text-center">Basket</span>
+                </a>
+                
+                <!-- Category Item 4: Voli --><a href="<?= site_url('App/view_sport_category/voli') ?>" class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 bg-white rounded-xl shadow-md border-2 border-transparent hover:border-main transition duration-200 group w-28 sm:w-32">
+                    <span class="text-3xl sm:text-4xl">🏐</span>
+                    <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-main text-center">Voli</span>
+                </a>
+                
+                <!-- Category Item 5: Tenis --><a href="<?= site_url('App/view_sport_category/tenis') ?>" class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 bg-white rounded-xl shadow-md border-2 border-transparent hover:border-main transition duration-200 group w-28 sm:w-32">
+                    <span class="text-3xl sm:text-4xl">🎾</span>
+                    <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-main text-center">Tenis</span>
+                </a>
 
-                <!-- Category Bar Section -->
-                <div class="mt-8 mb-12 py-4">
-                    <!-- Wrapper untuk horizontal scrolling di mobile dan centering di desktop -->
-                    <div class="flex space-x-6 overflow-x-auto pb-2 scrollbar-hide justify-center">
-                        
-                        <!-- Category Item 1: Futsal/Sepakbola -->
-                        <a href="<?= site_url('App/view_sport_category/futsal/sepakbola') ?>" class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 bg-gray-50 rounded-xl shadow-md border-2 border-transparent hover:border-[#926699] transition duration-200 group w-28 sm:w-32">
-                            <span class="text-3xl sm:text-4xl">⚽</span>
-                            <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Futsal/Sepakbola</span>
-                        </a>
-                        
-                        <!-- Category Item 2: Badminton -->
-                        <a href="<?= site_url('App/view_sport_category/badminton') ?>" class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 bg-gray-50 rounded-xl shadow-md border-2 border-transparent hover:border-[#926699] transition duration-200 group w-28 sm:w-32">
-                            <span class="text-3xl sm:text-4xl">🏸</span>
-                            <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Badminton</span>
-                        </a>
-                        
-                        <!-- Category Item 3: Basket -->
-                        <a href="<?= site_url('App/view_sport_category/basket') ?>" class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 bg-gray-50 rounded-xl shadow-md border-2 border-transparent hover:border-[#926699] transition duration-200 group w-28 sm:w-32">
-                            <span class="text-3xl sm:text-4xl">🏀</span>
-                            <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Basket</span>
-                        </a>
-                        
-                        <!-- Category Item 4: Voli -->
-                        <a href="<?= site_url('App/view_sport_category/voli') ?>" class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 bg-gray-50 rounded-xl shadow-md border-2 border-transparent hover:border-[#926699] transition duration-200 group w-28 sm:w-32">
-                            <span class="text-3xl sm:text-4xl">🏐</span>
-                            <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Voli</span>
-                        </a>
-                        
-                        <!-- Category Item 5: Tenis -->
-                        <a href="<?= site_url('App/view_sport_category/tenis') ?>" class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 bg-gray-50 rounded-xl shadow-md border-2 border-transparent hover:border-[#926699] transition duration-200 group w-28 sm:w-32">
-                            <span class="text-3xl sm:text-4xl">🎾</span>
-                            <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Tenis</span>
-                        </a>
+                 <!-- Category Item 6: Renang --><a href="<?= site_url('App/view_sport_category/renang') ?>" class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 bg-white rounded-xl shadow-md border-2 border-transparent hover:border-main transition duration-200 group w-28 sm:w-32">
+                    <span class="text-3xl sm:text-4xl">🏊</span>
+                    <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-main text-center">Renang</span>
+                </a>
+                
+            </div>
+        </div>
+    </section>
 
-                         <!-- Category Item 6: Renang -->
-                        <a href="<?= site_url('App/view_sport_category/renang') ?>" class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 bg-gray-50 rounded-xl shadow-md border-2 border-transparent hover:border-[#926699] transition duration-200 group w-28 sm:w-32">
-                            <span class="text-3xl sm:text-4xl">🏊</span>
-                            <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Renang</span>
-                        </a>
-                        
+    <!-- How It Works (Alur Kerja Reservasi Courty) - Menggunakan Warna Aksi Hijau --><section class="py-20 bg-soft"> <!-- Background section ini menggunakan bg-soft --><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-extrabold text-gray-900">Alur Kerja Reservasi Courty</h2>
+            <p class="mt-4 text-lg text-gray-500">Kami menjamin keakuratan dengan proses konfirmasi Mitra GOR yang cepat.</p>
+
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+                
+                <!-- Step 1: Cari & Request --><div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-t-main transition duration-300 hover:shadow-xl">
+                    <div class="w-12 h-12 mx-auto bg-main text-white rounded-full flex items-center justify-center text-2xl font-bold">
+                        <i class="fas fa-search"></i>
                     </div>
+                    <h3 class="mt-6 text-xl font-semibold text-gray-900">Cari & Kirim Permintaan</h3>
+                    <p class="mt-4 text-gray-600 text-sm">Pilih lapangan, kirim permintaan. Pesanan Anda akan berstatus **Pending** menunggu persetujuan Mitra.</p>
                 </div>
 
-                <!-- Geolocation Button (Dipindah ke bawah search bar untuk kejelasan) -->
-                <div class="mt-4 flex justify-center items-center space-x-2">
-                    <button type="button" class="text-sm font-semibold text-gray-600 hover:text-[#926699] transition duration-150" onclick="getGeolocation()">
-                        <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                        Gunakan Lokasi Saya Sekarang
-                    </button>
-                    <p id="geo-status" class="text-sm text-gray-500"></p>
+                <!-- Step 2: Konfirmasi Mitra --><div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-t-action transition duration-300 hover:shadow-xl">
+                    <div class="w-12 h-12 mx-auto bg-action text-white rounded-full flex items-center justify-center text-2xl font-bold">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="mt-6 text-xl font-semibold text-gray-900">Konfirmasi Cepat oleh Mitra</h3>
+                    <p class="mt-4 text-gray-600 text-sm">Mitra GOR menyetujui ketersediaan. Anda mendapat notifikasi **Confirmed** (Siap Bayar).</p>
                 </div>
-                <!-- Terpadu Search Bar (Mengadopsi Fungsionalitas Ayo.co.id) -->
-                <div class="mt-4 max-w-6xl mx-auto bg-white p-4 sm:p-5 rounded-3xl shadow-2xl border border-gray-100 transition duration-300 hover:shadow-xl">
-                    <form class="flex flex-col md:flex-row items-center md:space-x-4 space-y-4 md:space-y-0">
 
-                        
-                        <!-- 1. Unified Search Input (Venue/Sport/Location) -->
-                        <div class="relative flex-grow w-full md:w-2/5">
-                            <label for="search_query" class="sr-only">Cari Venue/Lokasi</label>
-                            <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                            
-                            <input type="text" id="search_query" name="search_query" placeholder="Venue, Olahraga, atau Lokasi..." class="w-full pl-12 pr-4 py-3 text-base border-none rounded-2xl focus:ring-1 focus:ring-[#926699] transition duration-150 focus:outline-none bg-gray-50">
-                        </div>
-                        
-                        <!-- 2. Search Button -->
-                        <button type="submit" class="w-full md:w-1/5 px-4 py-3 bg-[#B9CF32] text-white font-bold text-base rounded-2xl shadow-lg hover:bg-[#a1b62a] transition duration-150 flex-shrink-0">
-                            Cari Lapangan
-                        </button>
-                    </form>
+                <!-- Step 3: Bayar & Main --><div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-t-main transition duration-300 hover:shadow-xl">
+                    <div class="w-12 h-12 mx-auto bg-main text-white rounded-full flex items-center justify-center text-2xl font-bold">
+                        <i class="fas fa-basketball-ball"></i>
+                    </div>
+                    <h3 class="mt-6 text-xl font-semibold text-gray-900">Bayar & Selesai</h3>
+                    <p class="mt-4 text-gray-600 text-sm">Selesaikan pembayaran. Reservasi Anda resmi **Completed** dan terjamin.</p>
                 </div>
-            
 
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- How It Works (Penjelasan Workflow Semi-Otomatis) -->
-        <section class="py-20 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 class="text-3xl font-extrabold text-gray-900">Alur Kerja Reservasi Courty</h2>
-                <p class="mt-4 text-lg text-gray-500">Kami menjamin keakuratan dengan proses konfirmasi Mitra GOR yang cepat.</p>
+    <!-- Rekomendasi Section (Card List - Menggunakan Data Real) --><section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <!-- Judul Rekomendasi disamakan dengan warna aksi (hijau) --><h2 class="text-3xl font-bold text-action mb-8 border-b-4 border-main inline-block pb-1">
+            Rekomendasi Lapangan
+        </h2>
 
-                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-10">
-                    
-                    <!-- Step 1: Cari & Request -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-b-4 border-t-[#926699] border-b-white transition duration-300 hover:shadow-xl">
-                        <div class="w-12 h-12 mx-auto bg-purple-100 text-[#926699] rounded-full flex items-center justify-center text-2xl font-bold">1</div>
-                        <h3 class="mt-6 text-xl font-semibold text-gray-900">Cari & Kirim Permintaan (Pending)</h3>
-                        <p class="mt-4 text-gray-500">Pilih lapangan dan slot waktu yang Anda inginkan. Pesanan Anda akan berstatus **Pending** menunggu persetujuan Mitra GOR.</p>
-                    </div>
-
-                    <!-- Step 2: Konfirmasi Mitra -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-b-4 border-t-[#F87B1B] border-b-white transition duration-300 hover:shadow-xl">
-                        <div class="w-12 h-12 mx-auto bg-orange-100 text-[#F87B1B] rounded-full flex items-center justify-center text-2xl font-bold">2</div>
-                        <h3 class="mt-6 text-xl font-semibold text-gray-900">Konfirmasi Cepat oleh Mitra</h3>
-                        <p class="mt-4 text-lg text-gray-500">Mitra GOR akan memeriksa ketersediaan akhir dan menyetujui. Anda akan mendapat notifikasi **Confirmed** (Siap Bayar).</p>
-                    </div>
-
-                    <!-- Step 3: Bayar & Main -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-b-4 border-t-[#347048] border-b-white transition duration-300 hover:shadow-xl">
-                        <div class="w-12 h-12 mx-auto bg-green-100 text-[#347048] rounded-full flex items-center justify-center text-2xl font-bold">3</div>
-                        <h3 class="mt-6 text-xl font-semibold text-gray-900">Bayar & Selesai (Completed)</h3>
-                        <p class="mt-4 text-lg text-gray-500">Selesaikan pembayaran dalam **Payment Deadline** (Batas Waktu). Reservasi Anda resmi **Completed** dan terjamin.</p>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Rekomendasi Section (Card List - Menggunakan Data Real) -->
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <h2 class="text-3xl font-bold text-gray-900 mb-8 border-b-4 border-[#B9CF32] inline-block pb-1">
-                Rekomendasi Lapangan
-            </h2>
-
-            <div class="flex space-x-6 overflow-x-auto py-6 scrollbar-hide">
-                <?php if (!empty($featured_venues)): ?>
-                    <?php foreach ($featured_venues as $venue): 
-                        $img_src = base_url($venue['link_profile_img']);
-                        if (empty($venue['link_profile_img']) || $venue['link_profile_img'] == 'placeholder.jpg' || (file_exists($venue['link_profile_img']) === false)) {
-                            $img_src = "https://placehold.co/600x400/926699/FFFFFF?text=" . urlencode($venue['venue_name']);
-                        }
-                    ?>
-                        <!-- PERBAIKAN KRITIS DI BARIS INI: Mengubah view_venue_detail menjadi detail_venue -->
-                        <a href="<?= site_url('App/detail_venue/' . $venue['id_venue']) ?>" class="flex-shrink-0 w-80 bg-white rounded-xl shadow-lg overflow-hidden transition transform hover:scale-[1.02] hover:shadow-1xl duration-300 group">
-                            <img src="<?php echo $img_src; ?>" alt="<?php echo html_escape($venue['venue_name']); ?>" class="w-full h-48 object-cover group-hover:opacity-90 transition duration-300">
-                            <div class="p-5">
-                                <h4 class="text-xl font-semibold text-gray-900 truncate"><?php echo html_escape($venue['venue_name']); ?></h4>
-                                <div class="mt-2 text-sm text-gray-600 flex justify-between items-center">
-                                    <p>
-                                        <span class="font-bold text-[#926699]"><?php echo $venue['court_count']; ?></span> Lapangan Tersedia
-                                    </p>
-                                    <p class="font-bold text-[#B9CF32] text-lg">
-                                        Rp. <?php echo number_format($venue['min_price'], 0, ',', '.'); ?>,-
-                                    </p>
-                                </div>
-                                <p class="text-sm text-gray-500 mt-1">
-                                    <?php echo html_escape($venue['sports_offered']); ?> | 
-                                    <span class="text-xs text-gray-400">~ 5 km dari Anda</span>
+        <div class="flex space-x-6 overflow-x-auto py-6 scrollbar-hide">
+            <?php if (!empty($featured_venues)): ?>
+                <?php foreach ($featured_venues as $venue): 
+                    $img_src = base_url($venue['link_profile_img']);
+                    if (empty($venue['link_profile_img']) || $venue['link_profile_img'] == 'placeholder.jpg' || (file_exists($venue['link_profile_img']) === false)) {
+                        $img_src = "https://placehold.co/600x400/926699/FFFFFF?text=" . urlencode($venue['venue_name']);
+                    }
+                ?>
+                    <a href="<?= site_url('App/detail_venue/' . $venue['id_venue']) ?>" class="flex-shrink-0 w-80 bg-white rounded-xl shadow-lg overflow-hidden transition transform hover:scale-[1.02] hover:shadow-xl duration-300 group">
+                        <img src="<?php echo $img_src; ?>" alt="<?php echo html_escape($venue['venue_name']); ?>" class="w-full h-48 object-cover group-hover:opacity-90 transition duration-300">
+                        <div class="p-5">
+                            <h4 class="text-xl font-semibold text-gray-900 truncate"><?php echo html_escape($venue['venue_name']); ?></h4>
+                            <div class="mt-2 text-sm text-gray-600 flex justify-between items-center">
+                                <p>
+                                    <span class="font-bold text-main"><?php echo $venue['court_count']; ?></span> Lapangan Tersedia
                                 </p>
-                                <div class="mt-4 w-full text-center py-2 text-sm font-semibold text-white bg-[#926699] rounded-lg group-hover:bg-[#7d5583] transition duration-150">
-                                    Lihat Detail & Slot
-                                </div>
+                                <!-- Harga menggunakan warna aksi (hijau) --><p class="font-bold text-action text-lg">
+                                    Rp. <?php echo number_format($venue['min_price'], 0, ',', '.'); ?>,-
+                                </p>
                             </div>
-                        </a>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <div class="text-center p-10 bg-white rounded-xl shadow-lg">
-                        <p class="text-xl text-gray-500">Belum ada Lapangan/GOR yang terdaftar sebagai Mitra.</p>
-                        <p class="text-sm text-gray-400 mt-2">Daftar sekarang untuk menjadi yang pertama!</p>
-                    </div>
-                <?php endif; ?>
-            </div>
-        </section>
+                            <p class="text-sm text-gray-500 mt-1">
+                                <?php echo html_escape($venue['sports_offered']); ?> | 
+                                <span class="text-xs text-gray-400">~ 5 km dari Anda</span>
+                            </p>
+                            <!-- Tombol menggunakan warna aksi (hijau) --><div class="mt-4 w-full text-center py-2 text-sm font-semibold text-white bg-action rounded-lg group-hover:bg-[#2e5d3c] transition duration-150">
+                                Lihat Detail & Slot
+                            </div>
+                        </div>
+                    </a>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="text-center p-10 bg-white rounded-xl shadow-lg">
+                    <p class="text-xl text-gray-500">Belum ada Lapangan/GOR yang terdaftar sebagai Mitra.</p>
+                    <p class="text-sm text-gray-400 mt-2">Daftar sekarang untuk menjadi yang pertama!</p>
+                </div>
+            <?php endif; ?>
+        </div>
+    </section>
 
-    </main>
+</main>
