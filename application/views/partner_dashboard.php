@@ -78,12 +78,6 @@
                     <p class="text-lg text-gray-700"><?php echo html_escape($venue['address']); ?></p>
                 </div>
 
-                <!-- Koordinat (DIHAPUS SESUAI PERMINTAAN) -->
-                <!-- <div>
-                    <p class="text-sm font-medium text-gray-500">Koordinat (Lat, Lon)</p>
-                    <p class="text-lg text-gray-700"><?php echo empty($venue['coordinate']) ? '-' : html_escape($venue['coordinate']); ?></p>
-                </div> -->
-
                 <!-- Maps URL -->
                 <div>
                     <p class="text-sm font-medium text-gray-500">Link Google Maps</p>
@@ -124,10 +118,14 @@
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">
                             Gambar
                         </th>
+                        <!-- PERUBAHAN KRITIS: Menambahkan kolom Nama Lapangan -->
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-2/12">
+                            Nama Lapangan
+                        </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-2/12">
                             Olahraga
                         </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-2/12">
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">
                             Harga/Jam
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-3/12">
@@ -155,6 +153,10 @@
                                     ?>
                                     <img src="<?php echo $court_img_src; ?>" alt="Court Photo" class="w-12 h-12 object-cover rounded-md border">
                                 </td>
+                                <!-- PERUBAHAN KRITIS: Menampilkan court_name -->
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-semibold">
+                                    <?php echo html_escape($court['court_name']); ?>
+                                </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                     <?php echo html_escape($court['sport_name']); ?>
                                 </td>
@@ -168,14 +170,14 @@
                                     <a href="<?php echo site_url('mitra/edit_court/' . $court['id_court']); ?>" class="text-indigo-600 hover:text-indigo-900 font-medium">Edit</a>
                                     
                                     <a href="#" 
-                                       onclick="confirmDeleteCourt('<?php echo site_url('mitra/delete_court/' . $court['id_court']); ?>', '<?php echo html_escape($court['sport_name']); ?> #<?php echo $court['id_court']; ?>')" 
+                                       onclick="confirmDeleteCourt('<?php echo site_url('mitra/delete_court/' . $court['id_court']); ?>', '<?php echo html_escape($court['court_name']); ?>')" 
                                        class="text-red-600 hover:text-red-900 font-medium ml-3">Hapus</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500">
+                            <td colspan="7" class="px-6 py-4 text-center text-sm text-gray-500">
                                 Belum ada lapangan yang ditambahkan. Silakan klik "Tambah Lapangan" di atas.
                             </td>
                         </tr>
