@@ -489,6 +489,33 @@ class Mitra extends CI_Controller {
         redirect('mitra/orders');
     }
 
+    // 4. Tolak Pesanan / Pembayaran (BARU)
+    public function reject_booking()
+    {
+        if (!$this->_check_mitra_access()) return;
+
+        $booking_id = $this->input->post('booking_id');
+        $reason     = $this->input->post('reject_reason');
+
+        if (empty($reason)) {
+            $this->session->set_flashdata('error', 'Alasan penolakan wajib diisi.');
+            redirect('mitra/orders');
+            return;
+        }
+
+        $update_data = array(
+            'status' => $reason // Simpan alasan penolakan langsung di status
+        );
+
+        if ($this->Model->update_booking($booking_id, $update_data)) {
+            $this->session->set_flashdata('success', 'Status pesanan berhasil diperbarui (Ditolak).');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal menolak pesanan.');
+        }
+
+        redirect('mitra/orders');
+    }
+    
     // --- PRIVATE FUNCTION UNTUK PENCEGAHAN REDUNDANSI ---
     private function _check_mitra_access()
     {
