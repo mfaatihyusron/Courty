@@ -125,7 +125,7 @@ class Model extends CI_Model {
     public function get_court_by_id($id_court)
     {
         // Join dengan tabel sport agar nama olahraga bisa ditampilkan
-        $this->db->select('c.*, s.name as sport_name');
+        $this->db->select('c.*, c.name as court_name, s.name as sport_name');
         $this->db->from('court c');
         $this->db->join('sport s', 's.id_sport = c.id_sport', 'left');
         $this->db->where('c.id_court', $id_court);
