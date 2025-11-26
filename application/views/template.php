@@ -37,10 +37,20 @@
             <!-- Desktop Menu --><nav class="hidden md:flex space-x-8 items-center">
                 <a href="<?php echo site_url('App/index'); ?>" class="text-gray-600 hover:text-main font-medium transition duration-150">Home</a>
                 <a href="<?php echo site_url('App/venue'); ?>" class="text-gray-600 hover:text-main font-medium transition duration-150">Venue</a>
+                
+                <!-- MENU BARU: PESANAN SAYA (Hanya muncul jika login) -->
+                <?php if ($this->session->userdata('logged_in')): ?>
+                    <a href="<?php echo site_url('Booking/my_orders'); ?>" class="text-gray-600 hover:text-main font-medium transition duration-150">Pesanan Saya</a>
+                <?php endif; ?>
+
                 <a href="<?php echo site_url('App/about'); ?>" class="text-gray-600 hover:text-main font-medium transition duration-150">About Us</a>
                 
                 <?php if ($this->session->userdata('role') == 3): ?>
                     <!-- Link Partner Dashboard untuk Role 3 --><a href="<?php echo site_url('Mitra/partner_dashboard'); ?>" class="text-sm font-semibold text-white bg-action px-3 py-1 rounded-full hover:bg-[#2e5d3c] transition duration-150">Dashboard Mitra</a>
+                <?php endif; ?>
+                
+                <?php if ($this->session->userdata('role') == 3): ?>
+                    <!-- Link Lihat Pesanan Masuk (Mitra) --><a href="<?php echo site_url('Mitra/orders'); ?>" class="text-sm font-semibold text-action border border-action px-3 py-1 rounded-full hover:bg-green-50 transition duration-150">Order Masuk</a>
                 <?php endif; ?>
             </nav>
             
@@ -66,10 +76,19 @@
         <!-- Mobile Menu Dropdown --><div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-1 bg-white border-t">
             <a href="<?php echo site_url('App/index'); ?>" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-main hover:bg-gray-50">Home</a>
             <a href="<?php echo site_url('App/venue'); ?>" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-main hover:bg-gray-50">Venue</a>
+            
+            <!-- MENU MOBILE BARU: PESANAN SAYA -->
+            <?php if ($this->session->userdata('logged_in')): ?>
+                <a href="<?php echo site_url('Booking/my_orders'); ?>" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-main hover:bg-gray-50">Pesanan Saya</a>
+            <?php endif; ?>
+
             <a href="<?php echo site_url('App/about'); ?>" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-main hover:bg-gray-50">About Us</a>
+            
             <?php if ($this->session->userdata('role') == 3): ?>
                 <a href="<?php echo site_url('Mitra/partner_dashboard'); ?>" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-action hover:bg-[#2e5d3c]">Dashboard Mitra</a>
+                <a href="<?php echo site_url('Mitra/orders'); ?>" class="block px-3 py-2 rounded-md text-base font-medium text-action border border-action mt-2">Order Masuk</a>
             <?php endif; ?>
+            
             <?php if (!$this->session->userdata('logged_in')): ?>
                 <a href="<?php echo site_url('Auth/login'); ?>" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-main hover:bg-[#7d5583]">Login / Register</a>
             <?php endif; ?>

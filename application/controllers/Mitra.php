@@ -423,6 +423,72 @@ class Mitra extends CI_Controller {
         redirect('mitra/partner_dashboard');
     }
     
+    // === MANAJEMEN PESANAN (BARU) ===
+
+    // 1. Halaman Daftar Pesanan Masuk
+    public function orders()
+    {
+        if (!$this->_check_mitra_access()) return;
+        
+        $mitra_id = $this->session->userdata('user_id');
+        $data['orders'] = $this->Model->get_bookings_by_mitra($mitra_id);
+        
+        $data['content'] = "mitra_orders"; // View baru
+        $this->load->view('template', $data);
+    }
+
+    // 2. Approve Booking & Upload QR Code (Ubah Status: Pending -> Confirmed)
+    public function approve_booking()
+    {
+        if (!$this->_check_mitra_access()) return;
+
+        $booking_id = $this->input->post('booking_id');
+
+        // Config Upload QR
+        $config['upload_path']   = './assets/uploads/qrcodes/'; 
+        $config['allowed_types'] = 'jpg|png|jpeg';
+        $config['max_size']      = 2048; 
+        $config['file_name']     = 'qr-' . $booking_id . '-' . time();
+        $config['overwrite']     = TRUE;
+
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_upload('qr_code')) {
+            $upload_data = $this->upload->data();
+            $file_path = 'assets/uploads/qrcodes/' . $upload_data['file_name'];
+
+            $update_data = array(
+                'link_qr' => $file_path,
+                'status'  => 'Confirmed' // Siap Bayar
+            );
+
+            $this->Model->update_booking($booking_id, $update_data);
+            $this->session->set_flashdata('success', 'Booking disetujui. QR Code terkirim ke User.');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal upload QR: ' . $this->upload->display_errors());
+        }
+
+        redirect('mitra/orders');
+    }
+
+    // 3. Verifikasi Pembayaran (Ubah Status: Paid -> Completed)
+    public function verify_payment($booking_id)
+    {
+        if (!$this->_check_mitra_access()) return;
+
+        $update_data = array(
+            'status' => 'Completed'
+        );
+
+        if ($this->Model->update_booking($booking_id, $update_data)) {
+            $this->session->set_flashdata('success', 'Pembayaran diverifikasi. Booking Selesai.');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal verifikasi.');
+        }
+
+        redirect('mitra/orders');
+    }
+
     // --- PRIVATE FUNCTION UNTUK PENCEGAHAN REDUNDANSI ---
     private function _check_mitra_access()
     {
@@ -433,4 +499,6 @@ class Mitra extends CI_Controller {
         }
         return true;
     }
+
+    
 }

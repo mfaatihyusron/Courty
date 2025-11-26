@@ -146,7 +146,8 @@
                         </div>
                         
                         <div class="p-6">
-                            <form action="<?= site_url('App/create_order') ?>" method="POST" class="space-y-5">
+                            <!-- PERUBAHAN: Action diarahkan ke Booking/create -->
+                            <form action="<?= site_url('Booking/create') ?>" method="POST" class="space-y-5">
                                 
                                 <!-- Pilih Lapangan -->
                                 <div>
@@ -156,7 +157,7 @@
                                             <option value="" data-price="0">-- Pilih Lapangan --</option>
                                             <?php if (!empty($courts)): ?>
                                                 <?php foreach ($courts as $court): ?>
-                                                    <!-- ADDED: data-price attribute for JS calculation -->
+                                                    <!-- data-price attribute for JS calculation -->
                                                     <option value="<?php echo $court['id_court']; ?>" 
                                                             data-price="<?php echo $court['price_per_hour']; ?>">
                                                         <?php echo html_escape($court['court_name']); ?> (<?php echo html_escape($court['sport_name']); ?>)
@@ -203,14 +204,14 @@
                                     </div>
                                 </div>
                                 
-                                <!-- NEW: Total Price Display -->
+                                <!-- Total Price Display -->
                                 <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex justify-between items-center">
                                     <span class="text-sm font-semibold text-gray-600">Total Harga</span>
                                     <span id="total_price_display" class="text-xl font-bold text-[#B9CF32]">Rp 0</span>
                                 </div>
 
                                 <button type="submit" class="w-full py-4 text-base font-bold text-white bg-gradient-to-r from-[#926699] to-[#7d5583] rounded-xl shadow-lg hover:shadow-xl hover:translate-y-[-2px] transition-all duration-200 flex justify-center items-center group">
-                                    Cek Ketersediaan
+                                    Cek Ketersediaan & Booking
                                     <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                                 </button>
                                 

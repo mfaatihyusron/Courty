@@ -268,4 +268,52 @@ class Model extends CI_Model {
         }
         return FALSE;
     }
+
+    // === FITUR BOOKING (BARU) ===
+
+    // 1. Create Booking Baru
+    public function create_booking($data)
+    {
+        return $this->db->insert('booking', $data);
+    }
+
+    // 2. Ambil Booking berdasarkan User (Untuk Halaman Pesanan Saya)
+    public function get_bookings_by_user($user_id)
+    {
+        $this->db->select('b.*, c.name as court_name, v.venue_name, s.name as sport_name');
+        $this->db->from('booking b');
+        $this->db->join('court c', 'c.id_court = b.id_court');
+        $this->db->join('venue v', 'v.id_venue = c.id_venue');
+        $this->db->join('sport s', 's.id_sport = c.id_sport');
+        $this->db->where('b.id_user', $user_id);
+        $this->db->order_by('b.created_at', 'DESC');
+        return $this->db->get()->result_array();
+    }
+
+    // 3. Ambil Booking berdasarkan Mitra (Untuk Dashboard Mitra)
+    // Logika: User (Mitra) -> Punya Venue -> Punya Court -> Punya Booking
+    public function get_bookings_by_mitra($mitra_id)
+    {
+        $this->db->select('b.*, c.name as court_name, u.name as user_name, u.telp as user_telp');
+        $this->db->from('booking b');
+        $this->db->join('court c', 'c.id_court = b.id_court');
+        $this->db->join('venue v', 'v.id_venue = c.id_venue');
+        $this->db->join('users u', 'u.id_user = b.id_user'); // Info pemesan
+        $this->db->where('v.id_user', $mitra_id); // Filter venue milik mitra ini
+        $this->db->order_by('b.created_at', 'DESC');
+        return $this->db->get()->result_array();
+    }
+
+    // 4. Update Booking (Status, Link QR, Bukti Bayar)
+    public function update_booking($id_booking, $data)
+    {
+        $this->db->where('id', $id_booking); // Asumsi primary key tabel booking adalah 'id'
+        return $this->db->update('booking', $data);
+    }
+
+    // 5. Get Booking Detail (Opsional, untuk validasi)
+    public function get_booking_by_id($id)
+    {
+        return $this->db->get_where('booking', ['id' => $id])->row_array();
+    }
 }

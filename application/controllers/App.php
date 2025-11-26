@@ -81,7 +81,9 @@ class App extends CI_Controller {
 
     public function about()
 	{
-	// ... (fungsi lain yang sudah ada)
+	    $data['user_name'] = $this->session->userdata('name');
+		$data['content'] = "about"; 
+		$this->load->view('template', $data);
     }
 
     public function view_sport_category($sport_name = 'futsal')
@@ -97,5 +99,4 @@ class App extends CI_Controller {
         $data['content'] = "sport_category"; 
         $this->load->view('template', $data);
     }
-    // ... (sisa fungsi lain)
 }
