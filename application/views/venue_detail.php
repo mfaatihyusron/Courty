@@ -74,8 +74,9 @@
                                         
                                         <!-- Detail Lapangan -->
                                         <div class="flex-grow">
+                                            <!-- PERUBAHAN KRITIS: Menampilkan court_name -->
                                             <h3 class="text-lg font-bold text-gray-800">
-                                                Lapangan #<?php echo $index + 1; ?> (<?php echo html_escape($court['sport_name']); ?>)
+                                                <?php echo html_escape($court['court_name']); ?> (<?php echo html_escape($court['sport_name']); ?>)
                                             </h3>
                                             <p class="text-sm text-gray-600"><?php echo html_escape($court['description']); ?></p>
                                         </div>
@@ -123,8 +124,9 @@
                                     <option value="">-- Pilih Lapangan --</option>
                                     <?php if (!empty($courts)): ?>
                                         <?php foreach ($courts as $court): ?>
+                                            <!-- PERUBAHAN KRITIS: Menambahkan court_name di dropdown -->
                                             <option value="<?php echo $court['id_court']; ?>">
-                                                #<?php echo $court['id_court']; ?> - <?php echo html_escape($court['sport_name']); ?> (Rp. <?php echo number_format($court['price_per_hour'], 0); ?>/Jam)
+                                                <?php echo html_escape($court['court_name']); ?> - <?php echo html_escape($court['sport_name']); ?> (Rp. <?php echo number_format($court['price_per_hour'], 0); ?>/Jam)
                                             </option>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
