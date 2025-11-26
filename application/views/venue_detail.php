@@ -152,11 +152,13 @@
                                 <div>
                                     <label class="block text-sm font-semibold text-gray-700 mb-2">Lapangan</label>
                                     <div class="relative">
-                                        <select id="court_id" name="court_id" class="w-full pl-4 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#926699] focus:border-transparent appearance-none transition-all" required>
-                                            <option value="">-- Pilih Lapangan --</option>
+                                        <select id="court_id" name="court_id" class="w-full pl-4 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#926699] focus:border-transparent appearance-none transition-all" required>
+                                            <option value="" data-price="0">-- Pilih Lapangan --</option>
                                             <?php if (!empty($courts)): ?>
                                                 <?php foreach ($courts as $court): ?>
-                                                    <option value="<?php echo $court['id_court']; ?>">
+                                                    <!-- ADDED: data-price attribute for JS calculation -->
+                                                    <option value="<?php echo $court['id_court']; ?>" 
+                                                            data-price="<?php echo $court['price_per_hour']; ?>">
                                                         <?php echo html_escape($court['court_name']); ?> (<?php echo html_escape($court['sport_name']); ?>)
                                                     </option>
                                                 <?php endforeach; ?>
@@ -174,7 +176,7 @@
                                     <input type="date" id="booking_date" name="booking_date" 
                                            min="<?php echo date('Y-m-d'); ?>"
                                            value="<?php echo date('Y-m-d'); ?>" 
-                                           class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#926699] focus:border-transparent transition-all" required>
+                                           class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#926699] focus:border-transparent transition-all" required>
                                 </div>
 
                                 <!-- Jam & Durasi Grid -->
@@ -182,12 +184,12 @@
                                     <div>
                                         <label class="block text-sm font-semibold text-gray-700 mb-2">Jam Mulai</label>
                                         <input type="time" id="start_time" name="start_time" 
-                                               class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#926699] focus:border-transparent transition-all" required>
+                                               class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#926699] focus:border-transparent transition-all" required>
                                     </div>
                                     <div>
                                         <label class="block text-sm font-semibold text-gray-700 mb-2">Durasi</label>
                                         <div class="relative">
-                                            <select id="duration" name="duration" class="w-full pl-4 pr-8 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#926699] focus:border-transparent appearance-none transition-all" required>
+                                            <select id="duration" name="duration" class="w-full pl-4 pr-8 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#926699] focus:border-transparent appearance-none transition-all" required>
                                                 <option value="1">1 Jam</option>
                                                 <option value="2">2 Jam</option>
                                                 <option value="3">3 Jam</option>
@@ -201,6 +203,12 @@
                                     </div>
                                 </div>
                                 
+                                <!-- NEW: Total Price Display -->
+                                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex justify-between items-center">
+                                    <span class="text-sm font-semibold text-gray-600">Total Harga</span>
+                                    <span id="total_price_display" class="text-xl font-bold text-[#B9CF32]">Rp 0</span>
+                                </div>
+
                                 <button type="submit" class="w-full py-4 text-base font-bold text-white bg-gradient-to-r from-[#926699] to-[#7d5583] rounded-xl shadow-lg hover:shadow-xl hover:translate-y-[-2px] transition-all duration-200 flex justify-center items-center group">
                                     Cek Ketersediaan
                                     <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
@@ -229,3 +237,42 @@
         </div>
     </div>
 </div>
+
+<!-- SCRIPT: Auto Calculate Total Price -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const courtSelect = document.getElementById('court_id');
+        const durationSelect = document.getElementById('duration');
+        const totalPriceDisplay = document.getElementById('total_price_display');
+
+        function calculateTotal() {
+            // Ambil opsi yang dipilih
+            const selectedOption = courtSelect.options[courtSelect.selectedIndex];
+            
+            // Ambil harga dari atribut data-price (default 0 jika tidak ada)
+            const pricePerHour = selectedOption.getAttribute('data-price') || 0;
+            const duration = durationSelect.value || 0;
+
+            // Hitung total
+            const total = parseInt(pricePerHour) * parseInt(duration);
+
+            // Format ke Rupiah
+            const formattedTotal = new Intl.NumberFormat('id-ID', { 
+                style: 'currency', 
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(total);
+
+            // Update display (Jika total 0, tampilkan Rp 0 secara manual agar rapi)
+            if (total > 0) {
+                totalPriceDisplay.textContent = formattedTotal;
+            } else {
+                totalPriceDisplay.textContent = 'Rp 0';
+            }
+        }
+
+        // Pasang event listener
+        courtSelect.addEventListener('change', calculateTotal);
+        durationSelect.addEventListener('change', calculateTotal);
+    });
+</script>
