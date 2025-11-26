@@ -55,7 +55,9 @@
             </nav>
             
             <!-- User & Partner Actions --><div class="flex items-center space-x-4">
-                
+                <?php if (!$this->session->userdata('logged_in')): ?>
+                    <a href="<?php echo site_url('Mitra/partner_register_step1'); ?>" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-main hover:bg-gray-50">Daftar Mitra</a>
+                <?php endif; ?>
                 <?php if ($this->session->userdata('logged_in')): ?>
                     <!-- Jika sudah login --><div class="flex items-center space-x-4">
                         <span class="text-sm text-gray-600 hidden sm:block">Halo, <?php echo $this->session->userdata('name'); ?>!</span>
