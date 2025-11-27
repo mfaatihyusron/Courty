@@ -1,19 +1,18 @@
 <main>
     <!--
-    PERBAIKAN 1: HERO SECTION - FULL WIDTH DAN FOKUS KE SEARCH BAR LAMA
-    - Hapus max-w-7xl di container luar agar full-page.
-    - Container utama diatur ke relative z-10 di dalam.
+    PERBAIKAN 1: HERO SECTION - MEMPERTAHANKAN WARNA BACKGROUND HERO
+    - Tetap menggunakan bg-soft pada hero untuk kurva di bawahnya.
     -->
     <section class="relative h-[65vh] sm:h-[80vh] flex items-center justify-center overflow-hidden bg-soft -mt-16">
         
         <!-- Background Image & Overlay (FULL WIDTH) -->
         <div class="absolute inset-0 z-0">
             <!-- Asumsi: tennis_court_bg.jpg sudah ada di folder uploads/ -->
-            <img src="<?= base_url('upload/tennis_court.jpg') ?>" 
+            <img src="<?= base_url('upload/Padel.jpeg') ?>" 
                  alt="Lapangan Tenis Background" 
-                 class="w-full h-full object-cover brightness-50 contrast-100">
+                 class="w-full h-full object-cover brightness-50 contrast-85">
             <!-- Overlay menggunakan warna aksi hijau gelap -->
-            <div class="absolute inset-0 bg-action opacity-25"></div> 
+            <div class="absolute inset-0 bg-action opacity-15"></div> 
         </div>
 
         <!-- Konten Utama (Title & Search Bar) - Memastikan konten di tengah -->
@@ -26,8 +25,8 @@
             </p>
 
             <!-- Search Bar LAMA (INPUT TEKS TUNGGAL) - Ditempatkan di tengah, di atas curve -->
-            <!-- PERBAIKAN: Menggunakan design search bar yang lebih clean dan lama -->
-            <div class="mt-12 max-w-4xl mx-auto bg-white p-2 rounded-full shadow-2xl relative z-20 flex items-center">
+            <!-- PERBAIKAN SEARCH BAR: Tambahkan group dan hover:shadow-xl untuk interaktivitas -->
+            <div class="mt-12 max-w-4xl mx-auto bg-white p-2 rounded-full shadow-2xl relative z-20 flex items-center group transition duration-300 hover:shadow-xl">
                 <div class="relative flex-grow">
                     <i class="fas fa-search absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                     <input type="text" id="search_query" name="search_query" placeholder="Cari nama venue, olahraga, atau lokasi..." 
@@ -45,129 +44,123 @@
             </button>
         </div>
         
-        <!-- Kurva Bawah Hero Section -->
+        <!-- Kurva Bawah Hero Section harus tetap memiliki bg-soft agar menyatu dengan background body (putih) -->
         <div class="absolute bottom-0 left-0 right-0 h-40 bg-soft transform translate-y-2/3 rounded-t-[100px] sm:rounded-t-[150px] lg:rounded-t-[200px] z-0"></div>
     </section>
         
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-soft">
-        <h2 class="text-2xl font-bold text-center text-gray-900 mb-4" >Pilih Kategori Olahraga</h2>
-        <div class="mt-4 mb-12 py-4">
-            <div class="flex space-x-6 overflow-x-auto pb-2 scrollbar-hide justify-center">
-                
-                <!-- Category Item 1: Futsal/Sepakbola -->
-                <a href="<?= site_url('App/view_sport_category/futsal/sepakbola') ?>" 
-                   class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 rounded-xl shadow-md border-2 border-transparent 
-                          hover:border-main transition duration-200 group w-28 sm:w-32 transform hover:bg-white hover:scale-105">
-                    <span class="text-3xl sm:text-4xl">⚽</span>
-                    <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-main text-center">Futsal/Sepakbola</span>
-                </a>
-                
-                <!-- Category Item 2: Badminton -->
-                <a href="<?= site_url('App/view_sport_category/badminton') ?>" 
-                   class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 rounded-xl shadow-md border-2 border-transparent 
-                          hover:border-main transition duration-200 group w-28 sm:w-32 transform hover:bg-white hover:scale-105">
-                    <span class="text-3xl sm:text-4xl">🏸</span>
-                    <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-main text-center">Badminton</span>
-                </a>
-                
-                <!-- Category Item 3: Basket -->
-                <a href="<?= site_url('App/view_sport_category/basket') ?>" 
-                   class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 rounded-xl shadow-md border-2 border-transparent 
-                          hover:border-main transition duration-200 group w-28 sm:w-32 transform hover:bg-white hover:scale-105">
-                    <span class="text-3xl sm:text-4xl">🏀</span>
-                    <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-main text-center">Basket</span>
-                </a>
-                
-                <!-- Category Item 4: Voli -->
-                <a href="<?= site_url('App/view_sport_category/voli') ?>" 
-                   class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 rounded-xl shadow-md border-2 border-transparent 
-                          hover:border-main transition duration-200 group w-28 sm:w-32 transform hover:bg-white hover:scale-105">
-                    <span class="text-3xl sm:text-4xl">🏐</span>
-                    <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-main text-center">Voli</span>
-                </a>
-                
-                <!-- Category Item 5: Tenis -->
-                <a href="<?= site_url('App/view_sport_category/tenis') ?>" 
-                   class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 rounded-xl shadow-md border-2 border-transparent 
-                          hover:border-main transition duration-200 group w-28 sm:w-32 transform hover:bg-white hover:scale-105">
-                    <span class="text-3xl sm:text-4xl">🎾</span>
-                    <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-main text-center">Tenis</span>
-                </a>
+    <!-- PERUBAHAN KRITIS: HAPUS bg-soft PADA SECTION UTAMA INI -->
+    <!-- Sekarang background utama dari section ini adalah PUTIH (default body/div) -->
+    <section class="pb-20"> 
+        
+        <!-- Bagian Pilih Kategori Olahraga -->
+        <!-- Penyesuaian padding atas dari 10 menjadi 16 untuk spacing yang lebih lega dari kurva Hero -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16"> 
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-8" >Pilih Kategori Olahraga</h2>
+            <div class="py-4">
+                <div class="flex space-x-6 overflow-x-auto pb-2 scrollbar-hide justify-center">
+                    
+                    <?php 
+                    // Definisikan ikon dan nama kategori dalam array agar lebih rapi dan mudah diulang
+                    // (Menggunakan Emojis sesuai file sebelumnya)
+                    $categories = [
+                        ['name' => 'Futsal/Sepakbola', 'url' => 'futsal/sepakbola', 'icon' => '⚽'],
+                        ['name' => 'Badminton', 'url' => 'badminton', 'icon' => '🏸'],
+                        ['name' => 'Basket', 'url' => 'basket', 'icon' => '🏀'],
+                        ['name' => 'Voli', 'url' => 'voli', 'icon' => '🏐'],
+                        ['name' => 'Tenis', 'url' => 'tenis', 'icon' => '🎾'],
+                        ['name' => 'Renang', 'url' => 'renang', 'icon' => '🏊'],
+                    ];
+                    ?>
 
-                 <!-- Category Item 6: Renang -->
-                <a href="<?= site_url('App/view_sport_category/renang') ?>" 
-                   class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 rounded-xl shadow-md border-2 border-transparent 
-                          hover:border-main transition duration-200 group w-28 sm:w-32 transform hover:bg-white hover:scale-105">
-                    <span class="text-3xl sm:text-4xl">🏊</span>
-                    <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-main text-center">Renang</span>
-                </a>
-                
+                    <?php foreach ($categories as $category): ?>
+                        <!-- LINK CONTAINER -->
+                        <a href="<?= site_url('App/view_sport_category/' . $category['url']) ?>" 
+                           class="flex-shrink-0 flex flex-col items-center group w-24 sm:w-28 text-center">
+                            
+                            <!-- Icon Container (Lingkaran) - PERUBAHAN KRITIS DI SINI -->
+                            <div class="p-4 sm:p-5 rounded-full bg-white shadow-lg border border-gray-100 
+                                        group-hover:bg-[#347038] group-hover:border-transparent 
+                                        hover:shadow-xl transition duration-300 transform group-hover:scale-105">
+                                <span class="text-3xl sm:text-4xl leading-none group-hover:text-white transition duration-300">
+                                    <?php echo $category['icon']; ?>
+                                </span>
+                            </div>
+                            
+                            <!-- Nama Kategori - Teks tetap berubah warna #347038 (Hijau Gelap) -->
+                            <span class="mt-3 text-xs sm:text-sm font-medium text-gray-700 group-hover:text-[#347038]">
+                                <?php echo $category['name']; ?>
+                            </span>
+                        </a>
+                    <?php endforeach; ?>
+                    
+                </div>
+            </div>
+        </div>
+
+
+        <!-- How It Works (Alur Kerja Reservasi Courty) - Background Putih -->
+        <!-- Penyesuaian padding atas dari 10 menjadi 16 untuk spacing yang lebih lega -->
+        <div class="pt-16 pb-10"> 
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-extrabold text-gray-900 mb-10">Alur Kerja Reservasi Courty</h2>
+
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+                    
+                    <!-- Step 1: Cari & Request -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-t-main transition duration-300 hover:shadow-xl">
+                        <div class="w-14 h-14 mx-auto mb-4 bg-main text-white rounded-full flex items-center justify-center text-3xl font-bold transform group-hover:scale-105 transition">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3 class="mt-6 text-xl font-semibold text-gray-900">Cari & Kirim Permintaan</h3>
+                        <p class="mt-3 text-gray-600 text-sm">Pilih lapangan, kirim permintaan. Pesanan Anda akan berstatus **Pending** menunggu persetujuan Mitra.</p>
+                    </div>
+
+                    <!-- Step 2: Konfirmasi Mitra -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-t-action transition duration-300 hover:shadow-xl">
+                        <div class="w-14 h-14 mx-auto mb-4 bg-action text-white rounded-full flex items-center justify-center text-3xl font-bold transform group-hover:scale-105 transition">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3 class="mt-6 text-xl font-semibold text-gray-900">Konfirmasi Cepat oleh Mitra</h3>
+                        <p class="mt-3 text-gray-600 text-sm">Mitra GOR menyetujui ketersediaan. Anda mendapat notifikasi **Confirmed** (Siap Bayar).</p>
+                    </div>
+
+                    <!-- Step 3: Bayar & Main -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-t-main transition duration-300 hover:shadow-xl">
+                        <div class="w-14 h-14 mx-auto mb-4 bg-main text-white rounded-full flex items-center justify-center text-3xl font-bold transform group-hover:scale-105 transition">
+                            <i class="fas fa-basketball-ball"></i>
+                        </div>
+                        <h3 class="mt-6 text-xl font-semibold text-gray-900">Bayar & Selesai</h3>
+                        <p class="mt-3 text-gray-600 text-sm">Selesaikan pembayaran. Reservasi Anda resmi **Completed** dan terjamin.</p>
+                    </div>
+
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- How It Works (Alur Kerja Reservasi Courty) - Menggunakan Warna Aksi Hijau -->
-    <section class="py-20 bg-soft"> 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-extrabold text-gray-900">Alur Kerja Reservasi Courty</h2>
-            <p class="mt-4 text-lg text-gray-500">Kami menjamin keakuratan dengan proses konfirmasi Mitra GOR yang cepat.</p>
-
-            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-10">
-                
-                <!-- Step 1: Cari & Request -->
-                <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-t-main transition duration-300 hover:shadow-xl">
-                    <div class="w-12 h-12 mx-auto bg-main text-white rounded-full flex items-center justify-center text-2xl font-bold">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <h3 class="mt-6 text-xl font-semibold text-gray-900">Cari & Kirim Permintaan</h3>
-                    <p class="mt-4 text-gray-600 text-sm">Pilih lapangan, kirim permintaan. Pesanan Anda akan berstatus **Pending** menunggu persetujuan Mitra.</p>
-                </div>
-
-                <!-- Step 2: Konfirmasi Mitra -->
-                <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-t-action transition duration-300 hover:shadow-xl">
-                    <div class="w-12 h-12 mx-auto bg-action text-white rounded-full flex items-center justify-center text-2xl font-bold">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <h3 class="mt-6 text-xl font-semibold text-gray-900">Konfirmasi Cepat oleh Mitra</h3>
-                    <p class="mt-4 text-gray-600 text-sm">Mitra GOR menyetujui ketersediaan. Anda mendapat notifikasi **Confirmed** (Siap Bayar).</p>
-                </div>
-
-                <!-- Step 3: Bayar & Main -->
-                <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-t-main transition duration-300 hover:shadow-xl">
-                    <div class="w-12 h-12 mx-auto bg-main text-white rounded-full flex items-center justify-center text-2xl font-bold">
-                        <i class="fas fa-basketball-ball"></i>
-                    </div>
-                    <h3 class="mt-6 text-xl font-semibold text-gray-900">Bayar & Selesai</h3>
-                    <p class="mt-4 text-gray-600 text-sm">Selesaikan pembayaran. Reservasi Anda resmi **Completed** dan terjamin.</p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!--
-    PERBAIKAN 3: REKOMENDASI LAPANGAN - FIX DATA BINDING ERROR
-    - Mengubah $venue['field'] (Array) menjadi $venue->field (Object) untuk mengatasi potensi error.
-    -->
+    <!-- REKOMENDASI LAPANGAN -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         
-        <h2 class="text-3xl font-bold text-action mb-8 border-b-4 border-main inline-block pb-1">
+        <!-- PERUBAHAN JUDUL: Hapus garis bawah (border-b-4 border-main) dan ubah warna teks menjadi hitam (text-gray-900) -->
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 inline-block pb-1">
             Rekomendasi Lapangan
         </h2>
 
-        <div class="flex space-x-6 overflow-x-auto py-6 scrollbar-hide">
+        <!-- Penempatan Elemen: Tambah sedikit padding vertikal dan pastikan flex box rapi -->
+        <div class="flex space-x-6 overflow-x-auto py-4 scrollbar-hide">
             <?php if (!empty($featured_venues)): ?>
                 <?php foreach ($featured_venues as $venue): 
-                    // Perbaikan: Jika data dikirim sebagai array of objects (CI3 default jika Model menggunakan result())
-                    // Jika tetap array, gunakan $venue['field']. Jika error, kemungkinan Anda menggunakan result(), jadi kita ubah ke Object access.
-                    // Jika Anda menggunakan result_array() di Model, biarkan tetap Array. Karena error terjadi, kita asumsikan Model mengembalikan ARRAY
-                    
+                    // Pastikan id_venue tersedia
+                    $id_venue = isset($venue['id_venue']) ? $venue['id_venue'] : 0; 
+
+                    // Image fallback logic
                     $img_src = base_url($venue['link_profile_img']);
                     if (empty($venue['link_profile_img']) || $venue['link_profile_img'] == 'placeholder.jpg' || (file_exists($venue['link_profile_img']) === false)) {
                         $img_src = "https://placehold.co/600x400/926699/FFFFFF?text=" . urlencode($venue['venue_name']);
                     }
                 ?>
-                    <a href="<?= site_url('App/detail_venue/' . $venue['id_venue']) ?>" 
+                    <!-- LINK KRITIS: Memanggil App/detail_venue dengan ID yang benar -->
+                    <a href="<?= site_url('App/detail_venue/' . $id_venue) ?>" 
                        class="flex-shrink-0 w-80 bg-white rounded-xl shadow-lg overflow-hidden transition transform hover:scale-[1.02] hover:shadow-xl duration-300 group">
                         
                         <img src="<?php echo $img_src; ?>" alt="<?php echo html_escape($venue['venue_name']); ?>" 

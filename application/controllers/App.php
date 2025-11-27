@@ -53,6 +53,7 @@ class App extends CI_Controller {
     {
         // === LANGKAH KRITIS: DATA TRACKING ===
         // 1. Panggil fungsi Model untuk menambah jumlah dilihat (Increment View Count)
+        // Ini adalah praktek yang baik untuk mengukur popularitas venue (Data Analysis!)
         $this->Model->increment_view_count($id_venue);
         
         // 2. Ambil detail venue untuk ditampilkan
@@ -60,21 +61,22 @@ class App extends CI_Controller {
 
         // Pengecekan jika venue tidak ditemukan
         if (!$venue_detail) {
-            show_404(); // Fungsi standar CodeIgniter untuk menampilkan halaman 404
+            // Jika ID tidak valid atau data tidak ada, tampilkan 404
+            show_404(); 
         }
 
         // 3. Ambil court yang tersedia
         $courts = $this->Model->get_courts_by_venue_id($id_venue);
 
-        // 4. KRITIS: Ambil Galeri Foto (Variabel yang hilang di View)
+        // 4. Ambil Galeri Foto
         $gallery_photos = $this->Model->get_venue_gallery($id_venue); 
 
         $data['user_name'] = $this->session->userdata('name');
         $data['venue'] = $venue_detail;
         $data['courts'] = $courts;
-        $data['gallery_photos'] = $gallery_photos; // KRITIS: Mengirimkan variabel yang hilang
+        $data['gallery_photos'] = $gallery_photos; 
         $data['title'] = $venue_detail['venue_name'];
-        // KRITIS: NAMA VIEW DIGANTI JADI "venue_detail" (TANPA _v)
+        // Memuat View: venue_detail.php
         $data['content'] = "venue_detail"; 
         $this->load->view('template', $data);
     }

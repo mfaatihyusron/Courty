@@ -113,7 +113,8 @@ class Model extends CI_Model {
     // FUNGSI LAMA: Mengambil semua Court berdasarkan ID Venue
     public function get_courts_by_venue_id($id_venue)
     {
-        $this->db->select('c.*, c.name as court_name, s.name as sport_name');
+        // PERBAIKAN AKHIR: Menggunakan c.name AS court_name sesuai skema SQL.
+        $this->db->select('c.*, c.name as court_name, s.name as sport_name'); 
         $this->db->from('court c');
         $this->db->join('sport s', 's.id_sport = c.id_sport', 'left');
         $this->db->where('c.id_venue', $id_venue);
@@ -125,7 +126,7 @@ class Model extends CI_Model {
     public function get_court_by_id($id_court)
     {
         // Join dengan tabel sport agar nama olahraga bisa ditampilkan
-        $this->db->select('c.*, c.name as court_name, s.name as sport_name');
+        $this->db->select('c.*, c.name as court_name, s.name as sport_name'); // Menggunakan c.name AS court_name
         $this->db->from('court c');
         $this->db->join('sport s', 's.id_sport = c.id_sport', 'left');
         $this->db->where('c.id_court', $id_court);
@@ -280,7 +281,7 @@ class Model extends CI_Model {
     // 2. Ambil Booking berdasarkan User (Untuk Halaman Pesanan Saya)
     public function get_bookings_by_user($user_id)
     {
-        $this->db->select('b.*, c.name as court_name, v.venue_name, s.name as sport_name');
+        $this->db->select('b.*, c.name as court_name, v.venue_name, s.name as sport_name'); // Menggunakan c.name AS court_name
         $this->db->from('booking b');
         $this->db->join('court c', 'c.id_court = b.id_court');
         $this->db->join('venue v', 'v.id_venue = c.id_venue');
@@ -294,7 +295,7 @@ class Model extends CI_Model {
     // Logika: User (Mitra) -> Punya Venue -> Punya Court -> Punya Booking
     public function get_bookings_by_mitra($mitra_id)
     {
-        $this->db->select('b.*, c.name as court_name, u.name as user_name, u.telp as user_telp');
+        $this->db->select('b.*, c.name as court_name, u.name as user_name, u.telp as user_telp'); // Menggunakan c.name AS court_name
         $this->db->from('booking b');
         $this->db->join('court c', 'c.id_court = b.id_court');
         $this->db->join('venue v', 'v.id_venue = c.id_venue');
