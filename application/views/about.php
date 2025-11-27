@@ -38,7 +38,7 @@
                     <div class="p-6 bg-white rounded-xl shadow-lg border-t-4 border-t-main">
                         <h3 class="text-2xl font-bold text-gray-900 mb-3">Misi Kami</h3>
                         <p class="text-gray-600">
-                            Menyediakan sistem *booking* semi-otomatis yang menjamin keakuratan data jadwal, memberdayakan Mitra GOR dengan *data analysis*, dan memudahkan pengguna berolahraga.
+                            Menyediakan sistem booking semi-otomatis yang menjamin keakuratan data jadwal, memberdayakan Mitra GOR dengan data analysis, dan memudahkan pengguna berolahraga.
                         </p>
                     </div>
 
@@ -77,7 +77,7 @@
                         <img src="https://placehold.co/150x150/926699/FFFFFF?text=Fatih" alt="Fatih" class="w-28 h-28 rounded-full mx-auto object-cover border-4 border-cta">
                         <h3 class="mt-4 text-xl font-bold text-gray-900">Fatih</h3>
                         <p class="text-main font-semibold text-sm">System Strategist</p>
-                        <p class="mt-2 text-gray-600 text-sm">Bertanggung jawab atas definisikan *scope* dan alur bisnis (konfirmasi manual).</p>
+                        <p class="mt-2 text-gray-600 text-sm">Bertanggung jawab atas definisikan scope dan alur bisnis (konfirmasi manual).</p>
                         <a href="#" class="mt-3 inline-block text-secondary font-semibold text-xs hover:underline">LinkedIn</a>
                     </div>
 
