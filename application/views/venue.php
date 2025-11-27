@@ -136,7 +136,8 @@
                         <div class="mt-3 flex justify-between items-end border-t border-gray-100 pt-3">
                             <div>
                                 <p class="text-xs text-gray-500">Mulai dari</p>
-                                <p class="font-bold text-[#B9CF32] text-lg">Rp <?= number_format($venue['min_price'], 0, ',', '.') ?></p>
+                                <!-- PERUBAHAN KRITIS: Mengganti text-[#B9CF32] menjadi text-[#347038] -->
+                                <p class="font-bold text-[#347038] text-lg">Rp <?= number_format($venue['min_price'], 0, ',', '.') ?></p>
                             </div>
                             <span class="text-xs font-medium bg-gray-100 text-gray-600 px-2 py-1 rounded">
                                 <?= $venue['court_count'] ?> Lapangan
@@ -154,7 +155,7 @@
                 
             </div>
         </section>
-        
+
         <!-- REKOMENDASI SECTION 3: JARAK TERDEKAT (Menggunakan Data Asli) -->
         <section class="mb-12">
             <h2 class="text-2xl font-bold text-gray-900 mb-4 border-l-4 border-blue-500 pl-3">📍 Terdekat dari Anda</h2>
