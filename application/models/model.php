@@ -317,4 +317,34 @@ class Model extends CI_Model {
     {
         return $this->db->get_where('booking', ['id' => $id])->row_array();
     }
+
+    // FUNGSI BARU: Untuk Pencarian
+    // Digunakan oleh index.php dan venue.php
+    public function search_venues($query)
+    {
+        $this->db->query('SET SESSION sql_mode = ""');
+        $this->db->select('
+            v.*, 
+            COUNT(c.id_court) as court_count, 
+            MIN(c.price_per_hour) as min_price,
+            GROUP_CONCAT(DISTINCT s.name SEPARATOR ", ") as sports_offered
+        ');
+        $this->db->from('venue v');
+        $this->db->join('court c', 'c.id_venue = v.id_venue', 'left');
+        $this->db->join('sport s', 's.id_sport = c.id_sport', 'left');
+        
+        // Logika Pencarian: Mencari di Nama Venue, Alamat, atau Nama Olahraga yang Ditawarkan
+        $this->db->group_start();
+        $this->db->like('v.venue_name', $query);
+        $this->db->or_like('v.address', $query);
+        $this->db->or_like('s.name', $query);
+        $this->db->group_end();
+        
+        $this->db->group_by('v.id_venue');
+        $this->db->having('court_count > 0'); 
+        $this->db->order_by('v.view_count', 'DESC'); // Tetap urutkan berdasarkan view
+        
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }
