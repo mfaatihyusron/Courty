@@ -24,18 +24,18 @@
                 World's Biggest Sports Community
             </p>
 
-            <!-- Search Bar LAMA (INPUT TEKS TUNGGAL) - Ditempatkan di tengah, di atas curve -->
-            <!-- PERBAIKAN SEARCH BAR: Tambahkan group dan hover:shadow-xl untuk interaktivitas -->
-            <div class="mt-12 max-w-4xl mx-auto bg-white p-2 rounded-full shadow-2xl relative z-20 flex items-center group transition duration-300 hover:shadow-xl">
+            <!-- Search Bar (FORM PENCARIAN BARU) -->
+            <form action="<?= site_url('App/index') ?>" method="GET" class="mt-12 max-w-4xl mx-auto bg-white p-2 rounded-full shadow-2xl relative z-20 flex items-center group transition duration-300 hover:shadow-xl">
                 <div class="relative flex-grow">
                     <i class="fas fa-search absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    <!-- PERBAIKAN: Input memiliki name="search_query" -->
                     <input type="text" id="search_query" name="search_query" placeholder="Cari nama venue, olahraga, atau lokasi..." 
                            class="w-full pl-12 pr-4 py-3 text-base border-none rounded-full focus:ring-0 focus:outline-none bg-transparent">
                 </div>
                 <button type="submit" class="flex-shrink-0 px-6 py-3 bg-action text-white font-bold text-base rounded-full shadow-md hover:bg-[#2e5d3c] transition duration-150">
                     Search
                 </button>
-            </div>
+            </form>
             
             <!-- Tombol Geolocation -->
             <button type="button" class="text-sm font-semibold text-white/80 hover:text-white transition duration-150 mt-3" onclick="getGeolocation()">
