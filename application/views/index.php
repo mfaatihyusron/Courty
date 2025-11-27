@@ -43,9 +43,6 @@
                 Gunakan Lokasi Saya Sekarang
             </button>
         </div>
-        
-        <!-- Kurva Bawah Hero Section harus tetap memiliki bg-soft agar menyatu dengan background body (putih) -->
-        <div class="absolute bottom-0 left-0 right-0 h-40 bg-soft transform translate-y-2/3 rounded-t-[100px] sm:rounded-t-[150px] lg:rounded-t-[200px] z-0"></div>
     </section>
         
     <!-- PERUBAHAN KRITIS: HAPUS bg-soft PADA SECTION UTAMA INI -->
