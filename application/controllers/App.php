@@ -36,6 +36,13 @@ class App extends CI_Controller {
     
     public function venue()
 	{
+        // Jika ada query pencarian, alihkan ke search_results
+        $search_query = $this->input->get('search_venue_name');
+        if (!empty($search_query)) {
+            redirect('app/search_results?query=' . urlencode($search_query));
+            return;
+        }
+
         // Menggunakan fungsi baru: get_trending_by_views()
         $trending_data = $this->Model->get_trending_by_views();
 
@@ -47,6 +54,27 @@ class App extends CI_Controller {
 		$data['content'] = "venue"; 
 		$this->load->view('template', $data);
 	}
+    
+    // FUNGSI BARU: Menangani Hasil Pencarian
+    public function search_results()
+    {
+        $query = $this->input->get('query');
+        
+        if (empty($query)) {
+            redirect('app/venue');
+            return;
+        }
+        
+        $results = $this->Model->search_venues($query);
+
+        $data['user_name'] = $this->session->userdata('name');
+        $data['search_query'] = $query;
+        $data['venue_list'] = $results; // Menggunakan venue_list agar bisa di-reuse dengan view sport_category
+        $data['title'] = 'Hasil Pencarian: ' . html_escape($query);
+        $data['content'] = "search_results"; // View baru untuk menampilkan hasil
+        
+        $this->load->view('template', $data);
+    }
 
     // FUNGSI KRITIS: UNTUK HALAMAN DETAIL VENUE
     public function detail_venue($id_venue)
