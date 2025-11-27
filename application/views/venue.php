@@ -24,48 +24,52 @@
                 </form>
             </div>
 
-            <!-- Category Bar Section -->
-                <div class="mt-8 mb-12 py-4">
-                    <!-- Wrapper untuk horizontal scrolling di mobile dan centering di desktop -->
-                    <div class="flex space-x-6 overflow-x-auto pb-2 scrollbar-hide justify-center">
-                        
-                        <!-- Category Item 1: Futsal/Sepakbola -->
-                        <a href="<?= site_url('App/view_sport_category/futsal/sepakbola') ?>" class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 bg-gray-50 rounded-xl shadow-md border-2 border-transparent hover:border-[#926699] transition duration-200 group w-28 sm:w-32">
-                            <span class="text-3xl sm:text-4xl">⚽</span>
-                            <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Futsal/Sepakbola</span>
-                        </a>
-                        
-                        <!-- Category Item 2: Badminton -->
-                        <a href="<?= site_url('App/view_sport_category/badminton') ?>" class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 bg-gray-50 rounded-xl shadow-md border-2 border-transparent hover:border-[#926699] transition duration-200 group w-28 sm:w-32">
-                            <span class="text-3xl sm:text-4xl">🏸</span>
-                            <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Badminton</span>
-                        </a>
-                        
-                        <!-- Category Item 3: Basket -->
-                        <a href="<?= site_url('App/view_sport_category/basket') ?>" class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 bg-gray-50 rounded-xl shadow-md border-2 border-transparent hover:border-[#926699] transition duration-200 group w-28 sm:w-32">
-                            <span class="text-3xl sm:text-4xl">🏀</span>
-                            <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Basket</span>
-                        </a>
-                        
-                        <!-- Category Item 4: Voli -->
-                        <a href="<?= site_url('App/view_sport_category/voli') ?>" class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 bg-gray-50 rounded-xl shadow-md border-2 border-transparent hover:border-[#926699] transition duration-200 group w-28 sm:w-32">
-                            <span class="text-3xl sm:text-4xl">🏐</span>
-                            <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Voli</span>
-                        </a>
-                        
-                        <!-- Category Item 5: Tenis -->
-                        <a href="<?= site_url('App/view_sport_category/tenis') ?>" class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 bg-gray-50 rounded-xl shadow-md border-2 border-transparent hover:border-[#926699] transition duration-200 group w-28 sm:w-32">
-                            <span class="text-3xl sm:text-4xl">🎾</span>
-                            <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Tenis</span>
-                        </a>
+            <div class="mt-8 mb-16 py-4">
+                <div class="flex space-x-6 overflow-x-auto pb-2 scrollbar-hide justify-center">
+                    
+                    <a href="<?= site_url('App/view_sport_category/futsal/sepakbola') ?>" class="flex-shrink-0 flex flex-col items-center justify-start w-32 group">
+                        <div class="flex items-center justify-center p-5 h-28 w-28 bg-white rounded-full shadow-xl transition duration-300 transform hover:scale-105 hover:shadow-2xl">
+                            <span class="text-4xl">⚽</span>
+                        </div>
+                        <span class="mt-3 text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Futsal/Sepakbola</span>
+                    </a>
 
-                         <!-- Category Item 6: Renang -->
-                        <a href="<?= site_url('App/view_sport_category/renang') ?>" class="flex-shrink-0 flex flex-col items-center p-3 sm:p-4 bg-gray-50 rounded-xl shadow-md border-2 border-transparent hover:border-[#926699] transition duration-200 group w-28 sm:w-32">
-                            <span class="text-3xl sm:text-4xl">🏊</span>
-                            <span class="mt-1 text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Renang</span>
-                        </a>
-                    </div>
+                    <a href="<?= site_url('App/view_sport_category/badminton') ?>" class="flex-shrink-0 flex flex-col items-center justify-start w-32 group">
+                        <div class="flex items-center justify-center p-5 h-28 w-28 bg-white rounded-full shadow-xl transition duration-300 transform hover:scale-105 hover:shadow-2xl">
+                            <span class="text-4xl">🏸</span>
+                        </div>
+                        <span class="mt-3 text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Badminton</span>
+                    </a>
+                    
+                    <a href="<?= site_url('App/view_sport_category/basket') ?>" class="flex-shrink-0 flex flex-col items-center justify-start w-32 group">
+                        <div class="flex items-center justify-center p-5 h-28 w-28 bg-white rounded-full shadow-xl transition duration-300 transform hover:scale-105 hover:shadow-2xl">
+                            <span class="text-4xl">🏀</span>
+                        </div>
+                        <span class="mt-3 text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Basket</span>
+                    </a>
+                    
+                    <a href="<?= site_url('App/view_sport_category/voli') ?>" class="flex-shrink-0 flex flex-col items-center justify-start w-32 group">
+                        <div class="flex items-center justify-center p-5 h-28 w-28 bg-white rounded-full shadow-xl transition duration-300 transform hover:scale-105 hover:shadow-2xl">
+                            <span class="text-4xl">🏐</span>
+                        </div>
+                        <span class="mt-3 text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Voli</span>
+                    </a>
+                    
+                    <a href="<?= site_url('App/view_sport_category/tenis') ?>" class="flex-shrink-0 flex flex-col items-center justify-start w-32 group">
+                        <div class="flex items-center justify-center p-5 h-28 w-28 bg-white rounded-full shadow-xl transition duration-300 transform hover:scale-105 hover:shadow-2xl">
+                            <span class="text-4xl">🎾</span>
+                        </div>
+                        <span class="mt-3 text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Tenis</span>
+                    </a>
+
+                    <a href="<?= site_url('App/view_sport_category/renang') ?>" class="flex-shrink-0 flex flex-col items-center justify-start w-32 group">
+                        <div class="flex items-center justify-center p-5 h-28 w-28 bg-white rounded-full shadow-xl transition duration-300 transform hover:scale-105 hover:shadow-2xl">
+                            <span class="text-4xl">🏊</span>
+                        </div>
+                        <span class="mt-3 text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Renang</span>
+                    </a>
                 </div>
+            </div>
 
             <!-- REKOMENDASI SECTION 1: TRENDING (Sesuai Referensi) -->
             <section class="mb-12">
