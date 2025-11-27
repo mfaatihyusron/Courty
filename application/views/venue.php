@@ -2,7 +2,7 @@
 <section class="relative h-72 overflow-hidden shadow-md mb-10">
     <!-- Background Image (Lapangan Outdoor/Sport Center) -->
     <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://tangerangkota.go.id/assets/storage/files/photos/37535gairah-olahraga-meningkat-sederet-gor-di-kota-tangerang-full-booked-hingga-akhir-tahun-37535.jpeg');">
-        <div class="absolute inset-0 bg-purple-900/70"></div> <!-- Overlay Ungu Gelap -->
+        <div class="absolute inset-0 bg-gray-900/70"></div> <!-- Overlay Ungu Gelap -->
     </div>
     
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col items-center justify-center text-center pt-16">
@@ -30,7 +30,7 @@
                 </div>
                 
                 <!-- Search Button -->
-                <button type="submit" class="px-6 py-3 bg-cta text-white font-bold text-base rounded-xl shadow-md hover:bg-cta-dark transition duration-150 flex-shrink-0">
+                <button type="submit" class="px-6 py-3 text-white font-bold text-base rounded-xl shadow-md hover:bg-cta-dark transition duration-150 flex-shrink-0" style="background-color: plum;">
                     Cari
                 </button>
             </form>
