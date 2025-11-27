@@ -41,9 +41,6 @@
                 Gunakan Lokasi Saya Sekarang
             </button>
         </div>
-        
-        <!-- Kurva Bawah Hero Section harus tetap memiliki bg-soft agar menyatu dengan background body (putih) -->
-        <div class="absolute bottom-0 left-0 right-0 h-40 bg-soft transform translate-y-2/3 rounded-t-[100px] sm:rounded-t-[150px] lg:rounded-t-[200px] z-0"></div>
     </section>
         
     <!-- PERUBAHAN KRITIS: HAPUS bg-soft PADA SECTION UTAMA INI -->
@@ -54,8 +51,8 @@
         <!-- Penyesuaian padding atas dari 10 menjadi 16 untuk spacing yang lebih lega dari kurva Hero -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16"> 
             <h2 class="text-3xl font-bold text-center text-gray-900 mb-8" >Pilih Kategori Olahraga</h2>
-            <div class="py-4">
-                <div class="flex space-x-6 overflow-x-auto pb-2 scrollbar-hide justify-center">
+            <div class="py-4" >
+                <div class="flex space-x-6 overflow-x-auto pb-2 scrollbar-hide justify-center" style="overflow: visible;">
                     
                     <?php 
                     // Definisikan ikon dan nama kategori dalam array agar lebih rapi dan mudah diulang
@@ -110,7 +107,7 @@
                             <i class="fas fa-search"></i>
                         </div>
                         <h3 class="mt-6 text-xl font-semibold text-gray-900">Cari & Kirim Permintaan</h3>
-                        <p class="mt-3 text-gray-600 text-sm">Pilih lapangan, kirim permintaan. Pesanan Anda akan berstatus **Pending** menunggu persetujuan Mitra.</p>
+                        <p class="mt-3 text-gray-600 text-sm">Pilih lapangan, kirim permintaan. Pesanan Anda akan berstatus Pending menunggu persetujuan Mitra.</p>
                     </div>
 
                     <!-- Step 2: Konfirmasi Mitra -->
@@ -119,7 +116,7 @@
                             <i class="fas fa-check-circle"></i>
                         </div>
                         <h3 class="mt-6 text-xl font-semibold text-gray-900">Konfirmasi Cepat oleh Mitra</h3>
-                        <p class="mt-3 text-gray-600 text-sm">Mitra GOR menyetujui ketersediaan. Anda mendapat notifikasi **Confirmed** (Siap Bayar).</p>
+                        <p class="mt-3 text-gray-600 text-sm">Mitra GOR menyetujui ketersediaan. Anda mendapat notifikasi Confirmed (Siap Bayar).</p>
                     </div>
 
                     <!-- Step 3: Bayar & Main -->
@@ -128,7 +125,7 @@
                             <i class="fas fa-basketball-ball"></i>
                         </div>
                         <h3 class="mt-6 text-xl font-semibold text-gray-900">Bayar & Selesai</h3>
-                        <p class="mt-3 text-gray-600 text-sm">Selesaikan pembayaran. Reservasi Anda resmi **Completed** dan terjamin.</p>
+                        <p class="mt-3 text-gray-600 text-sm">Selesaikan pembayaran. Reservasi Anda resmi Completed dan terjamin.</p>
                     </div>
 
                 </div>
