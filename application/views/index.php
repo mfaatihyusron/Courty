@@ -109,7 +109,7 @@
                             <i class="fas fa-search"></i>
                         </div>
                         <h3 class="mt-6 text-xl font-semibold text-gray-900">Cari & Kirim Permintaan</h3>
-                        <p class="mt-3 text-gray-600 text-sm">Pilih lapangan, kirim permintaan. Pesanan Anda akan berstatus **Pending** menunggu persetujuan Mitra.</p>
+                        <p class="mt-3 text-gray-600 text-sm">Pilih lapangan, kirim permintaan. Pesanan Anda akan berstatus Pending menunggu persetujuan Mitra.</p>
                     </div>
 
                     <!-- Step 2: Konfirmasi Mitra -->
@@ -118,7 +118,7 @@
                             <i class="fas fa-check-circle"></i>
                         </div>
                         <h3 class="mt-6 text-xl font-semibold text-gray-900">Konfirmasi Cepat oleh Mitra</h3>
-                        <p class="mt-3 text-gray-600 text-sm">Mitra GOR menyetujui ketersediaan. Anda mendapat notifikasi **Confirmed** (Siap Bayar).</p>
+                        <p class="mt-3 text-gray-600 text-sm">Mitra GOR menyetujui ketersediaan. Anda mendapat notifikasi Confirmed (Siap Bayar).</p>
                     </div>
 
                     <!-- Step 3: Bayar & Main -->
@@ -127,7 +127,7 @@
                             <i class="fas fa-basketball-ball"></i>
                         </div>
                         <h3 class="mt-6 text-xl font-semibold text-gray-900">Bayar & Selesai</h3>
-                        <p class="mt-3 text-gray-600 text-sm">Selesaikan pembayaran. Reservasi Anda resmi **Completed** dan terjamin.</p>
+                        <p class="mt-3 text-gray-600 text-sm">Selesaikan pembayaran. Reservasi Anda resmi Completed dan terjamin.</p>
                     </div>
 
                 </div>
