@@ -65,38 +65,38 @@
                     
                     <!-- Team Member 1: Madi -->
                     <div class="bg-white p-6 rounded-xl shadow-xl text-center border-t-4 border-t-main">
-                        <img src="https://placehold.co/150x150/926699/FFFFFF?text=Madi" alt="Madi" class="w-28 h-28 rounded-full mx-auto object-cover border-4 border-cta">
-                        <h3 class="mt-4 text-xl font-bold text-gray-900">Madi</h3>
-                        <p class="text-main font-semibold text-sm">Flow Master & Data Analyst</p>
-                        <p class="mt-2 text-gray-600 text-sm">Memimpin desain UI/UX dan merancang logika Data Analysis (BI) sistem.</p>
-                        <a href="#" class="mt-3 inline-block text-secondary font-semibold text-xs hover:underline">LinkedIn</a>
+                        <img src="<?= base_url('upload/madi_foto.jpg') ?>" alt="Madi" class="w-28 h-28 rounded-full mx-auto object-cover border-4 border-main">
+                        <h3 class="mt-4 text-xl font-bold text-gray-900">Mahdi Imantaka Sutejo</h3>
+                        <p class="text-main font-semibold text-sm">2410512134</p>
+                        <p class="mt-2 text-gray-600 text-sm">Gak bertanggung jawab apa apa.</p>
+                        <a href="#" class="mt-3 inline-block text-main font-semibold text-xs hover:underline">LinkedIn</a>
                     </div>
 
                     <!-- Team Member 2: Fatih -->
                     <div class="bg-white p-6 rounded-xl shadow-xl text-center border-t-4 border-t-main">
-                        <img src="https://placehold.co/150x150/926699/FFFFFF?text=Fatih" alt="Fatih" class="w-28 h-28 rounded-full mx-auto object-cover border-4 border-cta">
-                        <h3 class="mt-4 text-xl font-bold text-gray-900">Fatih</h3>
-                        <p class="text-main font-semibold text-sm">System Strategist</p>
-                        <p class="mt-2 text-gray-600 text-sm">Bertanggung jawab atas definisikan scope dan alur bisnis (konfirmasi manual).</p>
-                        <a href="#" class="mt-3 inline-block text-secondary font-semibold text-xs hover:underline">LinkedIn</a>
+                        <img src="<?= base_url('upload/fatih_foto.jpg') ?>" alt="Fatih" class="w-28 h-28 rounded-full mx-auto object-cover border-4 border-main">
+                        <h3 class="mt-4 text-xl font-bold text-gray-900">Muhammad Faatih Yusron</h3>
+                        <p class="text-main font-semibold text-sm">2410512134</p>
+                        <p class="mt-2 text-gray-600 text-sm">Bertanggung jawab atas tangerang selatan.</p>
+                        <a href="#" class="mt-3 inline-block text-main font-semibold text-xs hover:underline">LinkedIn</a>
                     </div>
 
                     <!-- Team Member 3: Ryga -->
                     <div class="bg-white p-6 rounded-xl shadow-xl text-center border-t-4 border-t-main">
                         <img src="https://placehold.co/150x150/926699/FFFFFF?text=Ryga" alt="Ryga" class="w-28 h-28 rounded-full mx-auto object-cover border-4 border-cta">
-                        <h3 class="mt-4 text-xl font-bold text-gray-900">Ryga</h3>
-                        <p class="text-main font-semibold text-sm">System Architect & Flow Modeler</p>
-                        <p class="mt-2 text-gray-600 text-sm">Merancang DFD dan membantu implementasi Class Diagram di CodeIgniter.</p>
+                        <h3 class="mt-4 text-xl font-bold text-gray-900">Muhammad Ryga</h3>
+                        <p class="text-main font-semibold text-sm">24105121</p>
+                        <p class="mt-2 text-gray-600 text-sm">Bertanggung jawab atas lenteng agung yang ada danaunya.</p>
                         <a href="#" class="mt-3 inline-block text-secondary font-semibold text-xs hover:underline">LinkedIn</a>
                     </div>
 
                     <!-- Team Member 4: Daud -->
-                    <div class="bg-white p-6 rounded-xl shadow-xl text-center border-t-4 border-t-main">
-                        <img src="https://placehold.co/150x150/926699/FFFFFF?text=Daud" alt="Daud" class="w-28 h-28 rounded-full mx-auto object-cover border-4 border-cta">
+                        <div class="bg-white p-6 rounded-xl shadow-xl text-center border-t-4 border-t-main">
+                        <img src="<?= base_url('upload/daud_foto.jpg') ?>" alt="Daud" class="w-28 h-28 rounded-full mx-auto object-cover border-4 border-main">
                         <h3 class="mt-4 text-xl font-bold text-gray-900">Daud</h3>
-                        <p class="text-main font-semibold text-sm">Database & ERD Master</p>
-                        <p class="mt-2 text-gray-600 text-sm">Mendesain dan menjamin integritas ERD (7 tabel) serta model data. </p>
-                        <a href="#" class="mt-3 inline-block text-secondary font-semibold text-xs hover:underline">LinkedIn</a>
+                        <p class="text-main font-semibold text-sm">24105121</p>
+                        <p class="mt-2 text-gray-600 text-sm">Bertanggung jawab atas bekasi jamet. </p>
+                        <a href="#" class="mt-3 inline-block text-main font-semibold text-xs hover:underline">LinkedIn</a>
                     </div>
 
                 </div>
