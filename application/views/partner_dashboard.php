@@ -1,7 +1,7 @@
 <!-- BANNER SECTION -->
-<section class="relative h-72 overflow-hidden shadow-md">
+<section class="relative h-80 overflow-hidden shadow-md">
     <!-- Background Image (Venue/GOR) -->
-    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=2069&auto=format&fit=crop');">
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://recreation.ucsb.edu/sites/default/files/2024-12/F24_Photos_Facility_LockerRoom_Web-12.jpg');">
         <div class="absolute inset-0 bg-gray-900/70"></div> <!-- Overlay Gelap -->
     </div>
     
