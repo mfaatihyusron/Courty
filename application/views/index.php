@@ -53,8 +53,8 @@
         <!-- Penyesuaian padding atas dari 10 menjadi 16 untuk spacing yang lebih lega dari kurva Hero -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16"> 
             <h2 class="text-3xl font-bold text-center text-gray-900 mb-8" >Pilih Kategori Olahraga</h2>
-            <div class="py-4">
-                <div class="flex space-x-6 overflow-x-auto pb-2 scrollbar-hide justify-center">
+            <div class="py-4" >
+                <div class="flex space-x-6 overflow-x-auto pb-2 scrollbar-hide justify-center" style="overflow: visible;">
                     
                     <?php 
                     // Definisikan ikon dan nama kategori dalam array agar lebih rapi dan mudah diulang
