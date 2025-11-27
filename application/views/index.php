@@ -8,11 +8,11 @@
         <!-- Background Image & Overlay (FULL WIDTH) -->
         <div class="absolute inset-0 z-0">
             <!-- Asumsi: tennis_court_bg.jpg sudah ada di folder uploads/ -->
-            <img src="<?= base_url('upload/Padel.jpeg') ?>" 
+            <img src="<?= base_url('upload/tennis_court.jpg') ?>" 
                  alt="Lapangan Tenis Background" 
-                 class="w-full h-full object-cover brightness-50 contrast-85">
+                 class="w-full h-full object-cover brightness-50 contrast-100">
             <!-- Overlay menggunakan warna aksi hijau gelap -->
-            <div class="absolute inset-0 bg-action opacity-15"></div> 
+            <div class="absolute inset-0 bg-action opacity-25"></div> 
         </div>
 
         <!-- Konten Utama (Title & Search Bar) - Memastikan konten di tengah -->
