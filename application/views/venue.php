@@ -30,7 +30,7 @@
                 </div>
                 
                 <!-- Search Button -->
-                <button type="submit" class="px-6 py-3 text-white font-bold text-base rounded-xl shadow-md hover:bg-cta-dark transition duration-150 flex-shrink-0" style="background-color: plum;">
+                <button type="submit" class="px-6 py-3 text-white font-bold text-base rounded-xl shadow-md hover:bg-[#2e5d3c] transition duration-150 flex-shrink-0" style="background-color: #347048;">
                     Cari
                 </button>
             </form>
@@ -40,46 +40,61 @@
         <div class="mt-8 mb-16 py-4">
             <div class="flex space-x-6 overflow-x-auto pb-2 scrollbar-hide justify-center">
                 
+                <!-- Kategori 1: Futsal/Sepakbola -->
                 <a href="<?= site_url('App/view_sport_category/futsal/sepakbola') ?>" class="flex-shrink-0 flex flex-col items-center justify-start w-32 group">
-                    <div class="flex items-center justify-center p-5 h-28 w-28 bg-white rounded-full shadow-xl transition duration-300 transform hover:scale-105 hover:shadow-2xl border border-gray-50 group-hover:border-[#926699]">
-                        <span class="text-4xl">⚽</span>
+                    <!-- PERUBAHAN: Shape Hover -->
+                    <div class="flex items-center justify-center p-5 h-28 w-28 bg-white rounded-full shadow-xl transition duration-300 transform hover:scale-105 border border-gray-100 
+                                group-hover:bg-[#347038] group-hover:border-transparent group-hover:shadow-2xl">
+                        <!-- PERUBAHAN: Ikon Hover -->
+                        <span class="text-4xl group-hover:text-white transition duration-300">⚽</span>
                     </div>
-                    <span class="mt-3 text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Futsal/Sepakbola</span>
+                    <!-- PERUBAHAN: Teks Hover -->
+                    <span class="mt-3 text-sm font-semibold text-gray-700 group-hover:text-[#347038] text-center">Futsal/Sepakbola</span>
                 </a>
 
+                <!-- Kategori 2: Badminton -->
                 <a href="<?= site_url('App/view_sport_category/badminton') ?>" class="flex-shrink-0 flex flex-col items-center justify-start w-32 group">
-                    <div class="flex items-center justify-center p-5 h-28 w-28 bg-white rounded-full shadow-xl transition duration-300 transform hover:scale-105 hover:shadow-2xl border border-gray-50 group-hover:border-[#926699]">
-                        <span class="text-4xl">🏸</span>
+                    <div class="flex items-center justify-center p-5 h-28 w-28 bg-white rounded-full shadow-xl transition duration-300 transform hover:scale-105 border border-gray-100 
+                                group-hover:bg-[#347038] group-hover:border-transparent group-hover:shadow-2xl">
+                        <span class="text-4xl group-hover:text-white transition duration-300">🏸</span>
                     </div>
-                    <span class="mt-3 text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Badminton</span>
+                    <span class="mt-3 text-sm font-semibold text-gray-700 group-hover:text-[#347038] text-center">Badminton</span>
                 </a>
                 
+                <!-- Kategori 3: Basket -->
                 <a href="<?= site_url('App/view_sport_category/basket') ?>" class="flex-shrink-0 flex flex-col items-center justify-start w-32 group">
-                    <div class="flex items-center justify-center p-5 h-28 w-28 bg-white rounded-full shadow-xl transition duration-300 transform hover:scale-105 hover:shadow-2xl border border-gray-50 group-hover:border-[#926699]">
-                        <span class="text-4xl">🏀</span>
+                    <div class="flex items-center justify-center p-5 h-28 w-28 bg-white rounded-full shadow-xl transition duration-300 transform hover:scale-105 border border-gray-100 
+                                group-hover:bg-[#347038] group-hover:border-transparent group-hover:shadow-2xl">
+                        <span class="text-4xl group-hover:text-white transition duration-300">🏀</span>
                     </div>
-                    <span class="mt-3 text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Basket</span>
+                    <span class="mt-3 text-sm font-semibold text-gray-700 group-hover:text-[#347038] text-center">Basket</span>
                 </a>
                 
+                <!-- Kategori 4: Voli -->
                 <a href="<?= site_url('App/view_sport_category/voli') ?>" class="flex-shrink-0 flex flex-col items-center justify-start w-32 group">
-                    <div class="flex items-center justify-center p-5 h-28 w-28 bg-white rounded-full shadow-xl transition duration-300 transform hover:scale-105 hover:shadow-2xl border border-gray-50 group-hover:border-[#926699]">
-                        <span class="text-4xl">🏐</span>
+                    <div class="flex items-center justify-center p-5 h-28 w-28 bg-white rounded-full shadow-xl transition duration-300 transform hover:scale-105 border border-gray-100 
+                                group-hover:bg-[#347038] group-hover:border-transparent group-hover:shadow-2xl">
+                        <span class="text-4xl group-hover:text-white transition duration-300">🏐</span>
                     </div>
-                    <span class="mt-3 text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Voli</span>
+                    <span class="mt-3 text-sm font-semibold text-gray-700 group-hover:text-[#347038] text-center">Voli</span>
                 </a>
                 
+                <!-- Kategori 5: Tenis -->
                 <a href="<?= site_url('App/view_sport_category/tenis') ?>" class="flex-shrink-0 flex flex-col items-center justify-start w-32 group">
-                    <div class="flex items-center justify-center p-5 h-28 w-28 bg-white rounded-full shadow-xl transition duration-300 transform hover:scale-105 hover:shadow-2xl border border-gray-50 group-hover:border-[#926699]">
-                        <span class="text-4xl">🎾</span>
+                    <div class="flex items-center justify-center p-5 h-28 w-28 bg-white rounded-full shadow-xl transition duration-300 transform hover:scale-105 border border-gray-100 
+                                group-hover:bg-[#347038] group-hover:border-transparent group-hover:shadow-2xl">
+                        <span class="text-4xl group-hover:text-white transition duration-300">🎾</span>
                     </div>
-                    <span class="mt-3 text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Tenis</span>
+                    <span class="mt-3 text-sm font-semibold text-gray-700 group-hover:text-[#347038] text-center">Tenis</span>
                 </a>
 
+                <!-- Kategori 6: Renang -->
                 <a href="<?= site_url('App/view_sport_category/renang') ?>" class="flex-shrink-0 flex flex-col items-center justify-start w-32 group">
-                    <div class="flex items-center justify-center p-5 h-28 w-28 bg-white rounded-full shadow-xl transition duration-300 transform hover:scale-105 hover:shadow-2xl border border-gray-50 group-hover:border-[#926699]">
-                        <span class="text-4xl">🏊</span>
+                    <div class="flex items-center justify-center p-5 h-28 w-28 bg-white rounded-full shadow-xl transition duration-300 transform hover:scale-105 border border-gray-100 
+                                group-hover:bg-[#347038] group-hover:border-transparent group-hover:shadow-2xl">
+                        <span class="text-4xl group-hover:text-white transition duration-300">🏊</span>
                     </div>
-                    <span class="mt-3 text-sm font-semibold text-gray-700 group-hover:text-[#926699] text-center">Renang</span>
+                    <span class="mt-3 text-sm font-semibold text-gray-700 group-hover:text-[#347038] text-center">Renang</span>
                 </a>
             </div>
         </div>

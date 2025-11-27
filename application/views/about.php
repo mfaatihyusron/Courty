@@ -83,9 +83,9 @@
 
                     <!-- Team Member 3: Ryga -->
                     <div class="bg-white p-6 rounded-xl shadow-xl text-center border-t-4 border-t-main">
-                        <img src="https://placehold.co/150x150/926699/FFFFFF?text=Ryga" alt="Ryga" class="w-28 h-28 rounded-full mx-auto object-cover border-4 border-cta">
-                        <h3 class="mt-4 text-xl font-bold text-gray-900">Muhammad Ryga</h3>
-                        <p class="text-main font-semibold text-sm">24105121</p>
+                        <img src="<?= base_url('upload/ryga_foto.jpg') ?>" alt="Ryga" class="w-28 h-28 rounded-full mx-auto object-cover border-4 border-cta">
+                        <h3 class="mt-4 text-xl font-bold text-gray-900">Muhammad Ryga Adittyatama</h3>
+                        <p class="text-main font-semibold text-sm">2410512140</p>
                         <p class="mt-2 text-gray-600 text-sm">Bertanggung jawab atas lenteng agung yang ada danaunya.</p>
                         <a href="#" class="mt-3 inline-block text-secondary font-semibold text-xs hover:underline">LinkedIn</a>
                     </div>
@@ -93,7 +93,7 @@
                     <!-- Team Member 4: Daud -->
                         <div class="bg-white p-6 rounded-xl shadow-xl text-center border-t-4 border-t-main">
                         <img src="<?= base_url('upload/daud_foto.jpg') ?>" alt="Daud" class="w-28 h-28 rounded-full mx-auto object-cover border-4 border-main">
-                        <h3 class="mt-4 text-xl font-bold text-gray-900">Daud</h3>
+                        <h3 class="mt-4 text-xl font-bold text-gray-900">Daud Arie Pasaribu</h3>
                         <p class="text-main font-semibold text-sm">24105121</p>
                         <p class="mt-2 text-gray-600 text-sm">Bertanggung jawab atas bekasi jamet. </p>
                         <a href="#" class="mt-3 inline-block text-main font-semibold text-xs hover:underline">LinkedIn</a>
