@@ -2,7 +2,7 @@
 <section class="relative h-72 overflow-hidden shadow-md mb-10">
     <!-- Background Image (Lapangan Outdoor/Sport Center) -->
     <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://tangerangkota.go.id/assets/storage/files/photos/37535gairah-olahraga-meningkat-sederet-gor-di-kota-tangerang-full-booked-hingga-akhir-tahun-37535.jpeg');">
-        <div class="absolute inset-0 bg-gray-900/70"></div> <!-- Overlay Ungu Gelap -->
+        <div class="absolute inset-0 bg-purple-900/70"></div> <!-- Overlay Ungu Gelap -->
     </div>
     
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col items-center justify-center text-center pt-16">
@@ -20,7 +20,8 @@
 
         <!-- Unified Search Bar - Lebih Kompak dari Homepage -->
         <div class="max-w-4xl mx-auto bg-white p-3 rounded-2xl shadow-lg border border-gray-100 mb-16 -mt-8 relative z-10">
-            <form class="flex items-center space-x-2">
+            <!-- PERUBAHAN KRITIS: Mengubah action form ke App/venue dengan GET method (akan dialihkan di Controller) -->
+            <form action="<?= site_url('App/venue') ?>" method="GET" class="flex items-center space-x-2">
                 <!-- Search Input (Venue/Sport/Location) -->
                 <div class="relative flex-grow">
                     <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>

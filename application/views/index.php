@@ -24,6 +24,8 @@
                 World's Biggest Sports Community
             </p>
 
+            <!-- Search Bar LAMA (INPUT TEKS TUNGGAL) - Ditempatkan di tengah, di atas curve -->
+            <!-- PERBAIKAN SEARCH BAR: Tambahkan group dan hover:shadow-xl untuk interaktivitas -->
             <div class="mt-12 max-w-4xl mx-auto bg-white p-2 rounded-full shadow-2xl relative z-20 flex items-center group transition duration-300 hover:shadow-xl">
                 <div class="relative flex-grow">
                     <i class="fas fa-search absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
