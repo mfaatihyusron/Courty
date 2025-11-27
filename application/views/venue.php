@@ -20,7 +20,8 @@
 
         <!-- Unified Search Bar - Lebih Kompak dari Homepage -->
         <div class="max-w-4xl mx-auto bg-white p-3 rounded-2xl shadow-lg border border-gray-100 mb-16 -mt-8 relative z-10">
-            <form class="flex items-center space-x-2">
+            <!-- PERUBAHAN KRITIS: Mengubah action form ke App/venue dengan GET method (akan dialihkan di Controller) -->
+            <form action="<?= site_url('App/venue') ?>" method="GET" class="flex items-center space-x-2">
                 <!-- Search Input (Venue/Sport/Location) -->
                 <div class="relative flex-grow">
                     <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
@@ -29,7 +30,7 @@
                 </div>
                 
                 <!-- Search Button -->
-                <button type="submit" class="px-6 py-3 bg-cta text-white font-bold text-base rounded-xl shadow-md hover:bg-cta-dark transition duration-150 flex-shrink-0">
+                <button type="submit" class="px-6 py-3 text-white font-bold text-base rounded-xl shadow-md hover:bg-cta-dark transition duration-150 flex-shrink-0" style="background-color: plum;">
                     Cari
                 </button>
             </form>

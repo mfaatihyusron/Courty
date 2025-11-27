@@ -25,7 +25,19 @@ class App extends CI_Controller {
 
 	public function index()
 	{
-        // Ambil data venue unggulan dari Model (Mungkin bisa diganti dengan Trending)
+        // === LOGIKA PENGALIHAN PENCARIAN (HARUS ADA) ===
+        // 1. Tangkap input dari URL (?search_query=...)
+        $search_query = $this->input->get('search_query');
+        
+        // 2. Jika ada query pencarian, alihkan ke fungsi search_results
+        if (!empty($search_query)) {
+            // Mengarahkan ke App/search_results dengan membawa query sebagai parameter
+            redirect('app/search_results?query=' . urlencode($search_query));
+            return; // Penting untuk menghentikan eksekusi index()
+        }
+        // ===============================================
+
+        // Ambil data venue unggulan dari Model
         $featured_venues = $this->Model->get_featured_venues();
         
         $data['user_name'] = $this->session->userdata('name');
