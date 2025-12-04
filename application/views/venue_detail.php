@@ -104,7 +104,7 @@
                                             </div>
                                             <p class="text-sm text-gray-600 mt-2 line-clamp-2"><?php echo html_escape($court['description']); ?></p>
                                         </div>
-                                    </div>
+                                      </div>
                                 </div>
                             <?php endforeach; ?>
                         <?php else: ?>
