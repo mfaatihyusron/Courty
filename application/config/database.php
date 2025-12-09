@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
+	'hostname' => 'localhost', //sql305.infinityfree.com
+	'username' => 'root', //if0_40482016
+	'password' => '', //none jcioH7yLPpzup
 	'database' => 'courty',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
