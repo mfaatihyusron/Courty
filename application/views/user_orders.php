@@ -2,7 +2,7 @@
 <section class="relative h-64 overflow-hidden shadow-md">
     <!-- Background Image (Pemain melihat lapangan) -->
     <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://reezkypradata.com/wp-content/uploads/2021/01/Contoh-Shutterstock.jpg');">
-        <div class="absolute inset-0 bg-gradient-to-r from-[#926699]/90 to-grey-900/80"></div> <!-- Overlay Ungu Gradient -->
+        <div class="absolute inset-0 bg-gray-900/70"></div> <!-- Overlay Ungu Gradient -->
     </div>
     
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center">

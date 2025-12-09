@@ -104,7 +104,7 @@
                                             </div>
                                             <p class="text-sm text-gray-600 mt-2 line-clamp-2"><?php echo html_escape($court['description']); ?></p>
                                         </div>
-                                    </div>
+                                      </div>
                                 </div>
                             <?php endforeach; ?>
                         <?php else: ?>
@@ -114,25 +114,6 @@
                         <?php endif; ?>
                     </div>
                 </section>
-                
-                <!-- Galeri Foto -->
-                <?php if(!empty($gallery_photos)): ?>
-                <section>
-                    <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-                        <span class="bg-[#B9CF32] w-2 h-8 mr-3 rounded-full"></span>
-                        Galeri
-                    </h2>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                        <?php foreach ($gallery_photos as $photo): ?>
-                            <div class="aspect-square rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition">
-                                <img src="<?php echo html_escape($photo['url']); ?>" 
-                                     alt="Galeri" 
-                                     class="w-full h-full object-cover hover:scale-110 transition duration-500 cursor-pointer">
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                </section>
-                <?php endif; ?>
 
             </div>
 
