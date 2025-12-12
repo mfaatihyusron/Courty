@@ -47,7 +47,7 @@
                             <!-- Info Order -->
                             <div class="flex-grow">
                                 <div class="flex items-center flex-wrap gap-2 mb-1">
-                                    <h3 class="text-lg font-bold text-[#926699]">
+                                    <h3 class="text-lg font-bold text-[#000000] mr-3">
                                         <?= html_escape($order['venue_name']) ?>
                                     </h3>
                                     <!-- Badge Status -->
