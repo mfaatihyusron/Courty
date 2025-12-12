@@ -22,8 +22,8 @@
             scrollbar-width: none;
         }
         /* Definisikan warna kustom Tailwind */
-        .bg-main { background-color: #926699; }
-        .text-main { color: #926699; }
+        .bg-main { background-color: #347048; }
+        .text-main { color: #347048; }
         .bg-action { background-color: #347048; }
         .text-action { color: #347048; }
         .bg-soft { background-color: #EBE1D8; }
@@ -44,8 +44,8 @@
             width: 8px;
             height: 8px; 
             border-radius: 50%;
-            background-color: #926699;
-            box-shadow: 0 0 5px #926699;
+            background-color: #347048;
+            box-shadow: 0 0 5px #347048;
         }
 
         /* Override warna dot saat di mode transparan (background gelap) */
@@ -53,7 +53,7 @@
             color: white !important;
         }
         .navbar-transparent .nav-link-active::after {
-            background-color: #926699; /* Tetap ungu atau putih sesuai selera */
+            background-color: #347048; /* Tetap ungu atau putih sesuai selera */
             box-shadow: 0 0 5px white;
         }
 
@@ -66,10 +66,10 @@
             color: #4b5563 !important; /* Text Gray-600 */
         }
         .navbar-scrolled .nav-link-active {
-            color: #926699 !important;
+            color: #347048 !important;
         }
         .navbar-scrolled .logo-text {
-            color: #926699 !important;
+            color: #347048 !important;
         }
         .navbar-scrolled .menu-btn-icon {
             color: #4b5563 !important;
@@ -225,7 +225,7 @@
     </div> 
 
     <!-- Footer -->
-    <footer class="bg-main py-12 mt-10">
+    <footer class="bg-action py-12 mt-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <div>

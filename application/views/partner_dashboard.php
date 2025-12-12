@@ -48,7 +48,8 @@
                 <p class="text-sm text-gray-500 mt-1"><i class="fas fa-map-marker-alt mr-1"></i> <?php echo html_escape($venue['address']); ?></p>
             </div>
             <div class="mt-4 md:mt-0">
-                <a href="<?php echo site_url('mitra/edit_venue'); ?>" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition shadow-md">
+                <!-- PERBAIKAN 1: Tombol Edit Profil Venue menggunakan bg-action (#347048) -->
+                <a href="<?php echo site_url('mitra/edit_venue'); ?>" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-white bg-action rounded-lg hover:bg-[#2e5d3c] transition shadow-md">
                     <i class="fas fa-edit mr-2"></i> Edit Profil Venue
                 </a>
             </div>
@@ -63,7 +64,7 @@
                         <?php 
                         $img_src = base_url($venue['link_profile_img']);
                         if ($venue['link_profile_img'] == 'placeholder.jpg' || empty($venue['link_profile_img'])) {
-                            $img_src = "https://placehold.co/800x400/e2e8f0/94a3b8?text=Foto+Venue";
+                            $img_src = "https://placehold.co/800x400/e2e8f0/94a3b3?text=Foto+Venue";
                         }
                         ?>
                         <img src="<?php echo $img_src; ?>" 
@@ -122,7 +123,8 @@
                 <h3 class="text-xl font-bold text-gray-800">Daftar Lapangan (Courts)</h3>
                 <p class="text-sm text-gray-500 mt-1">Kelola data lapangan yang tersedia untuk dipesan.</p>
             </div>
-            <a href="<?php echo site_url('mitra/add_court'); ?>" class="mt-4 sm:mt-0 inline-flex items-center px-5 py-2.5 text-sm font-medium text-white bg-[#B9CF32] rounded-lg hover:bg-[#a6bd2e] transition shadow-md">
+            <!-- PERBAIKAN 2: Tombol Tambah Lapangan menggunakan bg-action (#347048) -->
+            <a href="<?php echo site_url('mitra/add_court'); ?>" class="mt-4 sm:mt-0 inline-flex items-center px-5 py-2.5 text-sm font-medium text-white bg-action rounded-lg hover:bg-[#2e5d3c] transition shadow-md">
                 <i class="fas fa-plus mr-2"></i> Tambah Lapangan
             </a>
         </div>
@@ -162,7 +164,8 @@
                                         <?php echo html_escape($court['sport_name']); ?>
                                     </span>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-[#B9CF32]">
+                                <!-- PERBAIKAN 3: Harga/Jam menggunakan warna text-action (#347048) -->
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-action">
                                     Rp <?php echo number_format($court['price_per_hour'], 0, ',', '.'); ?>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm">
