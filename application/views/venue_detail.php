@@ -134,12 +134,13 @@
                                 <div>
                                     <label class="block text-sm font-semibold text-gray-700 mb-2">Lapangan</label>
                                     <div class="relative">
-                                        <select id="court_id" name="court_id" class="w-full pl-4 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#926699] focus:border-transparent appearance-none transition-all" required>
-                                            <option value="" data-price="0">-- Pilih Lapangan --</option>
+                                        <select id="court_id" name="court_id" 
+                                            class="select-placeholder w-full pl-4 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#926699] focus:border-transparent appearance-none transition-all"
+                                            required>
+                                            <option value="" data-price="0" style="font-weight: 400; color: #888;">Pilih Lapangan</option>
                                             <?php if (!empty($courts)): ?>
                                                 <?php foreach ($courts as $court): ?>
-                                                    <!-- data-price attribute for JS calculation -->
-                                                    <option value="<?php echo $court['id_court']; ?>" 
+                                                    <option value="<?php echo $court['id_court']; ?>"
                                                             data-price="<?php echo $court['price_per_hour']; ?>">
                                                         <?php echo html_escape($court['court_name']); ?> (<?php echo html_escape($court['sport_name']); ?>)
                                                     </option>
