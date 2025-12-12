@@ -91,7 +91,7 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium flex flex-col gap-2 w-32">
                                     <?php if($order['status'] == 'Pending'): ?>
-                                        <button onclick="openApproveModal(<?= $order['id'] ?>)" class="w-full text-white bg-indigo-600 hover:bg-indigo-700 px-3 py-1.5 rounded-lg shadow-sm text-xs font-bold transition">
+                                        <button onclick="openApproveModal(<?= $order['id'] ?>)" class="w-full text-white bg-green-600 hover:bg-green-700 px-3 py-1.5 rounded-lg shadow-sm text-xs font-bold transition">
                                             Terima
                                         </button>
                                         <button onclick="openRejectOrderModal(<?= $order['id'] ?>)" class="w-full text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 px-3 py-1.5 rounded-lg text-xs font-bold transition">
@@ -136,7 +136,7 @@
                 
                 <div class="mb-6">
                     <label class="block text-sm font-bold text-gray-700 mb-2">File QR Code (JPG/PNG)</label>
-                    <input type="file" name="qr_code" required class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 border border-gray-300 rounded-lg cursor-pointer">
+                    <input type="file" name="qr_code" required class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100 border border-gray-300 rounded-lg cursor-pointer">
                 </div>
                 
                 <div class="flex justify-end gap-3">
