@@ -156,67 +156,117 @@
             </div>
         </section>
 
-        <!-- REKOMENDASI SECTION 3: JARAK TERDEKAT (Menggunakan Data Asli) -->
+        <!-- REKOMENDASI SECTION 2: Lihat Lainnya -->
         <section class="mb-12">
-            <h2 class="text-2xl font-bold text-gray-900 mb-4 border-l-4 border-blue-500 pl-3">📍 Terdekat dari Anda</h2>
-            <p class="text-gray-600 mb-6 pl-4">Venue yang paling mudah dijangkau saat ini (Simulasi Data).</p>
+            <h2 class="text-2xl font-bold text-gray-900 mb-4 border-l-4 border-[#926699] pl-3"> Lihat Opsi Lainnya</h2>
+            <p class="text-gray-600 mb-6 pl-4">Venue yang direkomendasikan lainnya.</p>
             
+            <!-- Horizontal Scroll Container -->
             <div class="flex space-x-6 overflow-x-auto pb-6 scrollbar-hide px-2">
-                <!-- Menggunakan loop yang sama untuk menampilkan 'Real Data' di section ini -->
-                <?php if (isset($trending_venues) && is_array($trending_venues)): ?>
-                <?php foreach (array_reverse($trending_venues) as $venue): // Menggunakan array_reverse agar urutannya beda sedikit ?>
-                    
-                    <a href="<?= site_url('App/detail_venue/' . $venue['id_venue']) ?>" 
-                       class="flex-shrink-0 w-72 bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer transition transform hover:scale-[1.02] hover:shadow-2xl duration-300 group border border-gray-100">
+                
+                <?php if (isset($trending_venues) && is_array($trending_venues) && count($trending_venues) > 0): ?>
+                <?php foreach ($trending_venues as $venue): ?>
+                
+                <!-- Venue Card REAL DATA -->
+                <a href="<?= site_url('App/detail_venue/' . $venue['id_venue']) ?>" 
+                   class="flex-shrink-0 w-72 bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer transition transform hover:scale-[1.02] hover:shadow-2xl duration-300 group border border-gray-100">
+                    <!-- Gambar -->
+                    <div class="relative">
                         <img src="<?= base_url($venue['link_profile_img']) ?>" 
-                             alt="<?= html_escape($venue['venue_name']) ?>" 
+                             alt="Venue <?= html_escape($venue['venue_name']) ?>" 
                              class="w-full h-40 object-cover group-hover:opacity-90 transition duration-300"
-                             onerror="this.onerror=null;this.src='https://placehold.co/400x250/2196F3/FFFFFF?text=Venue';">
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-gray-900 truncate"><?= html_escape($venue['venue_name']) ?></h3>
-                            <p class="text-sm text-blue-600 font-semibold mt-1 flex items-center">
-                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                1.<?= rand(2, 9) ?> km
-                            </p>
-                            <div class="text-xs text-gray-500 mt-1 truncate"><?= html_escape($venue['address']) ?></div>
+                             onerror="this.onerror=null;this.src='https://placehold.co/400x250/347048/FFFFFF?text=<?= urlencode($venue['venue_name']) ?>';">
+                        <div class="absolute top-2 right-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg text-xs font-bold text-[#926699] shadow-sm">
+                            Trending
                         </div>
-                    </a>
+                    </div>
+                    
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-900 truncate" title="<?= html_escape($venue['venue_name']) ?>">
+                            <?= html_escape($venue['venue_name']) ?>
+                        </h3>
+                        <p class="text-sm text-gray-500 mt-1 truncate flex items-center">
+                            <svg class="w-4 h-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <?= html_escape($venue['address']) ?>
+                        </p>
+                        
+                        <div class="mt-3 flex justify-between items-end border-t border-gray-100 pt-3">
+                            <div>
+                                <p class="text-xs text-gray-500">Mulai dari</p>
+                                <!-- PERUBAHAN KRITIS: Mengganti text-[#B9CF32] menjadi text-[#347038] -->
+                                <p class="font-bold text-[#347038] text-lg">Rp <?= number_format($venue['min_price'], 0, ',', '.') ?></p>
+                            </div>
+                            <span class="text-xs font-medium bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                                <?= $venue['court_count'] ?> Lapangan
+                            </span>
+                        </div>
+                    </div>
+                </a>
 
                 <?php endforeach; ?>
+                <?php else: ?>
+                <div class="w-full text-center p-8 bg-gray-50 rounded-xl">
+                    <p class="text-gray-500">Belum ada data trending venue.</p>
+                </div>
                 <?php endif; ?>
+                
             </div>
         </section>
 
-        <!-- REKOMENDASI SECTION 4: RATING TERTINGGI (Menggunakan Data Asli) -->
-        <section>
-            <h2 class="text-2xl font-bold text-gray-900 mb-4 border-l-4 border-yellow-400 pl-3">🌟 Rating Tertinggi</h2>
-            <p class="text-gray-600 mb-6 pl-4">Venue dengan ulasan terbaik dari seluruh pengguna Courty.</p>
+        <!-- REKOMENDASI SECTION 1: Venue yang ada -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4 border-l-4 border-[#926699] pl-3">🔥 Venue yang ada</h2>
+            <p class="text-gray-600 mb-6 pl-4">Venue yang direkomendasikan lainnya.</p>
             
+            <!-- Horizontal Scroll Container -->
             <div class="flex space-x-6 overflow-x-auto pb-6 scrollbar-hide px-2">
-                <!-- Menggunakan loop yang sama untuk menampilkan 'Real Data' di section ini -->
-                <?php if (isset($trending_venues) && is_array($trending_venues)): ?>
+                
+                <?php if (isset($trending_venues) && is_array($trending_venues) && count($trending_venues) > 0): ?>
                 <?php foreach ($trending_venues as $venue): ?>
-                    
-                    <a href="<?= site_url('App/detail_venue/' . $venue['id_venue']) ?>" 
-                       class="flex-shrink-0 w-72 bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer transition transform hover:scale-[1.02] hover:shadow-2xl duration-300 group border border-gray-100">
+                
+                <!-- Venue Card REAL DATA -->
+                <a href="<?= site_url('App/detail_venue/' . $venue['id_venue']) ?>" 
+                   class="flex-shrink-0 w-72 bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer transition transform hover:scale-[1.02] hover:shadow-2xl duration-300 group border border-gray-100">
+                    <!-- Gambar -->
+                    <div class="relative">
                         <img src="<?= base_url($venue['link_profile_img']) ?>" 
-                             alt="<?= html_escape($venue['venue_name']) ?>" 
+                             alt="Venue <?= html_escape($venue['venue_name']) ?>" 
                              class="w-full h-40 object-cover group-hover:opacity-90 transition duration-300"
-                             onerror="this.onerror=null;this.src='https://placehold.co/400x250/FFC107/FFFFFF?text=Top+Rated';">
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-gray-900 truncate"><?= html_escape($venue['venue_name']) ?></h3>
-                            <div class="flex items-center mt-2">
-                                <span class="text-yellow-400 flex">
-                                    &#9733;&#9733;&#9733;&#9733;&#9733;
-                                </span>
-                                <span class="text-sm text-gray-600 ml-2 font-bold">5.0</span>
-                            </div>
-                            <p class="text-xs text-gray-500 mt-1">Fasilitas lengkap & bersih.</p>
+                             onerror="this.onerror=null;this.src='https://placehold.co/400x250/347048/FFFFFF?text=<?= urlencode($venue['venue_name']) ?>';">
+                        <div class="absolute top-2 right-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg text-xs font-bold text-[#926699] shadow-sm">
+                            Trending
                         </div>
-                    </a>
+                    </div>
+                    
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-900 truncate" title="<?= html_escape($venue['venue_name']) ?>">
+                            <?= html_escape($venue['venue_name']) ?>
+                        </h3>
+                        <p class="text-sm text-gray-500 mt-1 truncate flex items-center">
+                            <svg class="w-4 h-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <?= html_escape($venue['address']) ?>
+                        </p>
+                        
+                        <div class="mt-3 flex justify-between items-end border-t border-gray-100 pt-3">
+                            <div>
+                                <p class="text-xs text-gray-500">Mulai dari</p>
+                                <!-- PERUBAHAN KRITIS: Mengganti text-[#B9CF32] menjadi text-[#347038] -->
+                                <p class="font-bold text-[#347038] text-lg">Rp <?= number_format($venue['min_price'], 0, ',', '.') ?></p>
+                            </div>
+                            <span class="text-xs font-medium bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                                <?= $venue['court_count'] ?> Lapangan
+                            </span>
+                        </div>
+                    </div>
+                </a>
 
                 <?php endforeach; ?>
+                <?php else: ?>
+                <div class="w-full text-center p-8 bg-gray-50 rounded-xl">
+                    <p class="text-gray-500">Belum ada data trending venue.</p>
+                </div>
                 <?php endif; ?>
+                
             </div>
         </section>
     </div>

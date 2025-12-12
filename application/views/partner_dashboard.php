@@ -102,13 +102,6 @@
                                     Buka di Google Maps
                                 </a>
                             </div>
-
-                            <div>
-                                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide">Status Akun</p>
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 mt-1">
-                                    Verified Partner
-                                </span>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -172,7 +165,7 @@
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Aktif</span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium space-x-3">
-                                    <a href="<?php echo site_url('mitra/edit_court/' . $court['id_court']); ?>" class="text-indigo-600 hover:text-indigo-900 font-semibold">Edit</a>
+                                    <a href="<?php echo site_url('mitra/edit_court/' . $court['id_court']); ?>" class="text-green-600 hover:text-green-900 font-semibold">Edit</a>
                                     <a href="#" onclick="confirmDeleteCourt('<?php echo site_url('mitra/delete_court/' . $court['id_court']); ?>', '<?php echo html_escape($court['court_name']); ?>')" class="text-red-600 hover:text-red-900 font-semibold">Hapus</a>
                                 </td>
                             </tr>

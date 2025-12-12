@@ -2,7 +2,7 @@
         <!-- SECTION 1: HERO BANNER (REFERENSI XS FINANCIAL) -->
         <section class="relative h-96 overflow-hidden">
             <!-- Background Image Placeholder (Gedung/Lapangan Basket) -->
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://superlive.id/storage/articles/aeae881e-e955-46c7-9b85-9823f5b56a7a.jpg');">
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://www.prudential.co.id/export/sites/prudential-id/id/.galleries/images/page-title/GettyImages-1255387116-1366x560.jpg');">
                 <!-- Overlay Hitam Transparan -->
                 <div class="absolute inset-0 bg-black opacity-50"></div>
             </div>
@@ -76,7 +76,7 @@
                     <div class="bg-white p-6 rounded-xl shadow-xl text-center border-t-4 border-t-main">
                         <img src="<?= base_url('upload/fatih_foto.jpg') ?>" alt="Fatih" class="w-28 h-28 rounded-full mx-auto object-cover border-4 border-main">
                         <h3 class="mt-4 text-xl font-bold text-gray-900">Muhammad Faatih Yusron</h3>
-                        <p class="text-main font-semibold text-sm">2410512134</p>
+                        <p class="text-main font-semibold text-sm">2410512132</p>
                         <p class="mt-2 text-gray-600 text-sm">Bertanggung jawab atas tangerang selatan.</p>
                         <a href="#" class="mt-3 inline-block text-main font-semibold text-xs hover:underline">LinkedIn</a>
                     </div>
