@@ -175,8 +175,8 @@
                                 </p>
                             </div>
                             <p class="text-sm text-gray-500 mt-1">
-                                <?php echo html_escape($venue['sports_offered']); ?> | 
-                                <span class="text-xs text-gray-400">Venue Terverifikasi</span>
+                                <span class="text-xs text-gray-400">Jenis Olahraga</span>
+                                 | <?php echo html_escape($venue['sports_offered']); ?> 
                             </p>
                             
                             <div class="mt-4 w-full text-center py-2 text-sm font-semibold text-white bg-action rounded-lg group-hover:bg-[#2e5d3c] transition duration-150">
