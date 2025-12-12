@@ -96,7 +96,7 @@
                                                 </div>
                                                 <div class="text-right">
                                                     <p class="text-xs text-gray-500">Mulai dari</p>
-                                                    <p class="text-xl font-bold text-[#B9CF32]">
+                                                    <p class="text-xl font-bold text-action">
                                                         Rp<?php echo number_format($court['price_per_hour'], 0, ',', '.'); ?>
                                                     </p>
                                                     <p class="text-xs text-gray-400">/ jam</p>
@@ -188,7 +188,7 @@
                                 <!-- Total Price Display -->
                                 <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 flex justify-between items-center">
                                     <span class="text-sm font-semibold text-gray-600">Total Harga</span>
-                                    <span id="total_price_display" class="text-xl font-bold text-[#B9CF32]">Rp0</span>
+                                    <span id="total_price_display" class="text-xl font-bold text-action">Rp0</span>
                                 </div>
 
                                 <button type="submit" class="w-full py-4 text-base font-bold text-white bg-gradient-to-r from-[#926699] to-[#7d5583] rounded-xl shadow-lg hover:shadow-xl hover:translate-y-[-2px] transition-all duration-200 flex justify-center items-center group">
