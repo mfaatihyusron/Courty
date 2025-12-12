@@ -171,7 +171,7 @@
                                 </p>
                                 
                                 <p class="font-bold text-action text-lg">
-                                    Rp. <?php echo number_format($venue['min_price'], 0, ',', '.'); ?>,-
+                                    Rp<?php echo number_format($venue['min_price'], 0, ',', '.'); ?>
                                 </p>
                             </div>
                             <p class="text-sm text-gray-500 mt-1">
