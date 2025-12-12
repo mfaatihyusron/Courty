@@ -2,7 +2,7 @@
         <!-- SECTION 1: HERO BANNER (REFERENSI XS FINANCIAL) -->
         <section class="relative h-96 overflow-hidden">
             <!-- Background Image Placeholder (Gedung/Lapangan Basket) -->
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://superlive.id/storage/articles/aeae881e-e955-46c7-9b85-9823f5b56a7a.jpg');">
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://www.prudential.co.id/export/sites/prudential-id/id/.galleries/images/page-title/GettyImages-1255387116-1366x560.jpg');">
                 <!-- Overlay Hitam Transparan -->
                 <div class="absolute inset-0 bg-black opacity-50"></div>
             </div>
