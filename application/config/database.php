@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost', //sql305.infinityfree.com
-	'username' => 'root', //if0_40482016
-	'password' => '', //none jcioH7yLPpzup
-	'database' => 'courty',
+	'hostname' => getenv('DB_HOST') ? getenv('DB_HOST') : 'localhost',
+	'username' => getenv('DB_USER') ? getenv('DB_USER') : 'root',
+	'password' => getenv('DB_PASSWORD') !== false ? getenv('DB_PASSWORD') : '',
+	'database' => getenv('DB_NAME') ? getenv('DB_NAME') : 'courty',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

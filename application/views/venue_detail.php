@@ -24,7 +24,8 @@
                 }
                 ?>
                 <img src="<?php echo $img_src; ?>" alt="<?php echo html_escape($venue['venue_name']); ?>" 
-                     class="w-full h-full object-cover">
+                     class="w-full h-full object-cover"
+                     onerror="this.onerror=null;this.src='<?= base_url('Upload/Tennis_court.jpg') ?>';">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                 <div class="absolute bottom-0 left-0 p-6 md:p-8 text-white">
                     <h1 class="text-3xl md:text-5xl font-bold mb-2 tracking-tight"><?php echo html_escape($venue['venue_name']); ?></h1>

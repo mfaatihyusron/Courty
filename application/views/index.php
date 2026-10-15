@@ -7,8 +7,7 @@
         
         <!-- Background Image & Overlay (FULL WIDTH) -->
         <div class="absolute inset-0 z-0">
-            <!-- Asumsi: tennis_court_bg.jpg sudah ada di folder uploads/ -->
-            <img src="<?= base_url('upload/tennis_court.jpg') ?>" 
+            <img src="<?= base_url('Upload/Tennis_court.jpg') ?>" 
                  alt="Lapangan Tenis Background" 
                  class="w-full h-full object-cover brightness-50 contrast-100">
             <!-- Overlay menggunakan warna aksi hijau gelap -->
@@ -152,8 +151,8 @@
 
                     // Image fallback logic
                     $img_src = base_url($venue['link_profile_img']);
-                    if (empty($venue['link_profile_img']) || $venue['link_profile_img'] == 'placeholder.jpg' || (file_exists($venue['link_profile_img']) === false)) {
-                        $img_src = "https://placehold.co/600x400/926699/FFFFFF?text=" . urlencode($venue['venue_name']);
+                    if (empty($venue['link_profile_img']) || $venue['link_profile_img'] == 'placeholder.jpg') {
+                        $img_src = base_url('Upload/Tennis_court.jpg');
                     }
                 ?>
                     <!-- LINK KRITIS: Memanggil App/detail_venue dengan ID yang benar -->
@@ -161,7 +160,8 @@
                        class="flex-shrink-0 w-80 bg-white rounded-xl shadow-lg overflow-hidden transition transform hover:scale-[1.02] hover:shadow-xl duration-300 group">
                         
                         <img src="<?php echo $img_src; ?>" alt="<?php echo html_escape($venue['venue_name']); ?>" 
-                             class="w-full h-48 object-cover group-hover:opacity-90 transition duration-300">
+                             class="w-full h-48 object-cover group-hover:opacity-90 transition duration-300"
+                             onerror="this.onerror=null;this.src='<?= base_url('Upload/Tennis_court.jpg') ?>';">
                         
                         <div class="p-5">
                             <h4 class="text-xl font-semibold text-gray-900 truncate"><?php echo html_escape($venue['venue_name']); ?></h4>

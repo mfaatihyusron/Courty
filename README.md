@@ -102,50 +102,81 @@ Aplikasi ini menggunakan 6 tabel utama yang saling berelasi:
 
 Ikuti langkah-langkah di bawah ini untuk menjalankan proyek ini di komputer Anda menggunakan XAMPP:
 
+## 🐳 Panduan Menjalankan dengan Docker & Docker Compose (Rekomendasi)
+
+Aplikasi Courty beserta database MySQL telah ter-dockerisasi penuh menggunakan Docker Compose. Database akan langsung terisi data awal secara otomatis saat pertama kali dijalankan.
+
 ### 1. Prasyarat
-Pastikan Anda sudah menginstal aplikasi berikut:
-* **XAMPP** (disarankan dengan PHP 7.4 s.d. 8.0)
-* Web Browser (Chrome, Edge, Firefox, dll.)
+* [Docker Desktop](https://www.docker.com/products/docker-desktop/) (versi 20.10+ dengan Docker Compose v2) sudah terinstal dan berjalan di komputer Anda.
 
-### 2. Langkah-Langkah Setup
-1. **Salin Proyek**:
-   Pindahkan folder `Courty` ke dalam direktori server lokal Anda:
-   * Windows: `C:\xampp\htdocs\Courty`
-   * Linux: `/opt/lampp/htdocs/Courty`
-   
-2. **Import Database**:
-   * Jalankan **Apache** dan **MySQL** di XAMPP Control Panel.
-   * Buka browser dan pergi ke halaman [http://localhost/phpmyadmin](http://localhost/phpmyadmin).
-   * Buat database baru dengan nama `courty`.
-   * Pilih database `courty`, pergi ke tab **Import**, klik **Choose File**, pilih file `courty.sql` di root proyek ini, lalu klik **Go** / **Import**.
+### 2. Setup Environment Variables
+Salin berkas template `.env.example` menjadi `.env`:
+* **Windows (PowerShell / CMD)**:
+  ```powershell
+  copy .env.example .env
+  ```
+* **Linux / macOS**:
+  ```bash
+  cp .env.example .env
+  ```
 
-3. **Konfigurasi Database**:
-   Buka file `application/config/database.php` menggunakan text editor, sesuaikan pengaturan kredensial database Anda (default bawaan XAMPP biasanya seperti di bawah ini):
-   ```php
-   $db['default'] = array(
-       'dsn'	   => '',
-       'hostname' => 'localhost',
-       'username' => 'root',
-       'password' => '',
-       'database' => 'courty',
-       'dbdriver' => 'mysqli',
-       // ... konfigurasi lainnya
-   );
-   ```
+Konfigurasi default di dalam `.env`:
+```env
+APP_PORT=8080
+DB_HOST=db
+DB_PORT=3306
+DB_NAME=courty
+DB_USER=courty_user
+DB_PASSWORD=courty_password
+MYSQL_ROOT_PASSWORD=root_password
+```
 
-4. **Konfigurasi Base URL**:
-   Buka file `application/config/config.php` lalu sesuaikan `base_url` proyek Anda:
-   ```php
-   $config['base_url'] = 'http://localhost/CodeIgniter3/Courty/'; // Sesuaikan dengan path folder Anda di htdocs
-   ```
+### 3. Build & Menjalankan Service
+Jalankan perintah berikut di terminal root proyek:
+```bash
+docker compose up --build -d
+```
+> Perintah di atas akan membangun image backend dari `Dockerfile`, mengunduh image `mysql:8.0`, membuat jaringan `courty_network`, membuat volume `courty_db_data`, dan mengimpor skema awal dari `courty.sql`.
 
-5. **Jalankan Aplikasi**:
-   Buka browser Anda dan akses aplikasi melalui alamat base URL yang dikonfigurasi di atas, contoh:
-   ```text
-   http://localhost/CodeIgniter3/Courty/
-   ```
+Setelah proses selesai, buka browser Anda di:
+👉 **[http://localhost:8080](http://localhost:8080)**
+
+Untuk mematikan container:
+```bash
+docker compose down
+```
 
 ---
+
+## 🧪 Panduan Pengujian Sistem & Persistensi Data
+
+### 1. Pengujian Endpoint / Fitur Aplikasi (Baca & Tulis Data)
+1. **Buka Aplikasi**: Akses `http://localhost:8080` di browser.
+2. **Uji Tulis Data (Registrasi Akun Baru)**:
+   * Klik tombol **Login / Register** di pojok kanan atas, lalu pilih **Daftar Sekarang**.
+   * Isi nama, email, nomor telepon, dan password baru.
+   * Klik **Daftar**. Sistem akan menyimpan user baru ke tabel `users` di MySQL.
+3. **Uji Baca Data (Login)**:
+   * Masukkan email dan password akun yang baru didaftarkan.
+   * Jika berhasil masuk dan nama Anda muncul di navbar, integrasi backend dan database terbukti sukses.
+
+### 2. Pengujian Persistensi Data (Volume Persistence Test)
+Pengujian ini membuktikan bahwa data di database tetap aman dan tidak hilang saat container dihapus/dibuat ulang:
+1. Pastikan Anda sudah membuat akun baru pada langkah sebelumnya.
+2. Hentikan dan hapus container di terminal (tanpa menghapus volume):
+   ```bash
+   docker compose down
+   ```
+3. Nyalakan kembali container:
+   ```bash
+   docker compose up -d
+   ```
+4. Buka kembali `http://localhost:8080`, lakukan login dengan akun yang Anda buat tadi.
+5. **Hasil**: Akun tetap dapat login dengan normal, membuktikan data tersimpan permanen di dalam Docker named volume `courty_db_data`.
+
+---
+
+## 💻 Panduan Menjalankan Manual (Alternatif Non-Docker / XAMPP)
 
 ## Akun Demo (Bawaan Database)
 
@@ -183,3 +214,12 @@ sequenceDiagram
 ```
 
 ---
+
+## 📚 Referensi & Penggunaan AI (Attribution)
+* **Framework**: CodeIgniter 3.1.13 Documentation ([codeigniter.com](https://codeigniter.com))
+* **Containerization**: Official Docker & Docker Compose Documentation ([docs.docker.com](https://docs.docker.com))
+* **Bantuan AI**: Menggunakan asistensi AI (Antigravity AI Assistant) untuk perancangan `Dockerfile`, konfigurasi `docker-compose.yml`, optimasi penanganan environment variable pada CodeIgniter 3, serta penyusunan dokumentasi teknis ini sesuai ketentuan Tugas 1 Backend Intermediate.
+
+---
+
+*Made with ❤️ by Courty Development Team*
