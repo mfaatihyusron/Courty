@@ -136,15 +136,216 @@ Jalankan perintah berikut di terminal root proyek:
 ```bash
 docker compose up --build -d
 ```
-> Perintah di atas akan membangun image backend dari `Dockerfile`, mengunduh image `mysql:8.0`, membuat jaringan `courty_network`, membuat volume `courty_db_data`, dan mengimpor skema awal dari `courty.sql`.
+> Perintah di atas akan membangun image backend dari `Dockerfile`, mengunduh image `mysql:8.0` dan `nginx:alpine`, membuat jaringan `courty_network`, membuat volume `courty_db_data`, mengimpor skema awal dari `courty.sql`, serta menjalankan 3 replika backend yang dilindungi oleh reverse proxy Nginx pada port 80.
 
 Setelah proses selesai, buka browser Anda di:
-👉 **[http://localhost:8080](http://localhost:8080)**
+👉 **[http://localhost](http://localhost)**
 
 Untuk mematikan container:
 ```bash
 docker compose down
 ```
+
+---
+
+## 🛡️ Tugas 2: Arsitektur Reverse Proxy Nginx, Load Balancing & Gateway Keamanan
+
+Pada Tugas 2 ini, arsitektur ditingkatkan menjadi sistem multi-replica produksi dengan Nginx sebagai satu-satunya pintu gerbang (*Single Entry Point*):
+1. **Satu Pintu:** Hanya service `nginx` yang membuka port (`80:80`). Port backend (`8080`) dan database (`3307`) ditutup sepenuhnya dari akses host luar.
+2. **Reverse Proxy:** Rute `/api/` diteruskan ke backend lengkap dengan header `Host`, `X-Forwarded-For`, dan `X-Real-IP`.
+3. **Load Balancing:** Backend berjalan dengan **3 replika** (`deploy: replicas: 3`), upstream menggunakan `zone backend_zone 64k;`, dan respons menyertakan header `X-Upstream: $upstream_addr`.
+4. **Rate Limiting:** Rute `/api/` dibatasi dengan `limit_req` dan secara eksplisit menolak request berlebih dengan kode HTTP `429 Too Many Requests`.
+5. **Header Keamanan & Gzip:** Menyematkan header `X-Content-Type-Options: nosniff` dan kompresi `gzip on` untuk data JSON.
+
+---
+
+### 1. Bukti Output `curl` Pengujian (Teks Kode Mentah)
+
+#### a. Bukti Port Lama Backend (8080) & Database (3307) Tertutup dari Luar
+Pengujian koneksi langsung ke port 8080 dan 3307 pada host gagal (*Connection Refused*), membuktikan akses luar wajib melewati satu pintu Nginx:
+
+```bash
+curl.exe -I http://localhost:8080
+```
+Output:
+```text
+curl: (7) Failed to connect to localhost port 8080 after 2264 ms: Could not connect to server
+```
+
+```bash
+curl.exe -I http://localhost:3307
+```
+Output:
+```text
+curl: (7) Failed to connect to localhost port 3307 after 2255 ms: Could not connect to server
+```
+
+---
+
+#### b. Bukti Load Balancing (Header `X-Upstream` Berganti Antar-Replika)
+Pengujian endpoint `/api/status` sebanyak 3 kali berturut-turut membuktikan Nginx mendistribusikan beban secara merata (*Round-Robin*) ke 3 container backend yang berbeda (`172.18.0.5:80`, `172.18.0.4:80`, dan `172.18.0.3:80`):
+
+* **Request 1:**
+```bash
+curl.exe -i -s http://localhost/api/status
+```
+Output:
+```text
+HTTP/1.1 200 OK
+Server: nginx/1.31.8
+Date: Mon, 09 Nov 2026 04:45:30 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 180
+Connection: keep-alive
+Vary: Accept-Encoding
+X-Powered-By: PHP/8.1.34
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Upstream: 172.18.0.5:80
+
+{
+    "status": "success",
+    "message": "Courty API Gateway is operational",
+    "service": "backend-ci3",
+    "timestamp": "2026-11-09 04:45:30",
+    "server_ip": "172.18.0.5"
+}
+```
+
+* **Request 2:**
+```bash
+curl.exe -i -s http://localhost/api/status
+```
+Output:
+```text
+HTTP/1.1 200 OK
+Server: nginx/1.31.8
+Date: Mon, 09 Nov 2026 04:45:35 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 180
+Connection: keep-alive
+Vary: Accept-Encoding
+X-Powered-By: PHP/8.1.34
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Upstream: 172.18.0.4:80
+
+{
+    "status": "success",
+    "message": "Courty API Gateway is operational",
+    "service": "backend-ci3",
+    "timestamp": "2026-11-09 04:45:35",
+    "server_ip": "172.18.0.4"
+}
+```
+
+* **Request 3:**
+```bash
+curl.exe -i -s http://localhost/api/status
+```
+Output:
+```text
+HTTP/1.1 200 OK
+Server: nginx/1.31.8
+Date: Mon, 09 Nov 2026 04:45:42 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 180
+Connection: keep-alive
+Vary: Accept-Encoding
+X-Powered-By: PHP/8.1.34
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Upstream: 172.18.0.3:80
+
+{
+    "status": "success",
+    "message": "Courty API Gateway is operational",
+    "service": "backend-ci3",
+    "timestamp": "2026-11-09 04:45:42",
+    "server_ip": "172.18.0.3"
+}
+```
+
+---
+
+#### c. Bukti Rate Limiting (Muncul Status HTTP 429 Too Many Requests)
+Pengujian pengiriman request beruntun secara cepat ke endpoint `/api/venues` membuktikan Nginx menolak request berlebih dengan kode HTTP 429:
+
+```powershell
+1..6 | ForEach-Object { curl.exe -s -o /dev/null -w "%{http_code}`n" http://localhost/api/venues }
+```
+Output:
+```text
+200
+200
+200
+429
+429
+429
+```
+
+Respons lengkap saat status 429 terjadi:
+```text
+HTTP/1.1 429 Too Many Requests
+Server: nginx/1.31.8
+Date: Mon, 09 Nov 2026 04:45:53 GMT
+Content-Type: text/html
+Content-Length: 169
+Connection: keep-alive
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+
+<html>
+<head><title>429 Too Many Requests</title></head>
+<body>
+<center><h1>429 Too Many Requests</h1></center>
+<hr><center>nginx/1.31.8</center>
+</body>
+</html>
+```
+
+---
+
+#### d. Bukti Header Keamanan & Gzip Compression
+Pengujian request dengan header `Accept-Encoding: gzip` membuktikan Nginx berhasil mengompresi payload JSON dan menyematkan header keamanan:
+
+```bash
+curl.exe -I -H "Accept-Encoding: gzip" http://localhost/api/venues
+```
+Output:
+```text
+HTTP/1.1 200 OK
+Server: nginx/1.31.8
+Date: Mon, 09 Nov 2026 04:45:59 GMT
+Content-Type: application/json; charset=utf-8
+Connection: keep-alive
+Vary: Accept-Encoding
+X-Powered-By: PHP/8.1.34
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Upstream: 172.18.0.5:80
+Content-Encoding: gzip
+```
+
+---
+
+### 2. Jawaban Pertanyaan Teori
+
+**(a) Kenapa upstream perlu `zone`? Apa yang terjadi kalau dihapus?**  
+Direktif `zone` mendefinisikan area memori bersama (*shared memory zone*) yang dapat diakses oleh seluruh *worker process* Nginx untuk menyimpan konfigurasi upstream, counter load balancing, dan status kesehatan server backend secara tersinkronisasi. Jika direktif `zone` dihapus, setiap *worker process* akan mengelola state upstream secara terisolasi di memori lokal masing-masing tanpa koordinasi, sehingga pembagian beban (*load balancing*) menjadi tidak seimbang dan tidak konsisten. Selain itu, fitur dinamis seperti resolusi DNS berkala pada upstream tidak dapat beroperasi optimal antar-worker.
+
+**(b) Kenapa `limit_req_status` diganti ke 429? Apa bedanya dengan bawaan Nginx?**  
+Secara bawaan, Nginx merespons pelanggaran batas request (*rate limit*) dengan status HTTP `503 Service Temporarily Unavailable`, yang secara semantik standar HTTP merepresentasikan kegagalan atau kelebihan beban di sisi internal server (*server error*). Status tersebut diganti ke `429 Too Many Requests` (RFC 6585) karena secara tepat mengindikasikan kesalahan ada di pihak klien (*client error*) yang telah melampaui kuota frekuensi pengiriman request dalam kurun waktu tertentu. Perbedaan ini memudahkan klien maupun pengembang API memahami bahwa penolakan terjadi akibat pembatasan laju trafik (*throttling*), bukan karena server aplikasi sedang rusak.
+
+**(c) Kenapa backend dan database tidak punya ports, dan Nginx menjangkau backend lewat apa?**  
+Backend dan database sengaja tidak memetakan direktif `ports` ke host untuk menerapkan prinsip keamanan *Least Privilege* dan *Defense in Depth*, sehingga mencegah akses langsung yang tidak terotorisasi dari jaringan luar ke layer aplikasi dan basis data. Nginx menjangkau container backend melalui jaringan privat Docker (*bridge network*) memanfaatkan layanan DNS bawaan Docker yang secara otomatis mengarahkan nama service `web` ke alamat IP internal ketiga replika backend. Dengan demikian, Nginx bertindak sebagai satu-satunya gerbang masuk (*single entry point*) yang mengamankan seluruh lalu lintas data.
+
+---
 
 ---
 
